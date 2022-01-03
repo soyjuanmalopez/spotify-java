@@ -36,7 +36,10 @@
 
 ## Spotify
 
-![Spotify logo](media/Spotify/SpotifyLogo.png)
+![Spotify logo](media/Spotify/spotifyLogo.png)
+
+Spotify is a test repository that helps to start and implement a 
+test project with Spring Boot.
 
 ### Java 11
 
