@@ -36,7 +36,7 @@
 
 ## Spotify
 
-
+![Spotify logo](media/Spotify/SpotifyLogo.png)
 
 ### Java 11
 
