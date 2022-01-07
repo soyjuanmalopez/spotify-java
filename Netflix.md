@@ -197,6 +197,12 @@ INSERT INTO `spotify`.`artist` (`name`, `description`) VALUES ('Giggs', 'Giggs i
 INSERT INTO `spotify`.`artist` (`name`, `description`) VALUES ('Black Coffee', 'South African house music DJ and producer Black Coffee built his career gradually over nearly two decades, riding the growing global interest in his home country\'s burgeoning dance music scene and eventually becoming arguably the biggest DJ in Africa.');
 INSERT INTO `spotify`.`artist` (`name`, `description`) VALUES ('Jorja Smith', 'Jorja Smith is an English R & B singer/songwriter whose soulful, jazz-tinged cadence, heartfelt lyrics, and retro sound invoke names like Lauryn Hill, Alicia Keys, Rihanna, and Amy Winehouse, the latter of whom the Walsall-based artist cites as her biggest influence.');
 INSERT INTO `spotify`.`artist` (`name`, `description`) VALUES ('Sampha', 'In February 2017, Sampha released his debut album Process via Young Turks. The album - an achingly beautiful, emotionally raw and musically adventurous body of work co-produced by Sampha and Rodaidh McDonald - was the culmination of years of work for the singer, songwriter and producer who hails from South London. ');
+INSERT INTO `spotify`.`artist` (`name`, `description`) VALUES ('Quavo', 'Primarily known for being one-third of the hip-hop/trap collective Migos, Quavo (real name Quavious Marshall) is a rapper and hip-hop artist from Lawrenceville, Georgia.');
+INSERT INTO `spotify`.`artist` (`name`, `description`) VALUES ('Travis Scott', 'Travis Scott became known during the early 2010s for his heavily Auto-Tuned half-sung/half-rapped vocal style.');
+INSERT INTO `spotify`.`artist` (`name`, `description`) VALUES ('2 Chainz', 'I am the Drench God aka Tity Boi aka Soufside\'s own Hairweavekiller, but yall know me as 2 Chainz!!');
+INSERT INTO `spotify`.`artist` (`name`, `description`) VALUES ('Young Thug', 'Flouting hip-hop conventions while defying gender and sexuality stereotypes, Young Thug has been one of the most distinctive contemporary rap artists since attaining his chart debut with \"Stoner\" (2014).');
+INSERT INTO `spotify`.`artist` (`name`, `description`) VALUES ('Kanye West', 'One of the most influential and critically lauded artists of the early 21st century, Kanye West went from hip-hop beatmaker to worldwide hitmaker as his production work for artists such as Jay-Z  led to a major-label recording contract');
+INSERT INTO `spotify`.`artist` (`name`) VALUES ('PARTYNEXTDOOR');
 
 INSERT INTO `spotify`.`album` (`title`, `duration`, `year_release`) VALUES ('More Life', '1.21', '2017');
 INSERT INTO `spotify`.`rel_album_artist` (`id_album`, `id_artist`) VALUES ('1', '1');
@@ -224,8 +230,113 @@ INSERT INTO `spotify`.`song` (`title`, `duration`, `reproductions`, `album_ref`)
 INSERT INTO `spotify`.`song` (`title`, `duration`, `reproductions`, `album_ref`) VALUES ('Ice Melts', '4.10', '103700000', '1');
 INSERT INTO `spotify`.`song` (`title`, `duration`, `reproductions`, `album_ref`) VALUES ('Do Not Disturb', '4.43', '260410000', '1');
 
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('1', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('2', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('2', '2');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('3', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('4', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('5', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('5', '3');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('5', '4');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('6', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('7', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('8', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('8', '5');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('9', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('10', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('11', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('11', '6');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('11', '7');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('12', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('12', '8');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('12', '9');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('13', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('14', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('15', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('15', '2');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('16', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('17', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('18', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('18', '10');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('19', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('19', '11');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('20', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('21', '1');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('21', '9');
+INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`) VALUES ('22', '1');
+
+INSERT INTO `spotify`.`genre` (`name`) VALUES ('Hip-Hop');
+
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '1');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '2');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '3');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '4');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '5');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '6');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '7');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '8');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '9');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '10');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '11');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '12');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '13');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '14');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '15');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '16');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '17');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '18');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '19');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '20');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '21');
+INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`) VALUES ('1', '22');
+
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '1');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '2');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '3');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '4');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '5');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '6');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '7');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '8');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '9');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '10');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '11');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '12');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '13');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '14');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '15');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '16');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '17');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '18');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '19');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '20');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '21');
+INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`) VALUES ('1', '22');
 
 ```
+
+### Query Examples
+
+After the inserts, you have to different queries to see the data, for example:
+
+- If you want to see the content of an album, you need a join of album, rel_album_song and song. The query would be
+  something like that:
+
+````
+SELECT * FROM album a join rel_album_song rel on a.id = rel.id_album join song so on rel.id_song = so.Id where a.id = 1;
+````
+
+And the result of this query is:
+![database4](media/DataBase/database4.png)
+
+- Or for example, if you want to see all the songs of an artist, you need a join of song, rel_song_artist and artist.
+  The query would be something like that:
+````
+SELECT * FROM artist art join rel_song_artist rel on art.id = rel.id_artist join song so on rel.id_song = so.Id where art.id = 1;
+````
+And the result of this query is:
+![database5](media/DataBase/database5.png)
+
 
 ## Endpoints
 
