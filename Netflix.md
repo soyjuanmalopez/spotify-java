@@ -331,12 +331,51 @@ And the result of this query is:
 
 - Or for example, if you want to see all the songs of an artist, you need a join of song, rel_song_artist and artist.
   The query would be something like that:
+
 ````
 SELECT * FROM artist art join rel_song_artist rel on art.id = rel.id_artist join song so on rel.id_song = so.Id where art.id = 1;
 ````
+
 And the result of this query is:
 ![database5](media/DataBase/database5.png)
 
-
 ## Endpoints
 
+The definition of the endpoints is an important part because defines the structure of the URL and the structure of
+the controllers.
+
+The base path of the URL is: "http://localhost:5000/spotify"
+
+And in this part, I show the variable path for each table.
+
+### Artist
+
+<p><span style="color: green">GET</span>&nbsp; <b>/artist</b> &nbsp; - &nbsp; Get all artist </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Get artist by id </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Delete artist by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Modify artist by id </p> 
+<p><span style="color: yellow">POST</span>&nbsp; <b>/artist</b> &nbsp; - &nbsp; Insert new artist </p>
+
+### Song
+
+<p><span style="color: green">GET</span>&nbsp; <b>/song</b> &nbsp; - &nbsp; Get all songs </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/song/{id} </b> &nbsp; - &nbsp; Get song by id </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/song/{id} </b> &nbsp; - &nbsp; Delete song by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/song/{id} </b> &nbsp; - &nbsp; Modify song by id </p> 
+<p><span style="color: yellow">POST</span>&nbsp; <b>/song</b> &nbsp; - &nbsp; Insert new song </p>
+
+### Album
+
+<p><span style="color: green">GET</span>&nbsp; <b>/album</b> &nbsp; - &nbsp; Get all albums </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/album/{id} </b> &nbsp; - &nbsp; Get album by id </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/album/{id} </b> &nbsp; - &nbsp; Delete album by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/album/{id} </b> &nbsp; - &nbsp; Modify album by id </p> 
+<p><span style="color: yellow">POST</span>&nbsp; <b>/album</b> &nbsp; - &nbsp; Insert new album </p>
+
+### Genre
+
+<p><span style="color: green">GET</span>&nbsp; <b>/genre</b> &nbsp; - &nbsp; Get all genres </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/genre/{id} </b> &nbsp; - &nbsp; Get genre by id </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/genre/{id} </b> &nbsp; - &nbsp; Delete genre by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/genre/{id} </b> &nbsp; - &nbsp; Modify genre by id </p> 
+<p><span style="color: yellow">POST</span>&nbsp; <b>/genre</b> &nbsp; - &nbsp; Insert new genre </p>
