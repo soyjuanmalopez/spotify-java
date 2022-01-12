@@ -350,8 +350,17 @@ And in this part, I show the variable path for each table.
 
 ### Artist
 
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
+
 <p><span style="color: green">GET</span>&nbsp; <b>/artist</b> &nbsp; - &nbsp; Get all artist </p>
 <p><span style="color: green">GET</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Get artist by id </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/artist/{id}/albums </b> &nbsp; - &nbsp; Get albums of an artist by id </p>
 <p><span style="color: red">DELETE</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Delete artist by id </p>
 <p><span style="color: blue">PUT</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Modify artist by id </p> 
 <p><span style="color: yellow">POST</span>&nbsp; <b>/artist</b> &nbsp; - &nbsp; Insert new artist </p>
