@@ -51,9 +51,7 @@ D4I Team - NTT Data
 1. [What is Spring Boot?](#what-is_Spring-Boot?)
 2. [Exercise presentation](#exercise-presentation)
    1. [API model definition](#api-model-definition)
-   2. [API creation](#api-creation)
-      1. [BD, Entity, RestModel, Controller, Service, Repository, End-points)](#api-db-etc)
-   3. [Other common classes](#other-common-classes)
+   2. [Other common classes](#other-common-classes)
 
 ### What is Spring Boot?
 Spring Boot is a tool that was created in order to further simplify the development of applications based on the already
