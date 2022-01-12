@@ -341,8 +341,8 @@ And the result of this query is:
 
 ## Endpoints
 
-The definition of the endpoints is an important part because defines the structure of the URL and the structure of
-the controllers.
+The definition of the endpoints is an important part because defines the structure of the URL and the structure of the
+controllers.
 
 The base path of the URL is: "http://localhost:5000/spotify"
 
@@ -350,41 +350,46 @@ And in this part, I show the variable path for each table.
 
 ### Artist
 
-```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
-```
-
 <p><span style="color: green">GET</span>&nbsp; <b>/artist</b> &nbsp; - &nbsp; Get all artist </p>
 <p><span style="color: green">GET</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Get artist by id </p>
-<p><span style="color: green">GET</span>&nbsp; <b>/artist/{id}/albums </b> &nbsp; - &nbsp; Get albums of an artist by id </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/artist/{id}/albums </b> &nbsp; - &nbsp; Get albums of an artist by the artist id </p>
 <p><span style="color: red">DELETE</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Delete artist by id </p>
-<p><span style="color: blue">PUT</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Modify artist by id </p> 
-<p><span style="color: yellow">POST</span>&nbsp; <b>/artist</b> &nbsp; - &nbsp; Insert new artist </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/artist/{id}/album/{id} </b> &nbsp; - &nbsp; Delete an album from the artist by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Modify artist by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/artist/{id}/album/{id}</b> &nbsp; - &nbsp; Insert album into the artist by the album id </p>
+<p><span style="color: yellow">POST</span>&nbsp; <b>/artist</b> &nbsp; - &nbsp; Create new artist </p>
 
 ### Song
 
 <p><span style="color: green">GET</span>&nbsp; <b>/song</b> &nbsp; - &nbsp; Get all songs </p>
 <p><span style="color: green">GET</span>&nbsp; <b>/song/{id} </b> &nbsp; - &nbsp; Get song by id </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/song/{id}/album </b> &nbsp; - &nbsp; Get the album of the song by the song id </p>
 <p><span style="color: red">DELETE</span>&nbsp; <b>/song/{id} </b> &nbsp; - &nbsp; Delete song by id </p>
-<p><span style="color: blue">PUT</span>&nbsp; <b>/song/{id} </b> &nbsp; - &nbsp; Modify song by id </p> 
-<p><span style="color: yellow">POST</span>&nbsp; <b>/song</b> &nbsp; - &nbsp; Insert new song </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/song/{id}/artist/{id} </b> &nbsp; - &nbsp; Delete an artist from a song by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/song/{id} </b> &nbsp; - &nbsp; Modify song by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/song/{id}/artist/{id} </b> &nbsp; - &nbsp; Add an artist to the song by artist id </p> 
+<p><span style="color: yellow">POST</span>&nbsp; <b>/song</b> &nbsp; - &nbsp; Create new song </p>
 
 ### Album
 
 <p><span style="color: green">GET</span>&nbsp; <b>/album</b> &nbsp; - &nbsp; Get all albums </p>
 <p><span style="color: green">GET</span>&nbsp; <b>/album/{id} </b> &nbsp; - &nbsp; Get album by id </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/album/{id}/songs </b> &nbsp; - &nbsp; Get songs of an album by id </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/album/{id}/artist </b> &nbsp; - &nbsp; Get artists of an album by id </p>
 <p><span style="color: red">DELETE</span>&nbsp; <b>/album/{id} </b> &nbsp; - &nbsp; Delete album by id </p>
-<p><span style="color: blue">PUT</span>&nbsp; <b>/album/{id} </b> &nbsp; - &nbsp; Modify album by id </p> 
-<p><span style="color: yellow">POST</span>&nbsp; <b>/album</b> &nbsp; - &nbsp; Insert new album </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/album/{id}/song/{id} </b> &nbsp; - &nbsp; Delete a song from the album by id </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/album/{id}/artist/{id} </b> &nbsp; - &nbsp; Delete a artist from the album by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/album/{id} </b> &nbsp; - &nbsp; Modify album by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/album/{id}/song/{id} </b> &nbsp; - &nbsp; Add a song to an album by the song id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/album/{id}/artist/{id} </b> &nbsp; - &nbsp; Add an artist to an album by artist id </p>
+<p><span style="color: yellow">POST</span>&nbsp; <b>/album</b> &nbsp; - &nbsp; Create new album </p>
 
 ### Genre
 
 <p><span style="color: green">GET</span>&nbsp; <b>/genre</b> &nbsp; - &nbsp; Get all genres </p>
 <p><span style="color: green">GET</span>&nbsp; <b>/genre/{id} </b> &nbsp; - &nbsp; Get genre by id </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/genre/{id}/songs </b> &nbsp; - &nbsp; Get songs of a genre by id </p>
 <p><span style="color: red">DELETE</span>&nbsp; <b>/genre/{id} </b> &nbsp; - &nbsp; Delete genre by id </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/genre/{id}/songs/{id} </b> &nbsp; - &nbsp; Delete genre by id </p>
 <p><span style="color: blue">PUT</span>&nbsp; <b>/genre/{id} </b> &nbsp; - &nbsp; Modify genre by id </p> 
-<p><span style="color: yellow">POST</span>&nbsp; <b>/genre</b> &nbsp; - &nbsp; Insert new genre </p>
+<p><span style="color: yellow">POST</span>&nbsp; <b>/genre</b> &nbsp; - &nbsp; Create new genre </p>
