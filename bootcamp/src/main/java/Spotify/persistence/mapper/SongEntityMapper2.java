@@ -5,7 +5,7 @@ import Spotify.service.model.SongDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SongEntityMapper implements EntityMapper<SongEntity, SongDto>{
+public class SongEntityMapper2 implements EntityMapper<SongEntity, SongDto>{
     @Override
     public SongEntity mapToEntity(final SongDto dto) {
         return new SongEntity(dto.getId(), dto.getTitle(),dto.getAlbum_ref(),dto.getReproductions(),dto.getDuration());

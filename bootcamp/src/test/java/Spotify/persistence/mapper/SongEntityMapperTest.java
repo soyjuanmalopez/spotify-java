@@ -16,7 +16,7 @@ import Spotify.service.model.SongDto;
 public class SongEntityMapperTest {
 
     @InjectMocks
-    private SongEntityMapper songEntityMapper;
+    private SongEntityMapper2 songEntityMapper;
 
     @Before
     public void init() {

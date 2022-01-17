@@ -2,6 +2,7 @@ package Spotify.persistence.entity;
 
 import lombok.*;
 
+import javax.management.ConstructorParameters;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;

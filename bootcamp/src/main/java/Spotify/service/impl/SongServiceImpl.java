@@ -4,7 +4,7 @@ import Spotify.exception.SpotifyException;
 import Spotify.exception.SpotifyNotFoundException;
 import Spotify.exception.error.ErrorDto;
 import Spotify.persistence.entity.SongEntity;
-import Spotify.persistence.mapper.SongEntityMapper;
+import Spotify.persistence.mapper.SongEntityMapper2;
 import Spotify.persistence.repository.SongRepository;
 import Spotify.service.SongService;
 import Spotify.service.model.SongDto;
@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class SongServiceImpl implements SongService {
 
     private final SongRepository songRepository;
-    private final SongEntityMapper songEntityMapper;
+    private final SongEntityMapper2 songEntityMapper;
 
     @Override
     public Page<SongDto> getAllSongs(final Pageable pageable) throws SpotifyException {

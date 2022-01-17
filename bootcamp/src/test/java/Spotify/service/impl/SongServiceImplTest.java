@@ -4,9 +4,8 @@ import Spotify.controller.rest.model.SongRest;
 import Spotify.exception.SpotifyException;
 import Spotify.exception.SpotifyNotFoundException;
 import Spotify.persistence.entity.SongEntity;
-import Spotify.persistence.mapper.SongEntityMapper;
+import Spotify.persistence.mapper.SongEntityMapper2;
 import Spotify.persistence.repository.SongRepository;
-import Spotify.service.impl.SongServiceImpl;
 import Spotify.service.model.SongDto;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +38,7 @@ public class SongServiceImplTest {
     private SongRepository songRepository;
 
 	@Mock
-	private SongEntityMapper  songEntityMapper;
+	private SongEntityMapper2 songEntityMapper;
 
     @InjectMocks
     private SongServiceImpl songService;
