@@ -655,19 +655,45 @@ And in this part, I show the variable path for each table.
     "id": 1,
     "title": "More Life",
     "duration": 1.21,
-    "year_release": 2017
+    "year_release": 2017,
+    "artists": [
+      {
+        "id": 1,
+        "name": "Drake",
+        "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
+      }
+    ]
   },
   {
     "id": 2,
     "title": "Views",
     "duration": 1.21,
-    "year_release": 2016
+    "year_release": 2016,
+    "artists": [
+      {
+        "id": 1,
+        "name": "Drake",
+        "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
+      }
+    ]
   },
   {
     "id": 3,
     "title": "JACKBOYS",
     "duration": 0.21,
-    "year_release": 2019
+    "year_release": 2019,
+    "artists": [
+      {
+        "id": 7,
+        "name": "Travis Scott",
+        "description": "Travis Scott became known during the early 2010s for his heavily Auto-Tuned half-sung/half-rapped vocal style."
+      },
+      {
+        "id": 12,
+        "name": "JACKBOYS",
+        "description": "Led by Travis Scott , JackBoys advances the Grammy-nominated rapper/producer's Cactus Jack Records with DJ Chase B and label signees Sheck Wes and Don Toliver."
+      }
+    ]
   }
 ]
 ````
@@ -679,7 +705,14 @@ And in this part, I show the variable path for each table.
   "id": 1,
   "title": "More Life",
   "duration": 1.21,
-  "year_release": 2017
+  "year_release": 2017,
+  "artists": [
+    {
+      "id": 1,
+      "name": "Drake",
+      "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
+    }
+  ]
 }
 ````
 
@@ -692,70 +725,80 @@ And in this part, I show the variable path for each table.
     "title": "Free smoke",
     "duration": 3.38,
     "reproductions": 170300000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   },
   {
     "id": 2,
     "title": "No Long Talk",
     "duration": 2.29,
     "reproductions": 116090000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   },
   {
     "id": 3,
     "title": "Passionfruit",
     "duration": 4.58,
     "reproductions": 1009000000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   },
   {
     "id": 4,
     "title": "Jorja Interlude",
     "duration": 1.47,
     "reproductions": 102042000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   },
   {
     "id": 5,
     "title": "Get It Together",
     "duration": 4.1,
     "reproductions": 192403000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   },
   {
     "id": 6,
     "title": "Madiba Riddim",
     "duration": 3.25,
     "reproductions": 192403000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   },
   {
     "id": 7,
     "title": "Blem",
     "duration": 3.25,
     "reproductions": 129680000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   },
   {
     "id": 8,
     "title": 4422,
     "duration": 3.06,
     "reproductions": 120230000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   },
   {
     "id": 9,
     "title": "Gyalchester",
     "duration": 3.09,
     "reproductions": 306130000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   },
   {
     "id": 10,
     "title": "Skepta Interlude",
     "duration": 2.23,
     "reproductions": 75900000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   }
 ]
 ````
@@ -767,7 +810,21 @@ And in this part, I show the variable path for each table.
   {
     "id": 1,
     "name": "Drake",
-    "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
+    "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky .",
+    "albums": [
+      {
+        "id": 1,
+        "title": "More Life",
+        "duration": 1.21,
+        "year_release": 2017
+      },
+      {
+        "id": 2,
+        "title": "Views",
+        "duration": 1.21,
+        "year_release": 2016
+      }
+    ]
   }
 ]
 ````
@@ -818,21 +875,24 @@ And in this part, I show the variable path for each table.
     "title": "Jorja Interlude",
     "duration": 1.47,
     "reproductions": 102042000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   },
   {
     "id": 5,
     "title": "Get It Together",
     "duration": 4.1,
     "reproductions": 192403000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   },
   {
     "id": 6,
     "title": "Madiba Riddim",
     "duration": 3.25,
     "reproductions": 192403000,
-    "album_ref": 1
+    "album_ref": 1,
+    "artists:": [...]
   }
 ]
 ````
