@@ -1,4 +1,4 @@
-package Spotify.service.impl;
+/* package Spotify.service.impl;
 
 import Spotify.controller.rest.model.SongRest;
 import Spotify.exception.SpotifyException;
@@ -48,7 +48,7 @@ public class SongServiceImplTest {
 	 MockitoAnnotations.initMocks(this);
 		SONG_ENTITY.setId(ID);
 		SONG_REST.setId(ID);
-		SONG_DTO.setId(ID);
+
 
 		Mockito.when(songRepository.findById(anyLong())).thenReturn(Optional.of(SONG_ENTITY));
 		Mockito.when(songEntityMapper.mapToEntity(any(SongDto.class))).thenReturn(SONG_ENTITY);
@@ -63,7 +63,7 @@ public class SongServiceImplTest {
 		Page<SongEntity> songPage = new PageImpl<>(List.of(SONG_ENTITY), pageable, 0);
 		Mockito.when(songRepository.findAll(any(Pageable.class))).thenReturn(songPage);
 
-		Page<SongDto> pagedModel = songService.getAllSongs(pageable);
+		Page<SongRest> pagedModel = songService.getAllSongs(pageable);
 
 		assertNotNull(pagedModel);
     }
@@ -108,4 +108,4 @@ public class SongServiceImplTest {
 
 		Mockito.verify(songRepository, Mockito.times(1)).deleteById(anyLong());
 	}
-}
+} */

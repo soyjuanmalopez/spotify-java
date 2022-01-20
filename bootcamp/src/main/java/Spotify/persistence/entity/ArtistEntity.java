@@ -26,27 +26,11 @@ public class ArtistEntity implements Serializable {
     @Column(name="description")
     private String description;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(
-            name = "artist_album",
-            joinColumns = {@JoinColumn(name = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id")}
-    )
+    @ManyToMany(mappedBy = "artists")
     private List<AlbumEntity> albums;
 
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(
-            name = "artist_song",
-            joinColumns = {@JoinColumn(name = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id")}
-    )
+    @ManyToMany(mappedBy = "artists")
     private List<SongEntity> songs;
 
 

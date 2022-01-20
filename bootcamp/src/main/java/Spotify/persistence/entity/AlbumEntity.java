@@ -28,7 +28,15 @@ public class AlbumEntity implements Serializable {
     @Column(name= "year_relase")
     private int yearRelease;
 
-    @ManyToMany(mappedBy = "albums")
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(
+            name = "rel_album_artist",
+            joinColumns = {@JoinColumn(name = "id_album")},
+            inverseJoinColumns = {@JoinColumn(name = "id_artist")}
+    )
     private List<ArtistEntity> artists;
 
     @OneToMany(mappedBy = "album_ref", cascade = CascadeType.ALL, orphanRemoval = true)

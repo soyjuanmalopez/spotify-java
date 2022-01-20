@@ -27,7 +27,7 @@ public class SongEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "album_ref")
-    private int album_ref;
+    private AlbumEntity album_ref;
 
     @Column(name = "reproductions")
     private int reproductions;
@@ -35,18 +35,18 @@ public class SongEntity implements Serializable {
     @Column(name = "duration")
     private double duration;
 
-    @ManyToMany(mappedBy = "songs")
-    private List<ArtistEntity> artists;
-
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
     @JoinTable(
-            name = "song_genre",
-            joinColumns = {@JoinColumn(name = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id")}
+            name = "rel_song_artist",
+            joinColumns = {@JoinColumn(name = "id_song")},
+            inverseJoinColumns = {@JoinColumn(name = "id_artist")}
     )
+    private List<ArtistEntity> artists;
+
+    @ManyToMany(mappedBy = "songs")
     private List<GenreEntity> genres;
 
 

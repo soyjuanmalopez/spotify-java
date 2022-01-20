@@ -23,6 +23,14 @@ public class GenreEntity implements Serializable {
     @Column(name="name")
     private String name;
 
-    @ManyToMany(mappedBy = "genres")
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(
+            name = "rel_genre_songs",
+            joinColumns = {@JoinColumn(name = "id_genre")},
+            inverseJoinColumns = {@JoinColumn(name = "id_song")}
+    )
     private List<SongEntity> songs;
 }

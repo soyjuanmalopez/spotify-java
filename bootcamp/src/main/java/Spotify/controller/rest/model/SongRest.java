@@ -26,7 +26,7 @@ public class SongRest implements Serializable {
     private int reproductions;
 
     @JsonProperty("album_ref")
-    private int album_ref;
+    private AlbumRest album_ref;
 
     @JsonProperty("duration")
     private double duration;

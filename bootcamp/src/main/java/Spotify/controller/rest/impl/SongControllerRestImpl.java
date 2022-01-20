@@ -1,12 +1,12 @@
 package Spotify.controller.rest.impl;
 
 import Spotify.controller.rest.SongControllerRest;
-import Spotify.controller.rest.mapper.SongRestMapper;
 import Spotify.controller.rest.model.SongRest;
 import Spotify.controller.rest.model.D4iPageRest;
 import Spotify.controller.rest.model.D4iPaginationInfo;
 import Spotify.controller.rest.model.SpotifyResponse;
 import Spotify.exception.SpotifyException;
+import Spotify.mapper.SongMapper;
 import Spotify.service.SongService;
 import Spotify.util.constant.CommonConstantsUtils;
 import Spotify.util.constant.RestConstantsUtils;
@@ -26,11 +26,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "Song", description = "Song rest")
+@Tag(name = "Song", description = "Song controller")
 public class SongControllerRestImpl implements SongControllerRest {
 
     private final SongService songService;
-    private final SongRestMapper songRestMapper;
+    private final SongMapper songRestMapper;
 
     @Override
     @ResponseStatus(HttpStatus.OK)
@@ -45,7 +45,7 @@ public class SongControllerRestImpl implements SongControllerRest {
       @RequestParam(defaultValue = CommonConstantsUtils.ZERO) final int page,
 	    @RequestParam(defaultValue = CommonConstantsUtils.TWENTY) final int size, 
       @Parameter(hidden = true) final Pageable pageable) throws SpotifyException {
-        final Page<SongRest> songRestList = songService.getAllSongs(pageable).map(song -> songRestMapper.mapToRest(song));
+        final Page<SongRest> songRestList = songService.getAllSongs(pageable);
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                                     String.valueOf(HttpStatus.OK.value()),
                                     CommonConstantsUtils.OK,
@@ -54,7 +54,7 @@ public class SongControllerRestImpl implements SongControllerRest {
                                                                 pageable.getPageSize(),
                                                                 songRestList.getTotalPages())));
     }
-
+/*
     @Override
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "getSongById", description = "Get one Song by given id")
@@ -114,5 +114,5 @@ public class SongControllerRestImpl implements SongControllerRest {
     public void deleteSong(@PathVariable(value = RestConstantsUtils.SONGID) final Long id)
 	    throws SpotifyException {
 	      songService.deleteSong(id);
-    }
+    }*/
 }
