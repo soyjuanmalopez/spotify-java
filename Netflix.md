@@ -175,9 +175,9 @@ This plugin can be configured by adding the tag: <configuration> in our plugin s
 </plugin>
 ```
 
-To find out more ways to configure the plugin, refer to the following reference link
+To find out more ways to configure the plugin, refer to the following reference link.
+And to see an example of migration see section *3* of the same guide.
 [Database Migrations with Flyway](https://www.baeldung.com/database-migrations-with-flyway)
-
 
 
 ### MapStruct
