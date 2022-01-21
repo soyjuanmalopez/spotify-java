@@ -130,14 +130,130 @@ the layers below it using a Handler.
 
 ### Java 11
 
+The Java version used for the training project is Java 11. With this, you can work 
+without any problem, but if you want to use another version*, you can find the JDK 
+you want at this link [Download Java 11 JDK](https://www.oracle.com/java/technologies/downloads/#java11). 
 
+In addition, it has a step-by-step installation guide for the JDK in case the IDE 
+used does not download it automatically. In our case, 
+the step-by-step installation link of Java 11 is added below [Java 11 Installation Guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A).
+
+*\*Note that we must remember to change the pom.xml if using another version of Java. 
+It is also useful to check the version to avoid errors.*
 
 ### FlyWay
+
+Flyway updates a database from one version to the next using migrations. We can write 
+migrations either in SQL with database-specific syntax, or in Java for advanced database 
+transformations.
+
+There is a plugin in Maven that allows us to use FlyWay, to install it we will
+to add the following plugin definition to our pom.xml:
+
+```java
+<plugin>
+    <groupId>org.flywaydb</groupId>
+    <artifactId>flyway-maven-plugin</artifactId>
+    <version>8.0.0</version> 
+</plugin>
+```
+
+This plugin can be configured by adding the tag: <configuration> in our plugin section.
+```java
+<plugin>
+    <groupId>org.flywaydb</groupId>
+    <artifactId>flyway-maven-plugin</artifactId>
+    <version>8.0.0</version>
+    <configuration>
+        <user>databaseUser</user>
+        <password>databasePassword</password>
+        <schemas>
+            <schema>schemaName</schema>
+        </schemas>
+        ...
+    </configuration>
+</plugin>
+```
+
+To find out more ways to configure the plugin, refer to the following reference link
+[Database Migrations with Flyway](https://www.baeldung.com/database-migrations-with-flyway)
 
 
 
 ### MapStruct
 
+"*MapStruct is a code generator that greatly simplifies the implementation of 
+mappings between Java bean types based on a convention over configuration approach [...]
+As shown on your web page, let's say we have a class that represents cars (for 
+example, a JPA entity) and an accompanying data transfer object (DTO).*
+
+*Both types are quite similar, only the seat count attributes have different names 
+and the type attribute is a special enum type in the Car class but is a plain 
+string in the DTO.*"
+
+See full example: [MapStruct official Web](https://mapstruct.org/)
+
+To configure MapStruct in our Spring project, follow the next tutorial (Apache Maven Section):
+[MapStruct Spring Reference Guide](https://mapstruct.org/documentation/spring-extensions/reference/html/)
+
+**Main annotations**
+
+We will see the main annotations that form MapStruct.
+
+```java
+@Mapper
+public interface SpotifyMapper {
+    //Code
+}
+```
+This annotation comes before the class and is used to indicate that the class 
+is using the Conversion Service.
+
+A good option is to inject the mapper directly where we need it (if our project uses any Dependency Injection solution).
+
+Luckily, MapStruct has solid support for both Spring and CDI (Contexts and Dependency Injection).
+
+To use Spring IoC in our mapper, we need to add the componentModel attribute to @Mapper with the 
+value **spring**, and for CDI, it would be cdi.
+
+```java
+@Mapper(componentModel = "spring")
+public interface SpotifyMapper {
+    //Code
+}
+```
+For attributes with different names in source and target object, the @Mapping annotation 
+can be used to configure the names.
+
+```java
+//Example code
+public class GenreDTO {
+    private int genreId;
+    private String genreName;
+    // getters and setters omitted
+}
+public class Genre {
+    private int id;
+    private String name;
+    // getters and setters omitted
+}
+
+@Mapper(componentModel = "spring")
+public interface SpotifyMapper {
+    @Mapping(source = "name", target = "genreName")
+    GenreDTO genreToGenreDTO(Genre genre);
+}
+```
+
+If our mapper uses another adapter or mapper, it can be specified in the annotation:
+
+```java
+@Mapper(componentModel = "spring", uses = OtherConversionAdapter.class)
+public interface SpotifyMapper{
+    @Mapping(source = "name", target = "genreName")
+    GenreDTO genreToGenreDTO(Genre genre);
+}
+```
 
 ## Archetype
 
