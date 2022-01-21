@@ -34,6 +34,35 @@
 
 ### MapStruct
 
+## No code smells
+
+The code smell is a surface indication that usually corresponds to a deeper problem in the system. Usually, they aren't
+bugs because they aren't technically incorrect and don't prevent the program from functioning but, they indicate
+weaknesses in design that may slow down development or increase the risk of bugs or failures in the future.
+
+### Most usually code smells
+
+#### Blootware
+
+- Appear when some parts of the code (class, methods...) that has become huge over time by accumulating functionality
+  and feature creeps. It could become a big problem if no one cares to fix it.
+
+#### Duplicated code
+
+- Appear when some part of the code exists identical or very similar in more than one location. Sometimes appears when
+  the code was writing by more than one programmer, and they don't communicate with each other.
+
+#### Mysterious Name
+
+- Appears when the name of functions, modules, variables or classes are named in a way that doesn't communicate what do
+  or how to use them. This problem could be fixed with comments on the code or more descriptive names.
+
+### How to avoid code smells?
+
+- SonarQube is a plugin that helps to keep the correct state of the code. A good way to avoid code smells is a
+  continuous analysis of the code to correct bad practices, bugs and vulnerabilities before the code is already very
+  complex.
+
 ## Archetype
 
 ## Data base
@@ -498,86 +527,24 @@ And in this part, I show the variable path for each table.
 
 ### Artist
 
-<p><span style="color: green">GET</span>&nbsp; <b>/artist</b> &nbsp; - &nbsp; Get all artist </p>
-
-````json
-[
-  {
-    "id": 1,
-    "name": "Drake",
-    "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky .",
-    "album": {
-      "id": 1,
-      "title": "More Life",
-      "duration": 1.21,
-      "year_release": 2017
-    }
-  },
-  {
-    "id": 2,
-    "name": "Giggs",
-    "description": "Giggs is a British rapper who made his critically acclaimed solo album debut in 2008 with Walk in da Park."
-  }
-]
-````
-
-<p><span style="color: green">GET</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Get artist by id </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/artists</b> &nbsp; - &nbsp; Get all artists </p>
 
 ````json
 {
-  "id": 1,
-  "name": "Drake",
-  "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky .",
-  "album": {
-    "id": 1,
-    "title": "More Life",
-    "duration": 1.21,
-    "year_release": 2017
-  }
-}
-````
-
-<p><span style="color: green">GET</span>&nbsp; <b>/artist/{id}/albums </b> &nbsp; - &nbsp; Get albums of an artist by the artist id </p>
-
-````json
-[
-  {
-    "id": 1,
-    "title": "More Life",
-    "duration": 1.21,
-    "year_release": 2017
-  },
-  {
-    "id": 2,
-    "title": "Views",
-    "duration": 1.21,
-    "year_release": 2016
-  }
-]
-````
-
-<p><span style="color: red">DELETE</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Delete artist by id </p>
-<p><span style="color: red">DELETE</span>&nbsp; <b>/artist/{id}/album/{id} </b> &nbsp; - &nbsp; Delete an album from the artist by id </p>
-<p><span style="color: blue">PUT</span>&nbsp; <b>/artist/{id} </b> &nbsp; - &nbsp; Modify artist by id </p>
-<p><span style="color: blue">PUT</span>&nbsp; <b>/artist/{id}/album/{id}</b> &nbsp; - &nbsp; Insert album into the artist by the album id </p>
-<p><span style="color: yellow">POST</span>&nbsp; <b>/artist</b> &nbsp; - &nbsp; Create new artist </p>
-
-### Song
-
-<p><span style="color: green">GET</span>&nbsp; <b>/song</b> &nbsp; - &nbsp; Get all songs </p>
-
-````json
-{
-  "id": 2,
-  "title": "No Long Talk",
-  "duration": 2.29,
-  "reproductions": "116090000",
-  "album_ref": "1",
-  "artist": [
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": [
     {
       "id": 1,
       "name": "Drake",
-      "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
+      "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky .",
+      "album": {
+        "id": 1,
+        "title": "More Life",
+        "duration": 1.21,
+        "year_release": 2017
+      }
     },
     {
       "id": 2,
@@ -588,25 +555,142 @@ And in this part, I show the variable path for each table.
 }
 ````
 
-<p><span style="color: green">GET</span>&nbsp; <b>/song/{id} </b> &nbsp; - &nbsp; Get song by id </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/artists/{id} </b> &nbsp; - &nbsp; Get artist by id </p>
 
 ````json
-[
-  {
+{
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": {
     "id": 1,
-    "title": "Free smoke",
-    "duration": 3.38,
-    "reproductions": "170300000",
-    "album_ref": "1",
-    "artist": [
-      {
-        "id": 1,
-        "name": "Drake",
-        "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
-      }
-    ]
-  },
-  {
+    "name": "Drake",
+    "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky .",
+    "album": {
+      "id": 1,
+      "title": "More Life",
+      "duration": 1.21,
+      "year_release": 2017
+    }
+  }
+}
+````
+
+<p><span style="color: green">GET</span>&nbsp; <b>/artists/{id}/albums </b> &nbsp; - &nbsp; Get albums of an artist by the artist id </p>
+
+````json
+{
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": [
+    {
+      "id": 1,
+      "title": "More Life",
+      "duration": 1.21,
+      "year_release": 2017
+    },
+    {
+      "id": 2,
+      "title": "Views",
+      "duration": 1.21,
+      "year_release": 2016
+    }
+  ]
+}
+````
+
+<p><span style="color: red">DELETE</span>&nbsp; <b>/artists/{id} </b> &nbsp; - &nbsp; Delete artist by id </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/artists/{id}/albums/{id} </b> &nbsp; - &nbsp; Delete an album from the artist by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/artists/{id} </b> &nbsp; - &nbsp; Modify artist by id </p>
+
+- Structure to modify json:
+
+````json
+{
+  "id": 0,
+  "name": "",
+  "description": ""
+}
+````
+
+<p><span style="color: blue">PUT</span>&nbsp; <b>/artists/{id}/albums/{id}</b> &nbsp; - &nbsp; Insert album into the artist by the album id </p>
+
+````json
+{
+  "artist_id": 0,
+  "album_id": 0
+}
+````
+
+<p><span style="color: yellow">POST</span>&nbsp; <b>/artists</b> &nbsp; - &nbsp; Create new artist </p>
+
+- The structure of the insert:
+
+````json
+{
+  "id": "number",
+  "title": "string",
+  "duration": "decimal",
+  "year_release": "decimal"
+}
+````
+
+### Song
+
+<p><span style="color: green">GET</span>&nbsp; <b>/songs</b> &nbsp; - &nbsp; Get all songs </p>
+
+````json
+{
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": [
+    {
+      "id": 1,
+      "title": "Free smoke",
+      "duration": 3.38,
+      "reproductions": "170300000",
+      "album_ref": "1",
+      "artist": [
+        {
+          "id": 1,
+          "name": "Drake",
+          "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "No Long Talk",
+      "duration": 2.29,
+      "reproductions": "116090000",
+      "album_ref": "1",
+      "artist": [
+        {
+          "id": 1,
+          "name": "Drake",
+          "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
+        },
+        {
+          "id": 2,
+          "name": "Giggs",
+          "description": "Giggs is a British rapper who made his critically acclaimed solo album debut in 2008 with Walk in da Park."
+        }
+      ]
+    }
+  ]
+}
+````
+
+<p><span style="color: green">GET</span>&nbsp; <b>/songs/{id} </b> &nbsp; - &nbsp; Get song by id </p>
+
+````json
+{
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": {
     "id": 2,
     "title": "No Long Talk",
     "duration": 2.29,
@@ -625,33 +709,128 @@ And in this part, I show the variable path for each table.
       }
     ]
   }
-]
-````
-
-<p><span style="color: green">GET</span>&nbsp; <b>/song/{id}/album </b> &nbsp; - &nbsp; Get the album of the song by the song id </p>
-
-````json
-{
-  "id": 1,
-  "title": "More Life",
-  "duration": 1.21,
-  "year_release": 2017
 }
 ````
 
-<p><span style="color: red">DELETE</span>&nbsp; <b>/song/{id} </b> &nbsp; - &nbsp; Delete song by id </p>
-<p><span style="color: red">DELETE</span>&nbsp; <b>/song/{id}/artist/{id} </b> &nbsp; - &nbsp; Delete an artist from a song by id </p>
-<p><span style="color: blue">PUT</span>&nbsp; <b>/song/{id} </b> &nbsp; - &nbsp; Modify song by id </p>
-<p><span style="color: blue">PUT</span>&nbsp; <b>/song/{id}/artist/{id} </b> &nbsp; - &nbsp; Add an artist to the song by artist id </p> 
-<p><span style="color: yellow">POST</span>&nbsp; <b>/song</b> &nbsp; - &nbsp; Create new song </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/songs/{id}/albums </b> &nbsp; - &nbsp; Get the album of the song by the song id </p>
+
+````json
+{
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": {
+    "id": 1,
+    "title": "More Life",
+    "duration": 1.21,
+    "year_release": 2017
+  }
+}
+````
+
+<p><span style="color: red">DELETE</span>&nbsp; <b>/songs/{id} </b> &nbsp; - &nbsp; Delete song by id </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/songs/{id}/artists/{id} </b> &nbsp; - &nbsp; Delete an artist from a song by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/songs/{id} </b> &nbsp; - &nbsp; Modify song by id </p>
+
+````json5
+{
+  "id": 0,
+  "title": "",
+  "duration": 0.05,
+  "reproductions": 0,
+  "album_ref": 0,
+}
+````
+
+<p><span style="color: blue">PUT</span>&nbsp; <b>/songs/{id}/artists/{id} </b> &nbsp; - &nbsp; Add an artist to the song by artist id </p>
+
+````json5
+{
+  "id_song": 0,
+  "id_artist": 0
+}
+````
+
+<p><span style="color: yellow">POST</span>&nbsp; <b>/songs</b> &nbsp; - &nbsp; Create new song </p>
+
+- The structure of the insert:
+
+````json5
+{
+  "id": "integer",
+  "title": "string",
+  "duration": "decimal",
+  "reproductions": "number",
+  "album_ref": "number",
+}
+````
 
 ### Album
 
-<p><span style="color: green">GET</span>&nbsp; <b>/album</b> &nbsp; - &nbsp; Get all albums </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/albums</b> &nbsp; - &nbsp; Get all albums </p>
 
 ````json
-[
-  {
+{
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": [
+    {
+      "id": 1,
+      "title": "More Life",
+      "duration": 1.21,
+      "year_release": 2017,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Drake",
+          "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Views",
+      "duration": 1.21,
+      "year_release": 2016,
+      "artists": [
+        {
+          "id": 1,
+          "name": "Drake",
+          "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "JACKBOYS",
+      "duration": 0.21,
+      "year_release": 2019,
+      "artists": [
+        {
+          "id": 7,
+          "name": "Travis Scott",
+          "description": "Travis Scott became known during the early 2010s for his heavily Auto-Tuned half-sung/half-rapped vocal style."
+        },
+        {
+          "id": 12,
+          "name": "JACKBOYS",
+          "description": "Led by Travis Scott , JackBoys advances the Grammy-nominated rapper/producer's Cactus Jack Records with DJ Chase B and label signees Sheck Wes and Don Toliver."
+        }
+      ]
+    }
+  ]
+}
+````
+
+<p><span style="color: green">GET</span>&nbsp; <b>/albums/{id} </b> &nbsp; - &nbsp; Get album by id </p>
+
+````json
+{
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": {
     "id": 1,
     "title": "More Life",
     "duration": 1.21,
@@ -663,241 +842,311 @@ And in this part, I show the variable path for each table.
         "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
       }
     ]
-  },
-  {
-    "id": 2,
-    "title": "Views",
-    "duration": 1.21,
-    "year_release": 2016,
-    "artists": [
-      {
-        "id": 1,
-        "name": "Drake",
-        "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "title": "JACKBOYS",
-    "duration": 0.21,
-    "year_release": 2019,
-    "artists": [
-      {
-        "id": 7,
-        "name": "Travis Scott",
-        "description": "Travis Scott became known during the early 2010s for his heavily Auto-Tuned half-sung/half-rapped vocal style."
-      },
-      {
-        "id": 12,
-        "name": "JACKBOYS",
-        "description": "Led by Travis Scott , JackBoys advances the Grammy-nominated rapper/producer's Cactus Jack Records with DJ Chase B and label signees Sheck Wes and Don Toliver."
-      }
-    ]
   }
-]
+}
 ````
 
-<p><span style="color: green">GET</span>&nbsp; <b>/album/{id} </b> &nbsp; - &nbsp; Get album by id </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/albums/{id}/songs </b> &nbsp; - &nbsp; Get songs of an album by id </p>
 
 ````json
 {
-  "id": 1,
-  "title": "More Life",
-  "duration": 1.21,
-  "year_release": 2017,
-  "artists": [
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": [
     {
       "id": 1,
-      "name": "Drake",
-      "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky ."
+      "title": "Free smoke",
+      "duration": 3.38,
+      "reproductions": 170300000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
+    },
+    {
+      "id": 2,
+      "title": "No Long Talk",
+      "duration": 2.29,
+      "reproductions": 116090000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Passionfruit",
+      "duration": 4.58,
+      "reproductions": 1009000000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Jorja Interlude",
+      "duration": 1.47,
+      "reproductions": 102042000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Get It Together",
+      "duration": 4.1,
+      "reproductions": 192403000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Madiba Riddim",
+      "duration": 3.25,
+      "reproductions": 192403000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Blem",
+      "duration": 3.25,
+      "reproductions": 129680000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
+    },
+    {
+      "id": 8,
+      "title": 4422,
+      "duration": 3.06,
+      "reproductions": 120230000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Gyalchester",
+      "duration": 3.09,
+      "reproductions": 306130000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Skepta Interlude",
+      "duration": 2.23,
+      "reproductions": 75900000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
     }
   ]
 }
 ````
 
-<p><span style="color: green">GET</span>&nbsp; <b>/album/{id}/songs </b> &nbsp; - &nbsp; Get songs of an album by id </p>
-
-````json
-[
-  {
-    "id": 1,
-    "title": "Free smoke",
-    "duration": 3.38,
-    "reproductions": 170300000,
-    "album_ref": 1,
-    "artists:": [...]
-  },
-  {
-    "id": 2,
-    "title": "No Long Talk",
-    "duration": 2.29,
-    "reproductions": 116090000,
-    "album_ref": 1,
-    "artists:": [...]
-  },
-  {
-    "id": 3,
-    "title": "Passionfruit",
-    "duration": 4.58,
-    "reproductions": 1009000000,
-    "album_ref": 1,
-    "artists:": [...]
-  },
-  {
-    "id": 4,
-    "title": "Jorja Interlude",
-    "duration": 1.47,
-    "reproductions": 102042000,
-    "album_ref": 1,
-    "artists:": [...]
-  },
-  {
-    "id": 5,
-    "title": "Get It Together",
-    "duration": 4.1,
-    "reproductions": 192403000,
-    "album_ref": 1,
-    "artists:": [...]
-  },
-  {
-    "id": 6,
-    "title": "Madiba Riddim",
-    "duration": 3.25,
-    "reproductions": 192403000,
-    "album_ref": 1,
-    "artists:": [...]
-  },
-  {
-    "id": 7,
-    "title": "Blem",
-    "duration": 3.25,
-    "reproductions": 129680000,
-    "album_ref": 1,
-    "artists:": [...]
-  },
-  {
-    "id": 8,
-    "title": 4422,
-    "duration": 3.06,
-    "reproductions": 120230000,
-    "album_ref": 1,
-    "artists:": [...]
-  },
-  {
-    "id": 9,
-    "title": "Gyalchester",
-    "duration": 3.09,
-    "reproductions": 306130000,
-    "album_ref": 1,
-    "artists:": [...]
-  },
-  {
-    "id": 10,
-    "title": "Skepta Interlude",
-    "duration": 2.23,
-    "reproductions": 75900000,
-    "album_ref": 1,
-    "artists:": [...]
-  }
-]
-````
-
-<p><span style="color: green">GET</span>&nbsp; <b>/album/{id}/artist </b> &nbsp; - &nbsp; Get artists of an album by id </p>
-
-````json
-[
-  {
-    "id": 1,
-    "name": "Drake",
-    "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky .",
-    "albums": [
-      {
-        "id": 1,
-        "title": "More Life",
-        "duration": 1.21,
-        "year_release": 2017
-      },
-      {
-        "id": 2,
-        "title": "Views",
-        "duration": 1.21,
-        "year_release": 2016
-      }
-    ]
-  }
-]
-````
-
-<p><span style="color: red">DELETE</span>&nbsp; <b>/album/{id} </b> &nbsp; - &nbsp; Delete album by id </p>
-<p><span style="color: red">DELETE</span>&nbsp; <b>/album/{id}/song/{id} </b> &nbsp; - &nbsp; Delete a song from the album by id </p>
-<p><span style="color: red">DELETE</span>&nbsp; <b>/album/{id}/artist/{id} </b> &nbsp; - &nbsp; Delete a artist from the album by id </p>
-<p><span style="color: blue">PUT</span>&nbsp; <b>/album/{id} </b> &nbsp; - &nbsp; Modify album by id </p>
-<p><span style="color: blue">PUT</span>&nbsp; <b>/album/{id}/song/{id} </b> &nbsp; - &nbsp; Add a song to an album by the song id </p>
-<p><span style="color: blue">PUT</span>&nbsp; <b>/album/{id}/artist/{id} </b> &nbsp; - &nbsp; Add an artist to an album by artist id </p>
-<p><span style="color: yellow">POST</span>&nbsp; <b>/album</b> &nbsp; - &nbsp; Create new album </p>
-
-### Genre
-
-<p><span style="color: green">GET</span>&nbsp; <b>/genre</b> &nbsp; - &nbsp; Get all genres </p>
-
-````json
-[
-  {
-    "id": 1,
-    "name": "Hip-Hop",
-    "songs": [...]
-  },
-  {
-    "id": 2,
-    "name": "Pop",
-    "songs": [...]
-  }
-]
-````
-
-<p><span style="color: green">GET</span>&nbsp; <b>/genre/{id} </b> &nbsp; - &nbsp; Get genre by id </p>
+<p><span style="color: green">GET</span>&nbsp; <b>/albums/{id}/artists </b> &nbsp; - &nbsp; Get artists of an album by id </p>
 
 ````json
 {
-  "id": 2,
-  "name": "Pop",
-  "songs": [...]
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": [
+    {
+      "id": 1,
+      "name": "Drake",
+      "description": "Canadian rapper and vocalist Drake sustained a high-level commercial presence shortly after he hit the scene in 2006, whether with his own chart-topping releases or a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna , and A$AP Rocky .",
+      "albums": [
+        {
+          "id": 1,
+          "title": "More Life",
+          "duration": 1.21,
+          "year_release": 2017
+        },
+        {
+          "id": 2,
+          "title": "Views",
+          "duration": 1.21,
+          "year_release": 2016
+        }
+      ]
+    }
+  ]
+}
+
+````
+
+<p><span style="color: red">DELETE</span>&nbsp; <b>/albums/{id} </b> &nbsp; - &nbsp; Delete album by id </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/albums/{id}/songs/{id} </b> &nbsp; - &nbsp; Delete a song from the album by id </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/albums/{id}/artists/{id} </b> &nbsp; - &nbsp; Delete a artist from the album by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/albums/{id} </b> &nbsp; - &nbsp; Modify album by id </p>
+
+````json5
+{
+  "id": 0,
+  "title": "",
+  "duration": 0.05,
+  "year_release": 0000
 }
 ````
 
-<p><span style="color: green">GET</span>&nbsp; <b>/genre/{id}/songs </b> &nbsp; - &nbsp; Get songs of a genre by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/albums/{id}/songs/{id} </b> &nbsp; - &nbsp; Add a song to an album by the song id </p>
 
-````json
-[
-  {
-    "id": 4,
-    "title": "Jorja Interlude",
-    "duration": 1.47,
-    "reproductions": 102042000,
-    "album_ref": 1,
-    "artists:": [...]
-  },
-  {
-    "id": 5,
-    "title": "Get It Together",
-    "duration": 4.1,
-    "reproductions": 192403000,
-    "album_ref": 1,
-    "artists:": [...]
-  },
-  {
-    "id": 6,
-    "title": "Madiba Riddim",
-    "duration": 3.25,
-    "reproductions": 192403000,
-    "album_ref": 1,
-    "artists:": [...]
-  }
-]
+````json5
+{
+  "id_album": 1,
+  "id_song": 1
+}
 ````
 
-<p><span style="color: red">DELETE</span>&nbsp; <b>/genre/{id} </b> &nbsp; - &nbsp; Delete genre by id </p>
-<p><span style="color: red">DELETE</span>&nbsp; <b>/genre/{id}/songs/{id} </b> &nbsp; - &nbsp; Delete genre by id </p>
-<p><span style="color: blue">PUT</span>&nbsp; <b>/genre/{id} </b> &nbsp; - &nbsp; Modify genre by id </p> 
-<p><span style="color: yellow">POST</span>&nbsp; <b>/genre</b> &nbsp; - &nbsp; Create new genre </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/albums/{id}/artists/{id} </b> &nbsp; - &nbsp; Add an artist to an album by artist id </p>
+
+````json5
+{
+  "id_album": 1,
+  "id_artist": 1
+}
+````
+
+<p><span style="color: yellow">POST</span>&nbsp; <b>/albums</b> &nbsp; - &nbsp; Create new album </p>
+
+- The structure of the insert:
+
+````json5
+{
+  "id": "number",
+  "title": "string",
+  "duration": "decimal",
+  "year_release": "number"
+}
+````
+
+### Genre
+
+<p><span style="color: green">GET</span>&nbsp; <b>/genres</b> &nbsp; - &nbsp; Get all genres </p>
+
+````json
+{
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": [
+    {
+      "id": 1,
+      "name": "Hip-Hop",
+      "songs": [
+        ...
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Pop",
+      "songs": [
+        ...
+      ]
+    }
+  ]
+}
+````
+
+<p><span style="color: green">GET</span>&nbsp; <b>/genres/{id} </b> &nbsp; - &nbsp; Get genre by id </p>
+
+````json
+{
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": {
+    "id": 2,
+    "name": "Pop",
+    "songs": [
+      ...
+    ]
+  }
+}
+````
+
+<p><span style="color: green">GET</span>&nbsp; <b>/genres/{id}/songs </b> &nbsp; - &nbsp; Get songs of a genre by id </p>
+
+````json
+{
+  "status": "OK",
+  "code": "200",
+  "message": "",
+  "data": [
+    {
+      "id": 4,
+      "title": "Jorja Interlude",
+      "duration": 1.47,
+      "reproductions": 102042000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Get It Together",
+      "duration": 4.1,
+      "reproductions": 192403000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Madiba Riddim",
+      "duration": 3.25,
+      "reproductions": 192403000,
+      "album_ref": 1,
+      "artists:": [
+        ...
+      ]
+    }
+  ]
+}
+````
+
+<p><span style="color: red">DELETE</span>&nbsp; <b>/genres/{id} </b> &nbsp; - &nbsp; Delete genre by id </p>
+<p><span style="color: red">DELETE</span>&nbsp; <b>/genres/{id}/songs/{id} </b> &nbsp; - &nbsp; Delete genre by id </p>
+<p><span style="color: blue">PUT</span>&nbsp; <b>/genres/{id} </b> &nbsp; - &nbsp; Modify genre by id </p> 
+
+````json5
+{
+  "id": 0,
+  "name": ""
+}
+````
+
+<p><span style="color: blue">PUT</span>&nbsp; <b>/genres/{id}/song/{id} </b> &nbsp; - &nbsp; Add songs to a genre by id</p>
+
+````json5
+{
+  "genre_id": 1,
+  "song_id": 1
+}
+````
+
+<p><span style="color: yellow">POST</span>&nbsp; <b>/genres</b> &nbsp; - &nbsp; Create new genre </p>
+
+````json5
+{
+  "id": "number",
+  "name": "string"
+}
+````
