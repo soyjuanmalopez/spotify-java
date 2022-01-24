@@ -11,6 +11,7 @@ import Spotify.persistence.repository.SongRepository;
 import Spotify.service.SongService;
 
 import Spotify.util.constant.ExceptionConstantsUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SongServiceImpl implements SongService {
 
+    @Autowired
     private final SongRepository songRepository;
+
+    @Autowired
     private final SongMapper songMapper;
 
     @Override
@@ -36,7 +40,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public SongRest getSongById(final Long id) throws SpotifyException {
+    public SongRest getSongById(final int id) throws SpotifyException {
 	SongEntity song = songRepository.findById(id)
 		.orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
 		return songMapper.mapToRest(song);
@@ -51,7 +55,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public void deleteSong(final Long id) throws SpotifyException {
+    public void deleteSong(final int id) throws SpotifyException {
 	songRepository.deleteById(id);
     }
 }

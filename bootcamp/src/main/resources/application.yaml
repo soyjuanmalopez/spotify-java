@@ -1,6 +1,7 @@
 server:
+  servlet:
+    context-path: /spotify/v1
   port: 8080
-  servlet.context-path: /spotify/v1
 
 # Microservice Configuration
 spring:

@@ -15,7 +15,7 @@ import java.util.List;
 public class ArtistRest implements Serializable {
 
     @JsonProperty("id")
-    private Long id;
+    private int id;
 
     @JsonProperty("name")
     private String name;

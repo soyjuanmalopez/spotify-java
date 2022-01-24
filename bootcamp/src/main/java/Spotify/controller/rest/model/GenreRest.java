@@ -16,7 +16,7 @@ import java.util.List;
 public class GenreRest implements Serializable {
 
     @JsonProperty("id")
-    private Long id;
+    private int id;
 
     @JsonProperty("name")
     private String name;

@@ -48,8 +48,7 @@ public class SongControllerRestImplTest {
 	@Before
 	public void init() {
 		MockitoAnnotations.initMocks(this);
-		SONG_ENTITY.setId(ID);
-		SONG_REST.setId(ID);
+
 	}
 /*
     @Test

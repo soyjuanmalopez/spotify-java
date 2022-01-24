@@ -1,12 +1,11 @@
 package Spotify.persistence.repository;
 
+import Spotify.persistence.entity.GenreEntity;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import Spotify.persistence.entity.SongEntity;
-
 @Repository
-public interface SongRepository extends PagingAndSortingRepository<SongEntity, Integer> {
+public interface GenreRepository extends PagingAndSortingRepository<GenreEntity,Integer> {
 
 
 }

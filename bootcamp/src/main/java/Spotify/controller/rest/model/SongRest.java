@@ -17,11 +17,11 @@ public class SongRest implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("id")
-    private Long id;
+    private int id;
 
-    @JsonProperty("title")
+    @JsonProperty("tile")
     private String title;
-    
+
     @JsonProperty("reproductions")
     private int reproductions;
 
@@ -36,6 +36,7 @@ public class SongRest implements Serializable {
 
     @JsonProperty("genres")
     private List<GenreRest> genres;
+
 
 
 }

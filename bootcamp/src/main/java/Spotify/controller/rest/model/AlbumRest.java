@@ -16,7 +16,7 @@ import java.util.List;
 public class AlbumRest implements Serializable {
 
     @JsonProperty("id")
-    private Long id;
+    private int id;
 
     @JsonProperty("title")
     private String title;
