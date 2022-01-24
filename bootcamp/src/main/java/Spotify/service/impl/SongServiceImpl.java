@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +28,7 @@ public class SongServiceImpl implements SongService {
     @Autowired
     private final SongMapper songMapper;
 
+    @Transactional(readOnly = true)
     @Override
     public Page<SongRest> getAllSongs(final Pageable pageable) throws SpotifyException {
 		return songRepository.findAll(pageable).map(song -> songMapper.mapToRest(song));

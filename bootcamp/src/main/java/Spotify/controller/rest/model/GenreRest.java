@@ -21,6 +21,4 @@ public class GenreRest implements Serializable {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("songs")
-    private List<SongRest> songs;
 }

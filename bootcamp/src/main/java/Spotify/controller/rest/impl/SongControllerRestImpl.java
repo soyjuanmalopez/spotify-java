@@ -45,6 +45,7 @@ public class SongControllerRestImpl implements SongControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
+
     public SpotifyResponse<D4iPageRest<SongRest>> getAllSongs(
       @RequestParam(defaultValue = CommonConstantsUtils.ZERO) final int page,
 	    @RequestParam(defaultValue = CommonConstantsUtils.TWENTY) final int size, 

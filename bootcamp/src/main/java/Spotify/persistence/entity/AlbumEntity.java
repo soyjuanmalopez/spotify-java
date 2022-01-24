@@ -11,7 +11,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Setter
+@Getter
 public class AlbumEntity implements Serializable {
 
     @Id
@@ -25,19 +26,8 @@ public class AlbumEntity implements Serializable {
     @Column(name = "duration")
     private double duration;
 
-    @Column(name= "year_relase")
+    @Column(name= "year_release")
     private int yearRelease;
-
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(
-            name = "rel_album_artist",
-            joinColumns = {@JoinColumn(name = "id_album")},
-            inverseJoinColumns = {@JoinColumn(name = "id_artist")}
-    )
-    private List<ArtistEntity> artists;
 
     @OneToMany(mappedBy = "album_ref", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SongEntity> songs;

@@ -27,10 +27,7 @@ public class AlbumRest implements Serializable {
     @JsonProperty("year_relase")
     private int yearRelease;
 
-    @JsonProperty("artists")
-    private List<ArtistRest> artists;
-
-    @JsonProperty("songs")
-    private List<SongRest> songs;
+   // @JsonProperty("songs")
+   // private List<SongRest> songs;
 
 }

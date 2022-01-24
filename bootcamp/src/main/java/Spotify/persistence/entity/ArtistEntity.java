@@ -12,7 +12,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Setter
+@Getter
 public class ArtistEntity implements Serializable {
 
     @Id
@@ -25,10 +26,6 @@ public class ArtistEntity implements Serializable {
 
     @Column(name="description")
     private String description;
-
-    @ManyToMany(mappedBy = "artists")
-    private List<AlbumEntity> albums;
-
 
     @ManyToMany(mappedBy = "artists")
     private List<SongEntity> songs;

@@ -12,7 +12,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Setter
+@Getter
 public class GenreEntity implements Serializable {
 
     @Id
@@ -24,8 +25,7 @@ public class GenreEntity implements Serializable {
     private String name;
 
     @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
+            CascadeType.ALL
     })
     @JoinTable(
             name = "rel_genre_songs",

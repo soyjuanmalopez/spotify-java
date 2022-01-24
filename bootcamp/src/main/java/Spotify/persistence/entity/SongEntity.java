@@ -12,7 +12,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Setter
+@Getter
 public class SongEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,7 +26,7 @@ public class SongEntity implements Serializable {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "album_ref")
     private AlbumEntity album_ref;
 
@@ -36,8 +37,7 @@ public class SongEntity implements Serializable {
     private double duration;
 
     @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
+            CascadeType.ALL
     })
     @JoinTable(
             name = "rel_song_artist",
