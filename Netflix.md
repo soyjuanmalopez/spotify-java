@@ -186,27 +186,6 @@ CREATE TABLE `spotify`.`rel_album_artist`
 );
 ```
 
-Relation album-song
-
-```mysql
-CREATE TABLE `spotify`.`rel_album_song`
-(
-    `id_album` INT NOT NULL,
-    `id_song`  INT NOT NULL,
-    PRIMARY KEY (`id_album`, `id_song`),
-    INDEX `fk_rel_albumsong_song_idx` (`id_song` ASC) VISIBLE,
-    CONSTRAINT `fk_rel_albumsong_album`
-        FOREIGN KEY (`id_album`)
-            REFERENCES `spotify`.`album` (`id`)
-            ON DELETE SET NULL
-            ON UPDATE CASCADE,
-    CONSTRAINT `fk_rel_albumsong_song`
-        FOREIGN KEY (`id_song`)
-            REFERENCES `spotify`.`song` (`id`)
-            ON DELETE SET NULL
-            ON UPDATE CASCADE
-);
-```
 
 Relation song_artist
 
