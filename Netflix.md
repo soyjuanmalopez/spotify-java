@@ -154,12 +154,12 @@ CREATE TABLE `spotify`.`rel_genre_songs`
     CONSTRAINT `fk_rel_genre`
         FOREIGN KEY (`id_genre`)
             REFERENCES `spotify`.`genre` (`id`)
-            ON DELETE NO ACTION
+            ON DELETE SET NULL
             ON UPDATE CASCADE,
     CONSTRAINT `fk_rel_song`
         FOREIGN KEY (`id_song`)
             REFERENCES `spotify`.`song` (`id`)
-            ON DELETE NO ACTION
+            ON DELETE SET NULL
             ON UPDATE CASCADE
 );
 ```
@@ -176,12 +176,12 @@ CREATE TABLE `spotify`.`rel_album_artist`
     CONSTRAINT `fk_rel_albumartist_album`
         FOREIGN KEY (`id_album`)
             REFERENCES `spotify`.`album` (`id`)
-            ON DELETE NO ACTION
+            ON DELETE SET NULL
             ON UPDATE CASCADE,
     CONSTRAINT `fk_rel_albumartist_artist`
         FOREIGN KEY (`id_artist`)
             REFERENCES `spotify`.`artist` (`id`)
-            ON DELETE NO ACTION
+            ON DELETE SET NULL
             ON UPDATE CASCADE
 );
 ```
@@ -198,12 +198,12 @@ CREATE TABLE `spotify`.`rel_album_song`
     CONSTRAINT `fk_rel_albumsong_album`
         FOREIGN KEY (`id_album`)
             REFERENCES `spotify`.`album` (`id`)
-            ON DELETE NO ACTION
+            ON DELETE SET NULL
             ON UPDATE CASCADE,
     CONSTRAINT `fk_rel_albumsong_song`
         FOREIGN KEY (`id_song`)
             REFERENCES `spotify`.`song` (`id`)
-            ON DELETE NO ACTION
+            ON DELETE SET NULL
             ON UPDATE CASCADE
 );
 ```
@@ -220,12 +220,12 @@ CREATE TABLE `spotify`.`rel_song_artist`
     CONSTRAINT `fk_rel_songartist_song`
         FOREIGN KEY (`id_song`)
             REFERENCES `spotify`.`song` (`id`)
-            ON DELETE NO ACTION
+            ON DELETE SET NULL
             ON UPDATE CASCADE,
     CONSTRAINT `fk_rel_songartist_artist`
         FOREIGN KEY (`id_artist`)
             REFERENCES `spotify`.`artist` (`id`)
-            ON DELETE NO ACTION
+            ON DELETE SET NULL
             ON UPDATE CASCADE
 );
 ```
@@ -309,6 +309,7 @@ INSERT INTO `spotify`.`song` (`title`, `duration`, `reproductions`, `album_ref`)
 VALUES ('Lose You', '5.05', '70350000', '1');
 INSERT INTO `spotify`.`song` (`title`, `duration`, `reproductions`, `album_ref`)
 VALUES ('Can\'t Have Everything', '3.48', '83960000', '1');
+
 INSERT INTO `spotify`.`song` (`title`, `duration`, `reproductions`, `album_ref`)
 VALUES ('Glow', '3.26', '70028000', '1');
 INSERT INTO `spotify`.`song` (`title`, `duration`, `reproductions`, `album_ref`)
