@@ -1,21 +1,21 @@
-package Spotify.controller.rest.model;
+package Spotify.controller.rest.model.restAlbums;
 
-
-import Spotify.controller.rest.model.restAlbums.ArtistRestAlbum;
-import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
+import Spotify.controller.rest.model.AlbumRest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AlbumRest implements Serializable {
+public class SongRestAlbum implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @JsonProperty("id")
     private int id;
@@ -23,16 +23,10 @@ public class AlbumRest implements Serializable {
     @JsonProperty("title")
     private String title;
 
+    @JsonProperty("reproductions")
+    private int reproductions;
+
     @JsonProperty("duration")
     private double duration;
-
-    @JsonProperty("year_release")
-    private int yearRelease;
-
-    @JsonProperty("songs")
-    private List<SongRestAlbum> songs;
-
-    /*@JsonProperty("artists")
-    private List<ArtistRestAlbum> artists;*/
 
 }

@@ -10,7 +10,6 @@ public interface AlbumMapper {
 
     AlbumMapper INSTANCE = Mappers.getMapper(AlbumMapper.class);
 
-    public AlbumEntity mapToEntity(AlbumRest rest);
-
+    AlbumEntity mapToEntity(AlbumRest rest);
     AlbumRest mapToRest(AlbumEntity entity);
 }

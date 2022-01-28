@@ -17,4 +17,8 @@ public class RestConstantsUtils {
 	public static final String RESOURCE_SONG = "/song";
 	public static final String RESOURCE_SONGS = "/songs";
 
+	public static final String RESOURCE_ALBUMS = "/albums";
+	public static final String RESOURCE_ALBUM_ID = "/{albumID}";
+
+
 }

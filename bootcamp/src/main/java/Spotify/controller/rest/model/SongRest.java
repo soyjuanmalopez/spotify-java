@@ -19,7 +19,7 @@ public class SongRest implements Serializable {
     @JsonProperty("id")
     private int id;
 
-    @JsonProperty("tile")
+    @JsonProperty("title")
     private String title;
 
     @JsonProperty("reproductions")
