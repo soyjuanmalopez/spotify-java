@@ -5,10 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "album")
-@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -28,8 +28,8 @@ public class AlbumEntity implements Serializable {
 
     @Column(name= "year_release")
     private int yearRelease;
-
-    @OneToMany(mappedBy = "album_ref", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SongEntity> songs;
+//, orphanRemoval = true
+    @OneToMany(mappedBy = "album_ref")
+    private Set<SongEntity> songs;
 
 }

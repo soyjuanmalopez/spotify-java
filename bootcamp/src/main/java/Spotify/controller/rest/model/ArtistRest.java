@@ -23,8 +23,6 @@ public class ArtistRest implements Serializable {
     @JsonProperty("description")
     private String description;
 
-    //@JsonProperty("albums")
-    //private List<AlbumRest> albums;
 
 
 }

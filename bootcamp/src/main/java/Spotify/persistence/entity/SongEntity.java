@@ -1,15 +1,16 @@
 package Spotify.persistence.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 
 import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "song")
-@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -36,9 +37,7 @@ public class SongEntity implements Serializable {
     @Column(name = "duration")
     private double duration;
 
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    })
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "rel_song_artist",
             joinColumns = {@JoinColumn(name = "id_song")},
@@ -47,8 +46,7 @@ public class SongEntity implements Serializable {
     private List<ArtistEntity> artists;
 
     @ManyToMany(mappedBy = "songs")
-    private List<GenreEntity> genres;
-
+    private Set<GenreEntity> genres;
 
 }
 

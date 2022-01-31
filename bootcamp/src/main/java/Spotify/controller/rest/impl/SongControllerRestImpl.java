@@ -1,11 +1,9 @@
 package Spotify.controller.rest.impl;
 
 import Spotify.controller.rest.SongControllerRest;
-import Spotify.controller.rest.model.SongRest;
-import Spotify.controller.rest.model.D4iPageRest;
-import Spotify.controller.rest.model.D4iPaginationInfo;
-import Spotify.controller.rest.model.SpotifyResponse;
+import Spotify.controller.rest.model.*;
 import Spotify.exception.SpotifyException;
+import Spotify.mapper.PostSongMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.service.SongService;
 import Spotify.util.constant.CommonConstantsUtils;
@@ -36,6 +34,9 @@ public class SongControllerRestImpl implements SongControllerRest {
     @Autowired
     private final SongMapper songMapper;
 
+    @Autowired
+    private final PostSongMapper postSongMapper;
+
     @Override
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = RestConstantsUtils.RESOURCE_SONG, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -59,7 +60,9 @@ public class SongControllerRestImpl implements SongControllerRest {
                                                                 pageable.getPageSize(),
                                                                 songRestList.getTotalPages())));
     }
-/*
+
+
+
     @Override
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "getSongById", description = "Get one Song by given id")
@@ -70,10 +73,10 @@ public class SongControllerRestImpl implements SongControllerRest {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
     })
     @GetMapping(value = RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.RESOURCE_SONGID)
-    public SpotifyResponse<SongRest> getSongById(@PathVariable(value = RestConstantsUtils.SONGID) final Long id)
+    public SpotifyResponse<SongRest> getSongById(@PathVariable(value = RestConstantsUtils.SONGID) final int id)
 	    throws SpotifyException {
 	return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-		CommonConstantsUtils.OK,songRestMapper.mapToRest(songService.getSongById(id)));
+		CommonConstantsUtils.OK,(songService.getSongById(id)));
     }
 
     @Override
@@ -85,9 +88,9 @@ public class SongControllerRestImpl implements SongControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<SongRest> createSong(@RequestBody final SongRest song) throws SpotifyException {
-        final SongRest songRest = songRestMapper.mapToRest(
-                songService.createSong(songRestMapper.mapToDto(song)));
+    public SpotifyResponse<PostSongRest> createSong(@RequestBody final PostSongRest song) throws SpotifyException {
+        final PostSongRest songRest =
+                songService.createSong(song);
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
                                     CommonConstantsUtils.OK, songRest);
     }
@@ -104,7 +107,7 @@ public class SongControllerRestImpl implements SongControllerRest {
     @PutMapping(value = RestConstantsUtils.RESOURCE_SONG)
     public SpotifyResponse<SongRest> updateSong(@RequestBody final SongRest songRest) throws SpotifyException {
 	return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-		CommonConstantsUtils.OK,songRestMapper.mapToRest(songService.updateSong(songRestMapper.mapToDto(songRest))));
+		CommonConstantsUtils.OK,songService.updateSong(songMapper.mapToEntity(songRest)));
     }
 
     @Override
@@ -116,8 +119,8 @@ public class SongControllerRestImpl implements SongControllerRest {
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
     @DeleteMapping(value = RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.RESOURCE_SONGID)
-    public void deleteSong(@PathVariable(value = RestConstantsUtils.SONGID) final Long id)
+    public void deleteSong(@PathVariable(value = RestConstantsUtils.SONGID) final int id)
 	    throws SpotifyException {
 	      songService.deleteSong(id);
-    }*/
+    }
 }
