@@ -61,8 +61,6 @@ public class SongControllerRestImpl implements SongControllerRest {
                                                                 songRestList.getTotalPages())));
     }
 
-
-
     @Override
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "getSongById", description = "Get one Song by given id")
@@ -78,6 +76,22 @@ public class SongControllerRestImpl implements SongControllerRest {
 	return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
 		CommonConstantsUtils.OK,(songService.getSongById(id)));
     }
+
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "getAlbumBySongId", description = "Get an album from a song")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
+    })
+    @GetMapping(value = RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.RESOURCE_SONGID + RestConstantsUtils.RESOURCE_ALBUM)
+    public SpotifyResponse<AlbumRest> getAlbumBySongId(int songId) throws SpotifyException {
+        return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
+                CommonConstantsUtils.OK,(songService.getAlbumBySongId(songId)));
+    }
+
 
     @Override
     @ResponseStatus(HttpStatus.OK)
@@ -118,9 +132,23 @@ public class SongControllerRestImpl implements SongControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    @DeleteMapping(value = RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.RESOURCE_SONGID)
+    @DeleteMapping(value = RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.RESOURCE_SONGID) // si funciona
     public void deleteSong(@PathVariable(value = RestConstantsUtils.SONGID) final int id)
 	    throws SpotifyException {
 	      songService.deleteSong(id);
+    }
+
+    @Override
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "deleteSong", description = "Delete Artist from a Song ")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "No Content"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    @DeleteMapping(value = RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.RESOURCE_SONGID+RestConstantsUtils.RESOURCE_ARTIST+RestConstantsUtils.RESOURCE_ARTISTID) //no funciona
+    public void deleteArtistFromSongById(@PathVariable int songId, @PathVariable int artistId) throws SpotifyException {
+        songService.deleteArtistFromSongById(songId,artistId);
+
     }
 }

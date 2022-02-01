@@ -15,10 +15,17 @@ public interface SongService {
 
     SongRest getSongById(int id) throws SpotifyException;
 
+    AlbumRest getAlbumBySongId(int songId) throws SpotifyException;
+
     PostSongRest createSong(PostSongRest Song) throws SpotifyException;
 
     SongRest updateSong(SongEntity SongDetails) throws SpotifyException;
 
     void deleteSong(int id) throws SpotifyException;
+
+    //no funciona
+    void deleteArtistFromSongById(int songId, int artistId) throws SpotifyException;
+
+
 
 }
