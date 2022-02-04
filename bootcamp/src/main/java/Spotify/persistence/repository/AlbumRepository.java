@@ -5,7 +5,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AlbumRepository extends PagingAndSortingRepository<AlbumEntity, Integer> {
+public interface AlbumRepository extends PagingAndSortingRepository<AlbumEntity, Long> {
 
 
 }

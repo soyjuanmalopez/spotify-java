@@ -9,7 +9,9 @@ import Spotify.exception.error.ErrorDto;
 import Spotify.mapper.AlbumMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.AlbumEntity;
+import Spotify.persistence.entity.SongEntity;
 import Spotify.persistence.repository.AlbumRepository;
+import Spotify.persistence.repository.SongRepository;
 import Spotify.service.AlbumService;
 import Spotify.util.constant.ExceptionConstantsUtils;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,9 @@ public class AlbumServiceImpl implements AlbumService {
     private final AlbumRepository albumRepository;
 
     @Autowired
+    private final SongRepository songRepository;
+
+    @Autowired
     private final AlbumMapper albumMapper;
 
     @Autowired
@@ -42,14 +47,14 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public AlbumRest getAlbumById(int id) throws SpotifyException {
+    public AlbumRest getAlbumById(Long id) throws SpotifyException {
         AlbumEntity album = albumRepository.findById(id)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         return albumMapper.mapToRest(album);
     }
 
     @Override
-    public Page<SongRestAlbum> getSongsOfAlbum(Pageable pageable, int id) throws SpotifyException {
+    public Page<SongRestAlbum> getSongsOfAlbum(Pageable pageable, Long id) throws SpotifyException {
         AlbumEntity album = albumRepository.findById(id)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         List<SongRestAlbum> songRest = albumMapper.mapToRest(album).getSongs();
@@ -57,7 +62,7 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public Page<ArtistRest> getArtistsOfAlbum(Pageable pageable, int id) throws SpotifyException {
+    public Page<ArtistRest> getArtistsOfAlbum(Pageable pageable, Long id) throws SpotifyException {
         return null;
     }
 
@@ -69,12 +74,49 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public AlbumRest updateAlbum(AlbumEntity album, int id) throws SpotifyException {
+    public AlbumRest updateAlbum(AlbumEntity album, Long id) throws SpotifyException {
+        AlbumEntity albumEntity = albumRepository.findById(id)
+                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        albumEntity = album;
+        albumRepository.save(albumEntity);
+        return albumMapper.mapToRest(albumEntity);
+    }
+
+    @Override
+    public void deleteAlbum(Long id) throws SpotifyException {
+        albumRepository.deleteById(id);
+    }
+
+    @Override
+    public AlbumRest addSongOfAlbum(Long albumId, int songId) throws SpotifyException {
+        AlbumEntity album = albumRepository.findById(albumId)
+                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        SongEntity songEntity = songRepository.findById(songId)
+                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        album.getSongs().add(songEntity);
+        albumRepository.save(album);
+        return albumMapper.mapToRest(album);
+    }
+
+    @Override
+    public AlbumRest addArtistToAlbum(Long albumId, Long artistId) throws SpotifyException {
         return null;
     }
 
     @Override
-    public void deleteAlbum(int id) throws SpotifyException {
+    public AlbumRest deleteSongOfAlbum(Long albumId, int songId) throws SpotifyException {
+        AlbumEntity album = albumRepository.findById(albumId)
+                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        for (int i = 0; i < album.getSongs().size(); i++) {
+            if (album.getSongs().get(i).getId() == songId){
+                album.getSongs().remove(i);
+            }
+        }
+        return albumMapper.mapToRest(album);
+    }
 
+    @Override
+    public AlbumRest deleteArtistOfAlbum(Long albumId, Long artistId) throws SpotifyException {
+        return null;
     }
 }

@@ -20,7 +20,7 @@ public class AlbumEntity implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "title")
     private String title;
@@ -34,12 +34,12 @@ public class AlbumEntity implements Serializable {
     @OneToMany(mappedBy = "album_ref", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<SongEntity> songs;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    /*@ManyToMany*//*(fetch = FetchType.LAZY, cascade = CascadeType.ALL)*//*
     @JoinTable(
             name = "rel_album_artist",
-            joinColumns = @JoinColumn(name = "id_album", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "id_artist", nullable = false)
+            joinColumns = @JoinColumn(name = "id_album"),
+            inverseJoinColumns = @JoinColumn(name = "id_artist")
     )
-    private List<ArtistEntity> artists;
+    private List<ArtistEntity> artists;*/
 
 }

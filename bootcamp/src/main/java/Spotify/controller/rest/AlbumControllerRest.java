@@ -10,16 +10,24 @@ public interface AlbumControllerRest {
 
     SpotifyResponse<D4iPageRest<AlbumRest>> getAllAlbums(int page, int size, Pageable pageable) throws SpotifyException;
 
-    SpotifyResponse<AlbumRest> getAlbumById(int id) throws SpotifyException;
+    SpotifyResponse<AlbumRest> getAlbumById(Long id) throws SpotifyException;
 
-    SpotifyResponse<D4iPageRest<SongRestAlbum>> getSongsOfAlbum(int page, int size, Pageable pageable, int id) throws SpotifyException;
+    SpotifyResponse<D4iPageRest<SongRestAlbum>> getSongsOfAlbum(int page, int size, Pageable pageable, Long id) throws SpotifyException;
 
-    SpotifyResponse<D4iPageRest<ArtistRest>> getArtistsOfAlbum(int page, int size, Pageable pageable, int id) throws SpotifyException;
+    SpotifyResponse<D4iPageRest<ArtistRest>> getArtistsOfAlbum(int page, int size, Pageable pageable, Long id) throws SpotifyException;
 
     SpotifyResponse<AlbumRest> createAlbum(AlbumEntity album) throws SpotifyException;
 
-    SpotifyResponse<AlbumRest> updateAlbum(AlbumEntity album, int id) throws SpotifyException;
+    SpotifyResponse<AlbumRest> updateAlbum(AlbumEntity album) throws SpotifyException;
 
-    void deleteAlbum(int id) throws SpotifyException;
+    void deleteAlbum(Long id) throws SpotifyException;
+
+    SpotifyResponse<AlbumRest> deleteSongOfAlbum(Long albumId, int songId) throws SpotifyException;
+
+    SpotifyResponse<AlbumRest> deleteArtistOfAlbum(Long albumId, Long artistId) throws SpotifyException;
+
+    SpotifyResponse<AlbumRest> addSongOfAlbum(Long albumId, int songId) throws SpotifyException;
+
+    SpotifyResponse<AlbumRest> addArtistToAlbum(Long albumId, Long artistId) throws SpotifyException;
 
 }

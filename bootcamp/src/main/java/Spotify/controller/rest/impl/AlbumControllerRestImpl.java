@@ -22,6 +22,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,15 +38,6 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
 
     @Autowired
     private final AlbumService albumService;
-
-    @Autowired
-    private final AlbumMapper albumMapper;
-
-    @Autowired
-    private final SongMapper songMapper;
-
-    @Autowired
-    private final ArtistMapper artistMapper;
 
     @Override
     @ResponseStatus(HttpStatus.OK)
@@ -80,7 +72,7 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<AlbumRest> getAlbumById(int id) throws SpotifyException {
+    public SpotifyResponse<AlbumRest> getAlbumById(Long id) throws SpotifyException {
         AlbumRest albumRest = albumService.getAlbumById(id);
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                 String.valueOf(HttpStatus.OK.value()),
@@ -99,7 +91,7 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
     public SpotifyResponse<D4iPageRest<SongRestAlbum>> getSongsOfAlbum(
             @RequestParam(defaultValue = CommonConstantsUtils.ZERO) final int page,
             @RequestParam(defaultValue = CommonConstantsUtils.TWENTY) final int size,
-            @Parameter(hidden = true) final Pageable pageable, int id) throws SpotifyException {
+            @Parameter(hidden = true) final Pageable pageable, Long id) throws SpotifyException {
         Page<SongRestAlbum> songRestAlbum = albumService.getSongsOfAlbum(pageable, id);
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                 String.valueOf(HttpStatus.OK.value()),
@@ -114,7 +106,7 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
     public SpotifyResponse<D4iPageRest<ArtistRest>> getArtistsOfAlbum(
             @RequestParam(defaultValue = CommonConstantsUtils.ZERO) final int page,
             @RequestParam(defaultValue = CommonConstantsUtils.TWENTY) final int size,
-            @Parameter(hidden = true) final Pageable pageable, int id) throws SpotifyException {
+            @Parameter(hidden = true) final Pageable pageable, Long id) throws SpotifyException {
         return null;
     }
 
@@ -144,8 +136,8 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<AlbumRest> updateAlbum(@RequestBody AlbumEntity album, int id) throws SpotifyException {
-        AlbumRest albumRest = albumService.updateAlbum(album, id);
+    public SpotifyResponse<AlbumRest> updateAlbum(@RequestBody AlbumEntity album) throws SpotifyException {
+        AlbumRest albumRest = albumService.updateAlbum(album, album.getId());
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                 String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK, albumRest);
@@ -154,13 +146,33 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
     @Override
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = RestConstantsUtils.RESOURCE_ALBUMS + RestConstantsUtils.RESOURCE_ALBUM_ID, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "updateAlbum", description = "Update an existing Album")
+    @Operation(summary = "deleteAlbum", description = "Delete an existing Album")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public void deleteAlbum(int id) throws SpotifyException {
+    public void deleteAlbum(@RequestParam Long id) throws SpotifyException {
         albumService.deleteAlbum(id);
+    }
+
+    @Override
+    public SpotifyResponse<AlbumRest> deleteSongOfAlbum(Long albumId, int songId) throws SpotifyException {
+        return null;
+    }
+
+    @Override
+    public SpotifyResponse<AlbumRest> deleteArtistOfAlbum(Long albumId, Long artistId) throws SpotifyException {
+        return null;
+    }
+
+    @Override
+    public SpotifyResponse<AlbumRest> addSongOfAlbum(Long albumId, int songId) throws SpotifyException {
+        return null;
+    }
+
+    @Override
+    public SpotifyResponse<AlbumRest> addArtistToAlbum(Long albumId, Long artistId) throws SpotifyException {
+        return null;
     }
 }
