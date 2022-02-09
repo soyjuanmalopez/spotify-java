@@ -32,7 +32,7 @@ public class AlbumRest implements Serializable {
     @JsonProperty("songs")
     private List<SongRestAlbum> songs;
 
-    @JsonProperty("artists")
-    private List<ArtistRestAlbum> artists;
+    /*@JsonProperty("artists")
+    private List<ArtistRestAlbum> artists;*/
 
 }

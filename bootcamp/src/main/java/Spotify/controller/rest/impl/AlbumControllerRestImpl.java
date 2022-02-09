@@ -156,9 +156,23 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
         albumService.deleteAlbum(id);
     }
 
+
     @Override
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(value = RestConstantsUtils.RESOURCE_ALBUMS + RestConstantsUtils.RESOURCE_ALBUM_ID
+            + RestConstantsUtils.RESOURCE_SONGS + RestConstantsUtils.RESOURCE_SONGID
+            , produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "deleteSongOfAlbum", description = "Delete Song of Album")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
+    })
     public SpotifyResponse<AlbumRest> deleteSongOfAlbum(Long albumId, int songId) throws SpotifyException {
-        return null;
+        AlbumRest albumRest = albumService.deleteSongOfAlbum(albumId,songId);
+        return new SpotifyResponse<>(HttpStatus.OK.toString(),
+                String.valueOf(HttpStatus.OK.value()),
+                CommonConstantsUtils.OK, albumRest);
     }
 
     @Override
@@ -167,8 +181,21 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
     }
 
     @Override
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping(value = RestConstantsUtils.RESOURCE_ALBUMS + RestConstantsUtils.RESOURCE_ALBUM_ID
+            + RestConstantsUtils.RESOURCE_SONGS + RestConstantsUtils.RESOURCE_SONGID
+            , produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "addSongToAlbum", description = "Add a Song to Album")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
+    })
     public SpotifyResponse<AlbumRest> addSongOfAlbum(Long albumId, int songId) throws SpotifyException {
-        return null;
+        AlbumRest albumRest = albumService.addSongOfAlbum(albumId,songId);
+        return new SpotifyResponse<>(HttpStatus.OK.toString(),
+                String.valueOf(HttpStatus.OK.value()),
+                CommonConstantsUtils.OK, albumRest);
     }
 
     @Override

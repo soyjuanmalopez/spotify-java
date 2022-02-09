@@ -24,20 +24,19 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class AlbumServiceImpl implements AlbumService {
 
     @Autowired
-    private final AlbumRepository albumRepository;
+    private AlbumRepository albumRepository;
 
     @Autowired
-    private final SongRepository songRepository;
+    private SongRepository songRepository;
 
     @Autowired
-    private final AlbumMapper albumMapper;
+    private AlbumMapper albumMapper;
 
     @Autowired
-    private final SongMapper songMapper;
+    private SongMapper songMapper;
 
 
     @Override
