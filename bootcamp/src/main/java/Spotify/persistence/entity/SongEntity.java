@@ -3,6 +3,7 @@ package Spotify.persistence.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Null;
 
+import io.micrometer.core.lang.Nullable;
 import lombok.*;
 
 import java.io.Serializable;
@@ -22,7 +23,7 @@ public class SongEntity implements Serializable {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "title")
     private String title;
@@ -31,11 +32,13 @@ public class SongEntity implements Serializable {
     @JoinColumn(name = "album_ref")
     private AlbumEntity album_ref;
 
+
     @Column(name = "reproductions")
-    private int reproductions;
+    private Integer reproductions;
+
 
     @Column(name = "duration")
-    private double duration;
+    private Double duration;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

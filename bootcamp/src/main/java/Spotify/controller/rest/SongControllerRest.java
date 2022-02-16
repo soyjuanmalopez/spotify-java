@@ -7,11 +7,12 @@ import Spotify.exception.SpotifyException;
 
 public interface SongControllerRest {
 
-    SpotifyResponse<D4iPageRest<SongRest>> getAllSongs(int page, int size, Pageable pageable) throws SpotifyException;
-    SpotifyResponse<SongRest> getSongById(int id) throws SpotifyException;
-    SpotifyResponse<AlbumRest> getAlbumBySongId(int songId) throws SpotifyException;
+    SpotifyResponse<D4iPageRest<SongRest>> getAllSongs(Long page, Long size, Pageable pageable) throws SpotifyException;
+    SpotifyResponse<SongRest> getSongById(Long id) throws SpotifyException;
+    SpotifyResponse<AlbumRest> getAlbumBySongId(Long songId) throws SpotifyException;
     SpotifyResponse<PostSongRest> createSong(PostSongRest song) throws SpotifyException;
-    SpotifyResponse<SongRest> updateSong(SongRest song) throws SpotifyException;
-    void deleteSong(int id) throws SpotifyException;
-    void deleteArtistFromSongById(int songId,int artistId) throws SpotifyException;
+    SpotifyResponse<PostSongRest> updateSong(PostSongRest song) throws SpotifyException;
+    SpotifyResponse<SongRest> updateArtistBySongId(Long songId, Long artistId) throws SpotifyException;
+    void deleteSong(Long id) throws SpotifyException;
+    void deleteArtistFromSongById(Long songId,Long artistId) throws SpotifyException;
 }

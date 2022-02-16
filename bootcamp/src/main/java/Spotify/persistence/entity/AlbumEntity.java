@@ -24,10 +24,10 @@ public class AlbumEntity implements Serializable {
     private String title;
 
     @Column(name = "duration")
-    private double duration;
+    private Double duration;
 
     @Column(name= "year_release")
-    private int yearRelease;
+    private Integer yearRelease;
 //, orphanRemoval = true
     @OneToMany(mappedBy = "album_ref")
     private Set<SongEntity> songs;

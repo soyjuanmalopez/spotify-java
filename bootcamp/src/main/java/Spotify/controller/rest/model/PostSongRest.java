@@ -17,19 +17,19 @@ public class PostSongRest implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("id")
-    private int id;
+    private Long id;
 
     @JsonProperty("tile")
     private String title;
 
     @JsonProperty("reproductions")
-    private int reproductions;
+    private Integer reproductions;
 
     @JsonProperty("album_ref")
     private AlbumRest album_ref;
 
     @JsonProperty("duration")
-    private double duration;
+    private Double duration;
 
 
 

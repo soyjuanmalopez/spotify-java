@@ -13,18 +13,19 @@ public interface SongService {
 
     Page<SongRest> getAllSongs(Pageable pageable) throws SpotifyException;
 
-    SongRest getSongById(int id) throws SpotifyException;
+    SongRest getSongById(Long id) throws SpotifyException;
 
-    AlbumRest getAlbumBySongId(int songId) throws SpotifyException;
+    AlbumRest getAlbumBySongId(Long songId) throws SpotifyException;
 
     PostSongRest createSong(PostSongRest Song) throws SpotifyException;
 
-    SongRest updateSong(SongEntity SongDetails) throws SpotifyException;
+    PostSongRest updateSong(SongEntity SongDetails) throws SpotifyException;
 
-    void deleteSong(int id) throws SpotifyException;
+    SongRest updateArtistBySongId(Long songId, Long artistId) throws SpotifyException;
 
-    //no funciona
-    void deleteArtistFromSongById(int songId, int artistId) throws SpotifyException;
+    void deleteSong(Long id) throws SpotifyException;
+
+    void deleteArtistFromSongById(Long songId, Long artistId) throws SpotifyException;
 
 
 
