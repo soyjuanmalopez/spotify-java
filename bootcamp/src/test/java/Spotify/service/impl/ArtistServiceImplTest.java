@@ -33,8 +33,8 @@ public class ArtistServiceImplTest {
     static final Long ID = 1L;
     static final ArtistEntity ARTIST_ENTITY = new ArtistEntity();
     static final ArtistRest ARTIST_REST = new ArtistRest();
-    static final AlbumRest ALBUM_REST = new AlbumRest();
     static final List<AlbumRest> ALBUM_REST_LIST = new ArrayList<>();
+
     @Mock
     private ArtistRepository artistRepository;
 

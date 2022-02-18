@@ -13,5 +13,5 @@ public interface ArtistControllerRest {
     SpotifyResponse<ArtistRest> createArtist(ArtistRest artist) throws SpotifyException;
     SpotifyResponse<ArtistRest> updateArtist(ArtistRest artist) throws SpotifyException;
     void deleteArtist(Long id) throws SpotifyException;
-    SpotifyResponse<D4iPageRest<AlbumRest>> getAlbumsofArtist(int page, int size, Pageable pageable, Long id) throws SpotifyException;
+    SpotifyResponse<D4iPageRest<AlbumRest>> getAlbumsOfArtist(int page, int size, Pageable pageable, Long id) throws SpotifyException;
 }

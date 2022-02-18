@@ -133,7 +133,7 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<D4iPageRest<AlbumRest>> getAlbumsofArtist(int page, int size, Pageable pageable, Long id) throws SpotifyException {
+    public SpotifyResponse<D4iPageRest<AlbumRest>> getAlbumsOfArtist(int page, int size, Pageable pageable, Long id) throws SpotifyException {
         Page<AlbumRest> albumRestPage = artistService.getAlbumsOfArtist(pageable,id);
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                 String.valueOf(HttpStatus.OK.value()),
