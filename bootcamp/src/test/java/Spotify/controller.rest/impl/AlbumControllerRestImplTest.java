@@ -1,10 +1,12 @@
 package Spotify.controller.rest.impl;
 
 import Spotify.controller.rest.model.AlbumRest;
+import Spotify.controller.rest.model.SpotifyResponse;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.persistence.entity.AlbumEntity;
 import Spotify.service.impl.AlbumServiceImpl;
+import Spotify.util.constant.CommonConstantsUtils;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
@@ -16,7 +18,9 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,23 +30,22 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+/*@RunWith(MockitoJUnitRunner.class)*/
 public class AlbumControllerRestImplTest {
 
     @Mock
     private AlbumServiceImpl albumService;
 
     @InjectMocks
-    private AlbumControllerRestImpl albumControllerRest = new AlbumControllerRestImpl(albumService);
+    private AlbumControllerRestImpl albumControllerRest;
 
     private final static AlbumRest ALBUM_REST = new AlbumRest();
-
     private final static AlbumEntity ALBUM_ENTITY = new AlbumEntity();
-
     private final static List<SongRestAlbum> SONG_REST_ALBUMS_LIST = new ArrayList<>();
     private final static SongRestAlbum SONG_REST_ALBUM = new SongRestAlbum();
-
     private final static List<AlbumRest> ALBUM_REST_LIST = new ArrayList<>();
+
+    private static final Pageable pageable = PageRequest.of(1,8);
 
     private static Page<AlbumRest> ALBUM_REST_PAGE;
     private static Page<SongRestAlbum> SONG_REST_PAGE;
@@ -52,7 +55,7 @@ public class AlbumControllerRestImplTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @BeforeEach
+    @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         SONG_REST_ALBUMS_LIST.clear();
@@ -79,36 +82,35 @@ public class AlbumControllerRestImplTest {
 
 
         ALBUM_REST_PAGE = new PageImpl<>(ALBUM_REST_LIST);
-
         SONG_REST_PAGE = new PageImpl<>(SONG_REST_ALBUMS_LIST);
 
 
     }
 
     @Test
-    void getAllAlbums() throws SpotifyException {
-        when(albumService.getAllAlbums(Pageable.unpaged())).thenReturn(ALBUM_REST_PAGE);
-        assertEquals(ALBUM_REST_PAGE.getContent(), Arrays.stream(albumControllerRest.getAllAlbums(1, 1, Pageable.unpaged()).getData().getContent()).collect(Collectors.toList()));
+    public void getAllAlbums() throws SpotifyException {
+        when(albumService.getAllAlbums(Mockito.any(Pageable.class))).thenReturn(ALBUM_REST_PAGE);
+        assertEquals(ALBUM_REST_PAGE.getContent(), Arrays.stream(albumControllerRest.getAllAlbums(1, 8, pageable).getData().getContent()).collect(Collectors.toList()));
     }
 
     @Test
-    void getAlbumById() throws SpotifyException {
+    public void getAlbumById() throws SpotifyException {
         when(albumService.getAlbumById(Mockito.anyLong())).thenReturn(ALBUM_REST);
         assertEquals(ALBUM_REST, albumControllerRest.getAlbumById(1L).getData());
     }
 
     @Test
-    void getSongsOfAlbum() throws SpotifyException {
+    public void getSongsOfAlbum() throws SpotifyException {
         when(albumService.getSongsOfAlbum(Mockito.any(Pageable.class), Mockito.anyLong())).thenReturn(SONG_REST_PAGE);
-        assertEquals(SONG_REST_ALBUMS_LIST, Arrays.stream(albumControllerRest.getSongsOfAlbum(1, 1, Pageable.unpaged(), 1L).getData().getContent()).collect(Collectors.toList()));
+        assertEquals(SONG_REST_ALBUMS_LIST, Arrays.stream(albumControllerRest.getSongsOfAlbum(1, 8, pageable, 1L).getData().getContent()).collect(Collectors.toList()));
     }
 
     @Test
-    void getArtistsOfAlbum() throws SpotifyException {
+    public void getArtistsOfAlbum() throws SpotifyException {
     }
 
     @Test
-    void createAlbum() throws SpotifyException {
+    public void createAlbum() throws SpotifyException {
         AlbumEntity album = new AlbumEntity(-1L, "CreateEntityTest", 1.2, 2022, new ArrayList<>());
         AlbumRest albumRest = new AlbumRest(-1L, "CreateEntityTest", 1.2, 2022, new ArrayList<>());
         when(albumService.createAlbum(Mockito.any(AlbumEntity.class))).thenReturn(albumRest);
@@ -116,20 +118,28 @@ public class AlbumControllerRestImplTest {
     }
 
     @Test
-    void updateAlbum() throws SpotifyException {
+    public void updateAlbum() throws SpotifyException {
         when(albumService.updateAlbum(Mockito.any(AlbumEntity.class), Mockito.anyLong())).thenReturn(ALBUM_REST);
-        assertEquals(ALBUM_REST, albumControllerRest.updateAlbum(ALBUM_ENTITY));
+        assertEquals(ALBUM_REST, albumControllerRest.updateAlbum(ALBUM_ENTITY).getData());
     }
 
     @Test
-    void deleteAlbum() throws SpotifyException {
+    public void deleteAlbum() throws SpotifyException {
+        SpotifyResponse<Object> spotifyResponse = new SpotifyResponse<>(HttpStatus.OK.toString(),
+                String.valueOf(HttpStatus.OK.value()),
+                CommonConstantsUtils.OK);
+        assertEquals(spotifyResponse, albumControllerRest.deleteAlbum(1L));
     }
 
     @Test
-    void deleteSongOfAlbum() throws SpotifyException {
+    public void deleteSongOfAlbum() throws SpotifyException {
+        when(albumService.deleteSongOfAlbum(Mockito.anyLong(), Mockito.anyInt())).thenReturn(ALBUM_REST);
+        assertEquals(ALBUM_REST, albumControllerRest.deleteSongOfAlbum(1L, 1).getData());
     }
 
     @Test
-    void addSongOfAlbum() throws SpotifyException {
+    public void addSongOfAlbum() throws SpotifyException {
+        when(albumService.addSongOfAlbum(Mockito.anyLong(), Mockito.anyInt())).thenReturn(ALBUM_REST);
+        assertEquals(ALBUM_REST, albumControllerRest.addSongOfAlbum(1L, 1).getData());
     }
 }

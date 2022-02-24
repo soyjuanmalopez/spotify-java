@@ -3,26 +3,17 @@ package Spotify.controller.rest.impl;
 import Spotify.controller.rest.AlbumControllerRest;
 import Spotify.controller.rest.model.*;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
-import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
-import Spotify.mapper.AlbumMapper;
-import Spotify.mapper.ArtistMapper;
-import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.AlbumEntity;
 import Spotify.service.AlbumService;
 import Spotify.util.constant.CommonConstantsUtils;
 import Spotify.util.constant.RestConstantsUtils;
-import Spotify.exception.SpotifyException;
-import Spotify.persistence.entity.AlbumEntity;
-import Spotify.util.constant.CommonConstantsUtils;
-import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,12 +23,11 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
 @Tag(name = "Album", description = "Album Controller")
 public class AlbumControllerRestImpl implements AlbumControllerRest {
 
     @Autowired
-    private final AlbumService albumService;
+    private AlbumService albumService;
 
     @Override
     @ResponseStatus(HttpStatus.OK)
@@ -152,8 +142,11 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public void deleteAlbum(@RequestParam Long id) throws SpotifyException {
+    public SpotifyResponse<Object> deleteAlbum(@RequestParam Long id) throws SpotifyException {
         albumService.deleteAlbum(id);
+        return new SpotifyResponse<>(HttpStatus.OK.toString(),
+                String.valueOf(HttpStatus.OK.value()),
+                CommonConstantsUtils.OK);
     }
 
 

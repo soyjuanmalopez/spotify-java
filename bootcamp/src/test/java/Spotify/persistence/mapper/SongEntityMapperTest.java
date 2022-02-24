@@ -16,7 +16,6 @@ import Spotify.persistence.entity.SongEntity;
 public class SongEntityMapperTest {
 
 
-
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);

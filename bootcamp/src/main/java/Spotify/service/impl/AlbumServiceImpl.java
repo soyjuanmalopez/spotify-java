@@ -42,7 +42,8 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public Page<AlbumRest> getAllAlbums(Pageable pageable) throws SpotifyException {
         Page<AlbumEntity> page = albumRepository.findAll(pageable);
-        return page.map(albumMapper::mapToRest);
+        Page<AlbumRest> albumRests = page.map(albumMapper::mapToRest);
+        return albumRests;
     }
 
     @Override
@@ -76,13 +77,24 @@ public class AlbumServiceImpl implements AlbumService {
     public AlbumRest updateAlbum(AlbumEntity album, Long id) throws SpotifyException {
         AlbumEntity albumEntity = albumRepository.findById(id)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
-        albumEntity = album;
+        if (album.getTitle() != null){
+            albumEntity.setTitle(album.getTitle());
+        }
+        if (album.getDuration() != 0){
+            albumEntity.setDuration(album.getDuration());
+        }
+        if (album.getYearRelease() != 0){
+            albumEntity.setYearRelease(album.getYearRelease());
+        }
         albumRepository.save(albumEntity);
         return albumMapper.mapToRest(albumEntity);
     }
 
     @Override
     public void deleteAlbum(Long id) throws SpotifyException {
+        if (!albumRepository.existsById(id)){
+            throw new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC));
+        }
         albumRepository.deleteById(id);
     }
 
