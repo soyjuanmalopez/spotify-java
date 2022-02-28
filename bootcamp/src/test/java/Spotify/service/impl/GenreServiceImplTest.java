@@ -135,8 +135,8 @@ public class GenreServiceImplTest {
     @Test
     public void updateGenre() throws SpotifyException {
 
-        genreService.updateGenre(any(GenreEntity.class));
-        verify(genreRepository).save(any(GenreEntity.class));
+        genreService.updateGenre(GENRE_ENTITY);
+        verify(genreRepository).save(GENRE_ENTITY);
     }
 
     @Test

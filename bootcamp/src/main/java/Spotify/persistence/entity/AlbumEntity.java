@@ -28,7 +28,7 @@ public class AlbumEntity implements Serializable {
 
     @Column(name= "year_release")
     private Integer yearRelease;
-//, orphanRemoval = true
+
     @OneToMany(mappedBy = "album_ref")
     private Set<SongEntity> songs;
 

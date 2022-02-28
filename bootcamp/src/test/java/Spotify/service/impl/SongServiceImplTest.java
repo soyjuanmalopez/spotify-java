@@ -8,7 +8,6 @@ import Spotify.exception.SpotifyNotFoundException;
 import Spotify.mapper.AlbumMapper;
 import Spotify.mapper.PostSongMapper;
 import Spotify.mapper.SongMapper;
-import Spotify.persistence.entity.AlbumEntity;
 import Spotify.persistence.entity.ArtistEntity;
 import Spotify.persistence.entity.SongEntity;
 
@@ -30,7 +29,6 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -40,9 +38,9 @@ public class SongServiceImplTest {
 	static final Long ID = 1L;
 	static final SongEntity SONG_ENTITY = new SongEntity();
     static final Set<SongEntity> SONG_ENTITY_SET= new HashSet<>();
-    static final List<ArtistEntity> ARTIST_ENTITY_LIST= new ArrayList<>();
 	static final SongRest SONG_REST = new SongRest();
     static final PostSongRest POST_SONG_REST = new PostSongRest();
+    static final List<ArtistEntity> ARTIST_ENTITY_LIST= new ArrayList<>();
     static final AlbumRest ALBUM_REST = new AlbumRest();
     static final ArtistEntity ARTIST_ENTITY = new ArtistEntity();
 
@@ -113,8 +111,8 @@ public class SongServiceImplTest {
     }
     @Test
     public void getAlbumBySongId() throws SpotifyException{
-        when(albumMapper.mapToRest(any(AlbumEntity.class))).thenReturn(ALBUM_REST);
-        AlbumRest response = songService.getAlbumBySongId(ID);
+        when(albumMapper.mapToRest(any())).thenReturn(ALBUM_REST);
+        AlbumRest response = songService.getAlbumBySongId(anyLong());
 
         Assertions.assertThat(response).isEqualTo(ALBUM_REST);
     }
@@ -126,7 +124,7 @@ public class SongServiceImplTest {
     @Test
     public void createSong() throws SpotifyException { //PostSongRest
         songService.createSong(any(PostSongRest.class));
-		Mockito.verify(songRepository, Mockito.times(1)).save(Mockito.any(SongEntity.class));
+		Mockito.verify(songRepository, Mockito.times(1)).save(Mockito.any());
     }
 
     @Test
