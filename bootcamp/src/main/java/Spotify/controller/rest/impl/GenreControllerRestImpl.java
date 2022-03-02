@@ -2,6 +2,7 @@ package Spotify.controller.rest.impl;
 
 import Spotify.controller.rest.GenreControllerRest;
 import Spotify.controller.rest.model.*;
+import Spotify.controller.rest.model.restSongs.GenreSongRest;
 import Spotify.exception.SpotifyException;
 import Spotify.mapper.GenreMapper;
 import Spotify.service.GenreService;
@@ -132,7 +133,7 @@ public class GenreControllerRestImpl implements GenreControllerRest {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
     })
     @PutMapping(value = RestConstantsUtils.RESOURCE_GENRE+RestConstantsUtils.RESOURCE_GENREID+RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.RESOURCE_SONGID)
-    public SpotifyResponse<GenreSongRest> updateSongByGenreId(@RequestParam Long genreId,@RequestParam Long songId) throws SpotifyException {
+    public SpotifyResponse<GenreSongRest> updateSongByGenreId(@RequestParam Long genreId, @RequestParam Long songId) throws SpotifyException {
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK,genreService.updateSongByGenreId(genreId,songId));
     }

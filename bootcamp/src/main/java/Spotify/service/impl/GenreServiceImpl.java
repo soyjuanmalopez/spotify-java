@@ -1,7 +1,7 @@
 package Spotify.service.impl;
 
 import Spotify.controller.rest.model.GenreRest;
-import Spotify.controller.rest.model.GenreSongRest;
+import Spotify.controller.rest.model.restSongs.GenreSongRest;
 import Spotify.controller.rest.model.SongRest;
 import Spotify.exception.SpotifyException;
 import Spotify.exception.SpotifyNotFoundException;
@@ -9,7 +9,6 @@ import Spotify.exception.error.ErrorDto;
 import Spotify.mapper.GenreMapper;
 import Spotify.mapper.GenreSongMapper;
 import Spotify.mapper.SongMapper;
-import Spotify.persistence.entity.ArtistEntity;
 import Spotify.persistence.entity.GenreEntity;
 import Spotify.persistence.entity.SongEntity;
 import Spotify.persistence.repository.GenreRepository;

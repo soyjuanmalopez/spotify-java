@@ -1,6 +1,6 @@
-package Spotify.controller.rest.model;
+package Spotify.controller.rest.model.restSongs;
 
-import Spotify.persistence.entity.SongEntity;
+import Spotify.controller.rest.model.restSongs.PostSongRest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

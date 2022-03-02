@@ -1,7 +1,7 @@
 package Spotify.service;
 
 import Spotify.controller.rest.model.AlbumRest;
-import Spotify.controller.rest.model.PostSongRest;
+import Spotify.controller.rest.model.restSongs.PostSongRest;
 import Spotify.controller.rest.model.SongRest;
 import Spotify.exception.SpotifyException;
 import Spotify.persistence.entity.SongEntity;

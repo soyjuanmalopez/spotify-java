@@ -1,6 +1,9 @@
 package Spotify.mapper;
 
 import Spotify.controller.rest.model.*;
+import Spotify.controller.rest.model.restSongs.AlbumRestSong;
+import Spotify.controller.rest.model.restSongs.GenreSongRest;
+import Spotify.controller.rest.model.restSongs.PostSongRest;
 import Spotify.persistence.entity.AlbumEntity;
 import Spotify.persistence.entity.GenreEntity;
 import Spotify.persistence.entity.SongEntity;
@@ -24,7 +27,7 @@ public class GenreSongMapperTest {
     String name = "Test name";
     SongEntity songEntity = new SongEntity();
     PostSongRest songRest = new PostSongRest();
-    AlbumRest albumRest = new AlbumRest();
+    AlbumRestSong albumRest = new AlbumRestSong();
     AlbumEntity albumEntity = new AlbumEntity();
     Set<SongEntity> songEntitySet = new HashSet<>();
     Set<PostSongRest> postSongRestSet = new HashSet<>();

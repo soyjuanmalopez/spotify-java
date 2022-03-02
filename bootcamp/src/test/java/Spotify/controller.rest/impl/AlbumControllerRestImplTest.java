@@ -70,7 +70,7 @@ public class AlbumControllerRestImplTest {
         ALBUM_ENTITY.setDuration(1.1);
         ALBUM_ENTITY.setYearRelease(2022);
 
-        SONG_REST_ALBUM.setId(1);
+        SONG_REST_ALBUM.setId(1L);
         SONG_REST_ALBUM.setTitle("TestingSong");
         SONG_REST_ALBUM.setDuration(1.4);
 
@@ -133,13 +133,13 @@ public class AlbumControllerRestImplTest {
 
     @Test
     public void deleteSongOfAlbum() throws SpotifyException {
-        when(albumService.deleteSongOfAlbum(Mockito.anyLong(), Mockito.anyInt())).thenReturn(ALBUM_REST);
-        assertEquals(ALBUM_REST, albumControllerRest.deleteSongOfAlbum(1L, 1).getData());
+        when(albumService.deleteSongOfAlbum(Mockito.anyLong(), Mockito.anyLong())).thenReturn(ALBUM_REST);
+        assertEquals(ALBUM_REST, albumControllerRest.deleteSongOfAlbum(1L, 1L).getData());
     }
 
     @Test
     public void addSongOfAlbum() throws SpotifyException {
-        when(albumService.addSongOfAlbum(Mockito.anyLong(), Mockito.anyInt())).thenReturn(ALBUM_REST);
-        assertEquals(ALBUM_REST, albumControllerRest.addSongOfAlbum(1L, 1).getData());
+        when(albumService.addSongOfAlbum(Mockito.anyLong(), Mockito.anyLong())).thenReturn(ALBUM_REST);
+        assertEquals(ALBUM_REST, albumControllerRest.addSongOfAlbum(1L, 1L).getData());
     }
 }

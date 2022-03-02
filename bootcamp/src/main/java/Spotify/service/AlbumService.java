@@ -25,11 +25,11 @@ public interface AlbumService {
 
     void deleteAlbum(Long id) throws SpotifyException;
 
-    AlbumRest deleteSongOfAlbum(Long albumId, int songId) throws SpotifyException;
+    AlbumRest deleteSongOfAlbum(Long albumId, Long songId) throws SpotifyException;
 
     AlbumRest deleteArtistOfAlbum(Long albumId, Long artistId) throws SpotifyException;
 
-    AlbumRest addSongOfAlbum(Long albumId, int songId) throws SpotifyException;
+    AlbumRest addSongOfAlbum(Long albumId, Long songId) throws SpotifyException;
 
     AlbumRest addArtistToAlbum(Long albumId, Long artistId) throws SpotifyException;
 

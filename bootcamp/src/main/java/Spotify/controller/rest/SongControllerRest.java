@@ -1,6 +1,7 @@
 package Spotify.controller.rest;
 
 import Spotify.controller.rest.model.*;
+import Spotify.controller.rest.model.restSongs.PostSongRest;
 import org.springframework.data.domain.Pageable;
 
 import Spotify.exception.SpotifyException;

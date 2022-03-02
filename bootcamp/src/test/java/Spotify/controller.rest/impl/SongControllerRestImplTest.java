@@ -10,13 +10,12 @@ import static org.mockito.Mockito.*;
 import java.util.*;
 
 import Spotify.controller.rest.model.*;
-import Spotify.mapper.AlbumMapper;
+import Spotify.controller.rest.model.restSongs.PostSongRest;
 import Spotify.mapper.PostSongMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.ArtistEntity;
 import Spotify.persistence.repository.ArtistRepository;
 import Spotify.persistence.repository.SongRepository;
-import Spotify.service.impl.SongServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;

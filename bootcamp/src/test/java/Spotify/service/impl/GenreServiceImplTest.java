@@ -155,13 +155,7 @@ public class GenreServiceImplTest {
         genreService.updateSongByGenreId(GENRE_ID,SONG_ID);
 
     }
-    /*@Test(expected = SpotifyNotFoundException.class)
-    public void updateSongByGenreIdSongException() throws SpotifyException {
 
-        when(songRepository.findById(anyLong())).thenReturn(Optional.empty());
-        genreService.deleteSongFromGenreById(GENRE_ID,SONG_ID);
-
-    }*/
     @Test
     public void deleteGenre() throws SpotifyException {
 

@@ -82,7 +82,7 @@ public class AlbumServiceImplTest {
         ALBUM_REST.setDuration(ALBUM_ENTITY.getDuration());
         ALBUM_REST.setYearRelease(ALBUM_ENTITY.getYearRelease());
 
-        SONG_ENTITY.setId(1);
+        SONG_ENTITY.setId(1L);
         SONG_ENTITY.setTitle("TestingSong");
         SONG_ENTITY.setDuration(1.4);
         SONG_ENTITY.setAlbum_ref(ALBUM_ENTITY);
@@ -185,30 +185,30 @@ public class AlbumServiceImplTest {
     @Test
     public void addSongOfAlbum() throws SpotifyException {
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ALBUM_ENTITY));
-        when(songRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(SONG_ENTITY));
+        when(songRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(SONG_ENTITY));
         when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
-        assertEquals(ALBUM_REST, albumService.addSongOfAlbum(1L, 1));
+        assertEquals(ALBUM_REST, albumService.addSongOfAlbum(1L, 1L));
     }
 
     @Test(expected = SpotifyException.class)
     public void addSongOfAlbumNotFoundAlbum() throws SpotifyException {
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
-        when(songRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(SONG_ENTITY));
-        albumService.addSongOfAlbum(1L, 1);
+        when(songRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(SONG_ENTITY));
+        albumService.addSongOfAlbum(1L, 1L);
     }
 
     @Test(expected = SpotifyException.class)
     public void addSongOfAlbumNotFoundAlbumSong() throws SpotifyException {
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ALBUM_ENTITY));
-        when(songRepository.findById(Mockito.anyInt())).thenReturn(Optional.empty());
-        albumService.addSongOfAlbum(1L, 1);
+        when(songRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+        albumService.addSongOfAlbum(1L, 1L);
     }
 
     @Test(expected = SpotifyException.class)
     public void deleteSongOfAlbumNotFound() throws SpotifyException {
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
         when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
-        assertEquals(ALBUM_REST, albumService.deleteSongOfAlbum(1L, 1));
+        assertEquals(ALBUM_REST, albumService.deleteSongOfAlbum(1L, 1L));
     }
 
 
@@ -216,6 +216,6 @@ public class AlbumServiceImplTest {
     public void deleteSongOfAlbum() throws SpotifyException {
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ALBUM_ENTITY));
         when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
-        assertEquals(ALBUM_REST, albumService.deleteSongOfAlbum(1L, 1));
+        assertEquals(ALBUM_REST, albumService.deleteSongOfAlbum(1L, 1L));
     }
 }

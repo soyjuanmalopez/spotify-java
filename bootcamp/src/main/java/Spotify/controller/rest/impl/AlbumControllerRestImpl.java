@@ -161,7 +161,7 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<AlbumRest> deleteSongOfAlbum(Long albumId, int songId) throws SpotifyException {
+    public SpotifyResponse<AlbumRest> deleteSongOfAlbum(@RequestParam Long albumId, @RequestParam Long songId) throws SpotifyException {
         AlbumRest albumRest = albumService.deleteSongOfAlbum(albumId,songId);
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                 String.valueOf(HttpStatus.OK.value()),
@@ -184,7 +184,7 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<AlbumRest> addSongOfAlbum(Long albumId, int songId) throws SpotifyException {
+    public SpotifyResponse<AlbumRest> addSongOfAlbum(@RequestParam Long albumId, @RequestParam Long songId) throws SpotifyException {
         AlbumRest albumRest = albumService.addSongOfAlbum(albumId,songId);
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                 String.valueOf(HttpStatus.OK.value()),

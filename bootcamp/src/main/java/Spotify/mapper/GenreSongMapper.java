@@ -1,7 +1,6 @@
 package Spotify.mapper;
 
-import Spotify.controller.rest.model.GenreRest;
-import Spotify.controller.rest.model.GenreSongRest;
+import Spotify.controller.rest.model.restSongs.GenreSongRest;
 import Spotify.persistence.entity.GenreEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

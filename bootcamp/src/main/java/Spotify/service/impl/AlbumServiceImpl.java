@@ -99,13 +99,15 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public AlbumRest addSongOfAlbum(Long albumId, int songId) throws SpotifyException {
+    public AlbumRest addSongOfAlbum(Long albumId, Long songId) throws SpotifyException {
         AlbumEntity album = albumRepository.findById(albumId)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         SongEntity songEntity = songRepository.findById(songId)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         album.getSongs().add(songEntity);
+        songEntity.setAlbum_ref(album);
         albumRepository.save(album);
+        songRepository.save(songEntity);
         return albumMapper.mapToRest(album);
     }
 
@@ -115,12 +117,13 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public AlbumRest deleteSongOfAlbum(Long albumId, int songId) throws SpotifyException {
+    public AlbumRest deleteSongOfAlbum(Long albumId, Long songId) throws SpotifyException {
         AlbumEntity album = albumRepository.findById(albumId)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         for (int i = 0; i < album.getSongs().size(); i++) {
             if (album.getSongs().get(i).getId() == songId){
                 album.getSongs().remove(i);
+
             }
         }
         return albumMapper.mapToRest(album);

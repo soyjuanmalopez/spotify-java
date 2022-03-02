@@ -4,6 +4,7 @@ import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.ArtistRest;
 import Spotify.controller.rest.model.GenreRest;
 import Spotify.controller.rest.model.SongRest;
+import Spotify.controller.rest.model.restSongs.AlbumRestSong;
 import Spotify.persistence.entity.AlbumEntity;
 import Spotify.persistence.entity.ArtistEntity;
 import Spotify.persistence.entity.GenreEntity;
@@ -29,7 +30,7 @@ public class SongMapperTest {
     String title= "titulo";
     Integer reproductions= 300;
     Double duration= 3.90;
-    AlbumRest albumRest = new AlbumRest();
+    AlbumRestSong albumRest = new AlbumRestSong();
     AlbumEntity albumEntity = new AlbumEntity();
     Set<ArtistRest> artistRestSet = new HashSet<>();
     ArtistRest artistRest = new ArtistRest();

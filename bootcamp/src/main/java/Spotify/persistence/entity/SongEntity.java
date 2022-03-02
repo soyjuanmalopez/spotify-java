@@ -40,7 +40,7 @@ public class SongEntity implements Serializable {
     @Column(name = "duration")
     private Double duration;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany()//fetch = FetchType.LAZY
     @JoinTable(
             name = "rel_song_artist",
             joinColumns = {@JoinColumn(name = "id_song")},

@@ -1,11 +1,9 @@
 package Spotify.controller.rest;
 
 import Spotify.controller.rest.model.*;
+import Spotify.controller.rest.model.restSongs.GenreSongRest;
 import Spotify.exception.SpotifyException;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 

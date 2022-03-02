@@ -22,11 +22,11 @@ public interface AlbumControllerRest {
 
     SpotifyResponse<Object> deleteAlbum(Long id) throws SpotifyException;
 
-    SpotifyResponse<AlbumRest> deleteSongOfAlbum(Long albumId, int songId) throws SpotifyException;
+    SpotifyResponse<AlbumRest> deleteSongOfAlbum(Long albumId, Long songId) throws SpotifyException;
 
     SpotifyResponse<AlbumRest> deleteArtistOfAlbum(Long albumId, Long artistId) throws SpotifyException;
 
-    SpotifyResponse<AlbumRest> addSongOfAlbum(Long albumId, int songId) throws SpotifyException;
+    SpotifyResponse<AlbumRest> addSongOfAlbum(Long albumId, Long songId) throws SpotifyException;
 
     SpotifyResponse<AlbumRest> addArtistToAlbum(Long albumId, Long artistId) throws SpotifyException;
 

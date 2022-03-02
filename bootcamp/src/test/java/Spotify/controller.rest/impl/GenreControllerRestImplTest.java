@@ -1,18 +1,15 @@
 package Spotify.controller.rest.impl;
 
 import Spotify.controller.rest.model.*;
+import Spotify.controller.rest.model.restSongs.GenreSongRest;
 import Spotify.exception.SpotifyException;
 import Spotify.mapper.GenreMapper;
 import Spotify.mapper.GenreSongMapper;
-import Spotify.mapper.PostSongMapper;
 import Spotify.mapper.SongMapper;
-import Spotify.persistence.entity.ArtistEntity;
 import Spotify.persistence.entity.GenreEntity;
 import Spotify.persistence.entity.SongEntity;
-import Spotify.persistence.repository.ArtistRepository;
 import Spotify.persistence.repository.GenreRepository;
 import Spotify.persistence.repository.SongRepository;
-import Spotify.service.SongService;
 import Spotify.service.impl.GenreServiceImpl;
 import Spotify.util.constant.RestConstantsUtils;
 import org.assertj.core.api.Assertions;

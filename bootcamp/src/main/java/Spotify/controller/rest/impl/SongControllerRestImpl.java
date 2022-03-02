@@ -2,6 +2,7 @@ package Spotify.controller.rest.impl;
 
 import Spotify.controller.rest.SongControllerRest;
 import Spotify.controller.rest.model.*;
+import Spotify.controller.rest.model.restSongs.PostSongRest;
 import Spotify.exception.SpotifyException;
 import Spotify.mapper.PostSongMapper;
 import Spotify.mapper.SongMapper;

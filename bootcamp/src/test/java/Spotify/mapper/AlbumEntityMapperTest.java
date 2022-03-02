@@ -1,4 +1,4 @@
-package Spotify.persistence.mapper;
+package Spotify.mapper;
 
 import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
@@ -52,7 +52,7 @@ public class AlbumEntityMapperTest {
         ALBUM_ENTITY.setDuration(1.1);
         ALBUM_ENTITY.setYearRelease(2021);*/
 
-        SONG_ENTITY.setId(1);
+        SONG_ENTITY.setId(1L);
         SONG_ENTITY.setTitle("TestingSong");
         SONG_ENTITY.setDuration(1.4);
         SONG_ENTITY.setAlbum_ref(ALBUM_ENTITY);
@@ -84,6 +84,7 @@ public class AlbumEntityMapperTest {
         Mockito.when(album.getDuration()).thenReturn(duration);
         Mockito.when(album.getYearRelease()).thenReturn(yearRelease);
         Mockito.when(album.getSongs()).thenReturn(SONG_REST_ALBUMS_LIST);
+
 
         AlbumEntity result = albumMapper.mapToEntity(album);
 

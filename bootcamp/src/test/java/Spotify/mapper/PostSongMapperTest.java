@@ -1,7 +1,8 @@
 package Spotify.mapper;
 
 import Spotify.controller.rest.model.AlbumRest;
-import Spotify.controller.rest.model.PostSongRest;
+import Spotify.controller.rest.model.restSongs.AlbumRestSong;
+import Spotify.controller.rest.model.restSongs.PostSongRest;
 import Spotify.persistence.entity.AlbumEntity;
 import Spotify.persistence.entity.SongEntity;
 import org.junit.Before;
@@ -12,7 +13,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 public class PostSongMapperTest {
@@ -20,7 +20,7 @@ public class PostSongMapperTest {
     String title= "titulo";
     Integer reproductions= 300;
     Double duration= 3.90;
-    AlbumRest albumRest = new AlbumRest();
+    AlbumRestSong albumRest = new AlbumRestSong();
     AlbumEntity albumEntity = new AlbumEntity();
 
 

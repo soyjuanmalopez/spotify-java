@@ -1,9 +1,9 @@
 package Spotify.service;
 
 import Spotify.controller.rest.model.*;
+import Spotify.controller.rest.model.restSongs.GenreSongRest;
 import Spotify.exception.SpotifyException;
 import Spotify.persistence.entity.GenreEntity;
-import Spotify.persistence.entity.SongEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
