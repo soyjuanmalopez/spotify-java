@@ -2,6 +2,8 @@ package Spotify.controller.rest.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -17,25 +19,25 @@ public class SongRest implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("id")
-    private int id;
+    private Long id;
 
     @JsonProperty("title")
     private String title;
 
     @JsonProperty("reproductions")
-    private int reproductions;
+    private Integer reproductions;
 
     @JsonProperty("album_ref")
     private AlbumRest album_ref;
 
     @JsonProperty("duration")
-    private double duration;
+    private Double duration;
 
     @JsonProperty("artists")
-    private List<ArtistRest> artists;
+    private Set<ArtistRest> artists;
 
     @JsonProperty("genres")
-    private List<GenreRest> genres;
+    private Set<GenreRest> genres;
 
 
 

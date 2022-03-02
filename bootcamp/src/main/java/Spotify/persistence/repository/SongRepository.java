@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import Spotify.persistence.entity.SongEntity;
 
 @Repository
-public interface SongRepository extends PagingAndSortingRepository<SongEntity, Integer> {
+public interface SongRepository extends PagingAndSortingRepository<SongEntity, Long> {
 
 
 }

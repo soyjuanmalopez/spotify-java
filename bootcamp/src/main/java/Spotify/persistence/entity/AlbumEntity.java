@@ -11,14 +11,12 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@ToString
+@Setter
+@Getter
 public class AlbumEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
-    @Column(name = "id")
+    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -26,20 +24,12 @@ public class AlbumEntity implements Serializable {
     private String title;
 
     @Column(name = "duration")
-    private double duration;
+    private Double duration;
 
     @Column(name= "year_release")
-    private int yearRelease;
+    private Integer yearRelease;
 
-    @OneToMany(mappedBy = "album_ref", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "album_ref", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SongEntity> songs;
-
-    /*@ManyToMany*//*(fetch = FetchType.LAZY, cascade = CascadeType.ALL)*//*
-    @JoinTable(
-            name = "rel_album_artist",
-            joinColumns = @JoinColumn(name = "id_album"),
-            inverseJoinColumns = @JoinColumn(name = "id_artist")
-    )
-    private List<ArtistEntity> artists;*/
 
 }

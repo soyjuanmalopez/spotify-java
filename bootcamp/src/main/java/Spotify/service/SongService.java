@@ -1,5 +1,7 @@
 package Spotify.service;
 
+import Spotify.controller.rest.model.AlbumRest;
+import Spotify.controller.rest.model.PostSongRest;
 import Spotify.controller.rest.model.SongRest;
 import Spotify.exception.SpotifyException;
 import Spotify.persistence.entity.SongEntity;
@@ -9,15 +11,22 @@ import org.springframework.data.domain.Pageable;
 
 public interface SongService {
 
-    Page<SongRest> getAllSongs(Pageable pageable)
-	    throws SpotifyException;
+    Page<SongRest> getAllSongs(Pageable pageable) throws SpotifyException;
 
-    SongRest createSong(SongEntity Song) throws SpotifyException;
+    SongRest getSongById(Long id) throws SpotifyException;
 
-    SongRest getSongById(int id) throws SpotifyException;
+    AlbumRest getAlbumBySongId(Long songId) throws SpotifyException;
 
-    SongRest updateSong(SongEntity SongDetails) throws SpotifyException;
+    PostSongRest createSong(PostSongRest Song) throws SpotifyException;
 
-    void deleteSong(int id) throws SpotifyException;
+    PostSongRest updateSong(SongEntity SongDetails) throws SpotifyException;
+
+    SongRest updateArtistBySongId(Long songId, Long artistId) throws SpotifyException;
+
+    void deleteSong(Long id) throws SpotifyException;
+
+    void deleteArtistFromSongById(Long songId, Long artistId) throws SpotifyException;
+
+
 
 }
