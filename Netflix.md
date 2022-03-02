@@ -28,25 +28,6 @@
 
 ## Spotify
 
-### Java 11
-
-### FlyWay
-
-### MapStruct
-
-## No code smells
-
-The code smell is a surface indication that usually corresponds to a deeper problem in the system. Usually, they aren't
-bugs because they aren't technically incorrect and don't prevent the program from functioning but, they indicate
-weaknesses in design that may slow down development or increase the risk of bugs or failures in the future.
-
-### Most usually code smells
-
-#### Blootware
-
-- Appear when some parts of the code (class, methods...) that has become huge over time by accumulating functionality
-  and feature creeps. It could become a big problem if no one cares to fix it.
-
 ![Spotify logo](media/Spotify/spotifyLogo.png)
 
 Spotify is a test repository that helps to start and implement a 
@@ -139,7 +120,7 @@ the layers below it using a Handler.
 
 ![Spotify Exception](media/Spotify/spotiExeption1.png)
 
-#### Mysterious Name
+### Java 11
 
 The Java version used for the training project is Java 11. With this, you can work 
 without any problem, but if you want to use another version*, you can find the JDK 
@@ -152,9 +133,7 @@ the step-by-step installation link of Java 11 is added below [Java 11 Installati
 *\*Note that we must remember to change the pom.xml if using another version of Java. 
 It is also useful to check the version to avoid errors.*
 
-- SonarQube is a plugin that helps to keep the correct state of the code. A good way to avoid code smells is a
-  continuous analysis of the code to correct bad practices, bugs and vulnerabilities before the code is already very
-  complex.
+### FlyWay
 
 Flyway updates a database from one version to the next using migrations. We can write 
 migrations either in SQL with database-specific syntax, or in Java for advanced database 
@@ -191,6 +170,105 @@ This plugin can be configured by adding the tag: <configuration> in our plugin s
 To find out more ways to configure the plugin, refer to the following reference link.
 And to see an example of migration see section *3* of the same guide.
 [Database Migrations with Flyway](https://www.baeldung.com/database-migrations-with-flyway)
+
+
+### MapStruct
+
+"*MapStruct is a code generator that greatly simplifies the implementation of 
+mappings between Java bean types based on a convention over configuration approach [...]
+As shown on your web page, let's say we have a class that represents cars (for 
+example, a JPA entity) and an accompanying data transfer object (DTO).*
+
+*Both types are quite similar, only the seat count attributes have different names 
+and the type attribute is a special enum type in the Car class but is a plain 
+string in the DTO.*"
+
+See full example: [MapStruct official Web](https://mapstruct.org/)
+
+To configure MapStruct in our Spring project, follow the next tutorial (Apache Maven Section):
+[MapStruct Spring Reference Guide](https://mapstruct.org/documentation/spring-extensions/reference/html/)
+
+**Main annotations**
+
+We will see the main annotations that form MapStruct.
+
+```java
+@Mapper
+public interface SpotifyMapper {
+    //Code
+}
+```
+This annotation comes before the class and is used to indicate that the class 
+is using the Conversion Service.
+
+A good option is to inject the mapper directly where we need it (if our project uses any Dependency Injection solution).
+
+Luckily, MapStruct has solid support for both Spring and CDI (Contexts and Dependency Injection).
+
+To use Spring IoC in our mapper, we need to add the componentModel attribute to @Mapper with the 
+value **spring**, and for CDI, it would be cdi.
+
+```java
+@Mapper(componentModel = "spring")
+public interface SpotifyMapper {
+    //Code
+}
+```
+For attributes with different names in source and target object, the @Mapping annotation 
+can be used to configure the names.
+
+```java
+//Example code
+public class GenreDTO {
+    private int genreId;
+    private String genreName;
+    // getters and setters omitted
+}
+public class Genre {
+    private int id;
+    private String name;
+    // getters and setters omitted
+}
+
+@Mapper(componentModel = "spring")
+public interface SpotifyMapper {
+    @Mapping(source = "name", target = "genreName")
+    GenreDTO genreToGenreDTO(Genre genre);
+}
+```
+
+If our mapper uses another adapter or mapper, it can be specified in the annotation:
+
+```java
+@Mapper(componentModel = "spring", uses = OtherConversionAdapter.class)
+public interface SpotifyMapper{
+    @Mapping(source = "name", target = "genreName")
+    GenreDTO genreToGenreDTO(Genre genre);
+}
+```
+
+## Archetype
+
+When starting a project first you have to build the structure: the archetype.
+As we know from the description, in Spotify you have different objects that interact between them: songs, albums, artists, genres and awards.
+
+That means that we need an entity for each one of them. There we are going to define it's attributes, getters and setters.
+
+--> imagen entity definida (explicación)
+
+Not only that, we also need other classes such as a repository in order to be able to communicate with the tables defined in our DB, a rest structure for the respose, controller and service (and it's implementation) to define the methods so then the user can interact with our programm. One of the previous one for each object that participates in the programm, as a general rule.
+
+--> imagenes de definición + explicación
+
+There are another important classes that are involved when coding: configuration, exceptions, responses, utils... These are not related with each object but with the general functionality of the code. Here you have some examples:
+
+--> ejemplos de las clases con explicación de que es (no todas)
+
+Remember that when programming is not just coding. We need some testing in each controller/service to verify that everything works how it's supposed to do and that's why we need testing classes:
+
+--> imagen de un test (explicación)
+
+As you know, you can use our archetype builder generator that's helps with the structure. In this [URL](https://gitlab.com/bootcamp-2.0/archetype/-/blob/main/Archetype.md) you can access to some info of how you can use it.
 
 ## Data base
 
