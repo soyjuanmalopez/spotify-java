@@ -1,6 +1,7 @@
 package Spotify.controller.rest;
 
 import Spotify.controller.rest.model.*;
+import Spotify.controller.rest.model.restAlbums.AlbumRestPost;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.persistence.entity.AlbumEntity;
@@ -16,7 +17,7 @@ public interface AlbumControllerRest {
 
     SpotifyResponse<D4iPageRest<ArtistRest>> getArtistsOfAlbum(int page, int size, Pageable pageable, Long id) throws SpotifyException;
 
-    SpotifyResponse<AlbumRest> createAlbum(AlbumEntity album) throws SpotifyException;
+    SpotifyResponse<AlbumRestPost> createAlbum(AlbumRestPost album) throws SpotifyException;
 
     SpotifyResponse<AlbumRest> updateAlbum(AlbumEntity album) throws SpotifyException;
 

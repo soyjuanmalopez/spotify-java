@@ -2,6 +2,7 @@ package Spotify.controller.rest.impl;
 
 import Spotify.controller.rest.AlbumControllerRest;
 import Spotify.controller.rest.model.*;
+import Spotify.controller.rest.model.restAlbums.AlbumRestPost;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.persistence.entity.AlbumEntity;
@@ -109,9 +110,9 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<AlbumRest> createAlbum(
-            @RequestBody AlbumEntity album) throws SpotifyException {
-        AlbumRest albumRest = albumService.createAlbum(album);
+    public SpotifyResponse<AlbumRestPost> createAlbum(
+            @RequestBody AlbumRestPost album) throws SpotifyException {
+        AlbumRestPost albumRest = albumService.createAlbum(album);
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                 String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK, albumRest);

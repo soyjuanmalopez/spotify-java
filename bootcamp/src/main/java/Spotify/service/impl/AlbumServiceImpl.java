@@ -2,11 +2,13 @@ package Spotify.service.impl;
 
 import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.ArtistRest;
+import Spotify.controller.rest.model.restAlbums.AlbumRestPost;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.exception.SpotifyNotFoundException;
 import Spotify.exception.error.ErrorDto;
 import Spotify.mapper.AlbumMapper;
+import Spotify.mapper.AlbumPostMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.AlbumEntity;
 import Spotify.persistence.entity.SongEntity;
@@ -34,6 +36,9 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Autowired
     private AlbumMapper albumMapper;
+
+    @Autowired
+    private AlbumPostMapper albumPostMapper;
 
     @Autowired
     private SongMapper songMapper;
@@ -68,9 +73,10 @@ public class AlbumServiceImpl implements AlbumService {
 
 
     @Override
-    public AlbumRest createAlbum(AlbumEntity album) throws SpotifyException {
-        albumRepository.save(album);
-        return albumMapper.mapToRest(album);
+    public AlbumRestPost createAlbum(AlbumRestPost album) throws SpotifyException {
+        AlbumEntity albumEntity = albumPostMapper.mapToEntity(album);
+        albumRepository.save(albumEntity);
+        return album;
     }
 
     @Override
