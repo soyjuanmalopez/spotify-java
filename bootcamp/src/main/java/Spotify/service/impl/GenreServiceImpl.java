@@ -78,8 +78,13 @@ public class GenreServiceImpl implements GenreService {
     @Transactional(readOnly = false)
     @Override
     public GenreRest updateGenre(GenreEntity genre) throws SpotifyException {
-        genreRepository.save(genre);
-        return genreMapper.mapToRest(genre);
+        GenreEntity genreEntity = genreRepository.findById(genre.getId())
+                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        if (genre.getName() != null){
+            genreEntity.setName(genre.getName());
+        }
+        genreRepository.save(genreEntity);
+        return genreMapper.mapToRest(genreEntity);
     }
 
     @Transactional(readOnly = false)
