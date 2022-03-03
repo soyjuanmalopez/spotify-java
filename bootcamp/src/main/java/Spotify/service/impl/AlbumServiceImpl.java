@@ -120,12 +120,16 @@ public class AlbumServiceImpl implements AlbumService {
     public AlbumRest deleteSongOfAlbum(Long albumId, Long songId) throws SpotifyException {
         AlbumEntity album = albumRepository.findById(albumId)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        SongEntity songEntity = songRepository.findById(songId)
+                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         for (int i = 0; i < album.getSongs().size(); i++) {
             if (album.getSongs().get(i).getId() == songId){
                 album.getSongs().remove(i);
-
             }
         }
+        songEntity.setAlbum_ref(null);
+        albumRepository.save(album);
+        songRepository.save(songEntity);
         return albumMapper.mapToRest(album);
     }
 

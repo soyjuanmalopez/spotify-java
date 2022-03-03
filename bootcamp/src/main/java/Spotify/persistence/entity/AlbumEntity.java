@@ -29,7 +29,7 @@ public class AlbumEntity implements Serializable {
     @Column(name= "year_release")
     private Integer yearRelease;
 
-    @OneToMany(mappedBy = "album_ref", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "album_ref", cascade = CascadeType.ALL,fetch = FetchType.EAGER) //orphanRemoval = true
     private List<SongEntity> songs;
 
 }
