@@ -3,6 +3,7 @@ package Spotify.service;
 import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.ArtistRest;
 import Spotify.controller.rest.model.SpotifyResponse;
+import Spotify.controller.rest.model.restAlbums.AlbumRestPost;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.persistence.entity.AlbumEntity;
@@ -19,7 +20,7 @@ public interface AlbumService {
 
     Page<ArtistRest> getArtistsOfAlbum(Pageable pageable, Long id) throws SpotifyException;
 
-    AlbumRest createAlbum(AlbumEntity album) throws SpotifyException;
+    AlbumRestPost createAlbum(AlbumRestPost album) throws SpotifyException;
 
     AlbumRest updateAlbum(AlbumEntity album, Long id) throws SpotifyException;
 

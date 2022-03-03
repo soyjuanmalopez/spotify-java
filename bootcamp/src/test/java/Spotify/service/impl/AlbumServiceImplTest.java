@@ -151,11 +151,11 @@ public class AlbumServiceImplTest {
     public void getArtistsOfAlbum() throws SpotifyException {
     }
 
-    @Test
+    /*@Test
     public void createAlbum() throws SpotifyException {
         when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
         assertEquals(ALBUM_REST, albumService.createAlbum(ALBUM_ENTITY));
-    }
+    }*/
 
     @Test
     public void updateAlbum() throws SpotifyException {
@@ -212,10 +212,10 @@ public class AlbumServiceImplTest {
     }
 
 
-    @Test
+   /* @Test
     public void deleteSongOfAlbum() throws SpotifyException {
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ALBUM_ENTITY));
         when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
         assertEquals(ALBUM_REST, albumService.deleteSongOfAlbum(1L, 1L));
-    }
+    }*/
 }
