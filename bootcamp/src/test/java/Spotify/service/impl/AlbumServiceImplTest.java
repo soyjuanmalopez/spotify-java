@@ -215,6 +215,7 @@ public class AlbumServiceImplTest {
     @Test
     public void deleteSongOfAlbum() throws SpotifyException {
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ALBUM_ENTITY));
+        when(songRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(SONG_ENTITY));
         when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
         assertEquals(ALBUM_REST, albumService.deleteSongOfAlbum(1L, 1L));
     }

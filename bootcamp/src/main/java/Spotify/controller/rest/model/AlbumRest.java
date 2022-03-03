@@ -1,6 +1,7 @@
 package Spotify.controller.rest.model;
 
 
+import Spotify.controller.rest.model.restAlbums.ArtistRestAlbum;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -30,5 +31,8 @@ public class AlbumRest implements Serializable {
 
    @JsonProperty("songs")
    private List<SongRestAlbum> songs;
+
+   @JsonProperty("artists")
+   private List<ArtistRestAlbum> artists;
 
 }

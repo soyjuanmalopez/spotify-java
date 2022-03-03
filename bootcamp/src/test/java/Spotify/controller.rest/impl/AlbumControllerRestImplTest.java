@@ -111,8 +111,8 @@ public class AlbumControllerRestImplTest {
 
     @Test
     public void createAlbum() throws SpotifyException {
-        AlbumEntity album = new AlbumEntity(-1L, "CreateEntityTest", 1.2, 2022, new ArrayList<>());
-        AlbumRest albumRest = new AlbumRest(-1L, "CreateEntityTest", 1.2, 2022, new ArrayList<>());
+        AlbumEntity album = new AlbumEntity(-1L, "CreateEntityTest", 1.2, 2022, new ArrayList<>(), new ArrayList<>());
+        AlbumRest albumRest = new AlbumRest(-1L, "CreateEntityTest", 1.2, 2022, new ArrayList<>(), new ArrayList<>());
         when(albumService.createAlbum(Mockito.any(AlbumEntity.class))).thenReturn(albumRest);
         assertEquals(albumControllerRest.createAlbum(album).getData(), albumRest);
     }

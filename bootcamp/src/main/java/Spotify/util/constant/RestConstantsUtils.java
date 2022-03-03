@@ -29,7 +29,6 @@ public class RestConstantsUtils {
 
 	public static final String ARTIST_ID = "artistId";
 	public static final String RESOURCE_ARTIST_ID = "/{artistId}";
-	public static final String RESOURCE_ARTIST = "/artist";
 	public static final String RESOURCE_ARTISTS = "/artists";
 
 }
