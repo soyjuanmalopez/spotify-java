@@ -109,8 +109,8 @@ the layers below it using a Handler.
 ### Java 11
 
 The Java version used for the training project is Java 11. With this, you can work 
-without any problem, but if you want to use another version*, you can find the JDK 
-you want at this link [Download Java 11 JDK](https://www.oracle.com/java/technologies/downloads/#java11). 
+without any problem, but if you want to use another version*, you can change the JDK 
+you want at this link, for exemple [Java 8 JDK](https://www.oracle.com/java/technologies/downloads/#java8). 
 
 In addition, it has a step-by-step installation guide for the JDK in case the IDE 
 used does not download it automatically. In our case, 
