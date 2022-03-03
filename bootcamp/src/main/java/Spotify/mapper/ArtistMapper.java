@@ -1,6 +1,5 @@
 package Spotify.mapper;
 
-import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.ArtistRest;
 import Spotify.persistence.entity.ArtistEntity;
 import org.mapstruct.Mapper;
