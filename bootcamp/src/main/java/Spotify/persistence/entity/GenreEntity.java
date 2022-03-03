@@ -6,6 +6,7 @@ import javax.management.ConstructorParameters;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "genre")
@@ -24,13 +25,11 @@ public class GenreEntity implements Serializable {
     @Column(name="name")
     private String name;
 
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    })
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "rel_genre_songs",
             joinColumns = {@JoinColumn(name = "id_genre")},
             inverseJoinColumns = {@JoinColumn(name = "id_song")}
     )
-    private List<SongEntity> songs;
+    private Set<SongEntity> songs;
 }

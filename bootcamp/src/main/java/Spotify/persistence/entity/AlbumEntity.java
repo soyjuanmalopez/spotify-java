@@ -23,12 +23,13 @@ public class AlbumEntity implements Serializable {
     private String title;
 
     @Column(name = "duration")
-    private double duration;
+    private Double duration;
 
     @Column(name= "year_release")
-    private int yearRelease;
+    private Integer yearRelease;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+<<<<<<< bootcamp/src/main/java/Spotify/persistence/entity/AlbumEntity.java
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
@@ -39,7 +40,10 @@ public class AlbumEntity implements Serializable {
     )
     private List<ArtistEntity> artists;
 
-    @OneToMany(mappedBy = "album_ref", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "album_ref", cascade = CascadeType.ALL)
+=======
+    @OneToMany(mappedBy = "album_ref", cascade = CascadeType.ALL,fetch = FetchType.EAGER) //orphanRemoval = true
+>>>>>>> bootcamp/src/main/java/Spotify/persistence/entity/AlbumEntity.java
     private List<SongEntity> songs;
 
 }

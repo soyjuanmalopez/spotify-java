@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -27,8 +28,8 @@ public class ArtistEntity implements Serializable {
     @Column(name="description")
     private String description;
 
-    @ManyToMany(mappedBy = "artists")
-    private List<SongEntity> songs;
+    @ManyToMany(mappedBy = "artists",fetch = FetchType.LAZY)
+    private Set<SongEntity> songs;
 
     @ManyToMany(mappedBy = "artists")
     private List<AlbumEntity> albums;

@@ -34,7 +34,7 @@ public class SpotifyExceptionHandler {
 	public SpotifyResponse unhandledErrors(final HttpServletRequest req, final Exception ex) {
 		logException(ex);
 		return new SpotifyResponse(ExceptionConstantsUtils.ERROR,
-				Integer.toString(HttpStatus.INTERNAL_SERVER_ERROR.value()), ex.getMessage());
+				Long.toString(HttpStatus.INTERNAL_SERVER_ERROR.value()), ex.getMessage());
 	}
 
 	@ExceptionHandler({ SpotifyException.class })
@@ -48,7 +48,7 @@ public class SpotifyExceptionHandler {
 				errorDto -> new ErrorRest(errorDto.getCode(), errorMessageService.getCodes().get(errorDto.getCode())))
 				.toArray(ErrorRest[]::new);
 
-		return new SpotifyResponse(ExceptionConstantsUtils.ERROR, Integer.toString(ex.getCode()), ex.getMessage(),
+		return new SpotifyResponse(ExceptionConstantsUtils.ERROR, Long.toString(ex.getCode()), ex.getMessage(),
 				errorRestArray);
 	}
 
