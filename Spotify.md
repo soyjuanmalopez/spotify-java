@@ -298,7 +298,7 @@ CREATE TABLE `spotify`.`song`
     CONSTRAINT `album_fk`
         FOREIGN KEY (`album_ref`)
             REFERENCES `spotify`.`album` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE
 );
 ```
@@ -341,12 +341,12 @@ CREATE TABLE `spotify`.`rel_genre_songs`
     CONSTRAINT `fk_rel_genre`
         FOREIGN KEY (`id_genre`)
             REFERENCES `spotify`.`genre` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE,
     CONSTRAINT `fk_rel_song`
         FOREIGN KEY (`id_song`)
             REFERENCES `spotify`.`song` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE
 );
 ```
@@ -363,12 +363,12 @@ CREATE TABLE `spotify`.`rel_album_artist`
     CONSTRAINT `fk_rel_albumartist_album`
         FOREIGN KEY (`id_album`)
             REFERENCES `spotify`.`album` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE,
     CONSTRAINT `fk_rel_albumartist_artist`
         FOREIGN KEY (`id_artist`)
             REFERENCES `spotify`.`artist` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE
 );
 ```
@@ -386,12 +386,12 @@ CREATE TABLE `spotify`.`rel_song_artist`
     CONSTRAINT `fk_rel_songartist_song`
         FOREIGN KEY (`id_song`)
             REFERENCES `spotify`.`song` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE,
     CONSTRAINT `fk_rel_songartist_artist`
         FOREIGN KEY (`id_artist`)
             REFERENCES `spotify`.`artist` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE
 );
 ```
