@@ -1,6 +1,8 @@
 package Spotify.persistence.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -33,6 +35,7 @@ public class AlbumEntity implements Serializable {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
+    @Fetch(value = FetchMode.SUBSELECT)//orphanRemoval = true
     @JoinTable(
             name = "rel_album_artist",
             joinColumns = {@JoinColumn(name = "id_album")},
