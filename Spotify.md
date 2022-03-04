@@ -752,9 +752,8 @@ And in this part, I show the variable path for each table.
 ````json
 {
   "id": "number",
-  "title": "string",
-  "duration": "decimal",
-  "year_release": "decimal"
+  "name": "string",
+  "description": "string"
 }
 ````
 
