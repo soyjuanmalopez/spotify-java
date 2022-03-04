@@ -86,7 +86,7 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<ArtistRest> createArtist(@RequestBody final PostArtistRest artist) throws SpotifyException {
+    public SpotifyResponse<PostArtistRest> createArtist(@RequestBody final PostArtistRest artist) throws SpotifyException {
         final ArtistEntity artistEntity = postArtistMapper.mapToEntity(artist);
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK,
@@ -104,7 +104,7 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
 
     })
-    public SpotifyResponse<ArtistRest> updateArtist(@RequestBody final PostArtistRest artist) throws SpotifyException {
+    public SpotifyResponse<PostArtistRest> updateArtist(@RequestBody final PostArtistRest artist) throws SpotifyException {
         final ArtistEntity artistEntity = postArtistMapper.mapToEntity(artist);
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK,

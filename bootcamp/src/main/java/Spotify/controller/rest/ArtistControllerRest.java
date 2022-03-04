@@ -11,8 +11,8 @@ import org.springframework.data.domain.Pageable;
 public interface ArtistControllerRest {
     SpotifyResponse<D4iPageRest<ArtistRest>> getAllArtists(int page, int size, Pageable pageable) throws SpotifyException;
     SpotifyResponse<ArtistRest> getArtistById(Long id) throws SpotifyException;
-    SpotifyResponse<ArtistRest> createArtist(PostArtistRest artist) throws SpotifyException;
-    SpotifyResponse<ArtistRest> updateArtist(PostArtistRest artist) throws SpotifyException;
+    SpotifyResponse<PostArtistRest> createArtist(PostArtistRest artist) throws SpotifyException;
+    SpotifyResponse<PostArtistRest> updateArtist(PostArtistRest artist) throws SpotifyException;
     void deleteArtist(Long id) throws SpotifyException;
     SpotifyResponse<D4iPageRest<AlbumRest>> getAlbumsOfArtist(int page, int size, Pageable pageable, Long id) throws SpotifyException;
 }

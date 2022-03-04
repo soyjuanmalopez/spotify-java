@@ -2,6 +2,7 @@ package Spotify.service;
 
 import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.ArtistRest;
+import Spotify.controller.rest.model.restArtists.PostArtistRest;
 import Spotify.exception.SpotifyException;
 import Spotify.persistence.entity.ArtistEntity;
 import org.springframework.data.domain.Page;
@@ -14,9 +15,9 @@ public interface ArtistService {
 
     ArtistRest getArtistById(Long id) throws SpotifyException;
 
-    ArtistRest createArtist(ArtistEntity artist) throws SpotifyException;
+    PostArtistRest createArtist(ArtistEntity artist) throws SpotifyException;
 
-    ArtistRest updateArtist(ArtistEntity artist) throws SpotifyException;
+    PostArtistRest updateArtist(ArtistEntity artist) throws SpotifyException;
 
     void deleteArtist(Long id) throws SpotifyException;
 
