@@ -4,6 +4,7 @@ import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.ArtistRest;
 import Spotify.controller.rest.model.D4iPageRest;
 import Spotify.controller.rest.model.SpotifyResponse;
+import Spotify.controller.rest.model.restArtists.PostArtistRest;
 import Spotify.exception.SpotifyException;
 import Spotify.mapper.ArtistMapper;
 import Spotify.persistence.entity.ArtistEntity;
@@ -32,6 +33,7 @@ public class ArtistControllerRestImplTest {
     static final Long ID = 1L;
     static final ArtistEntity ARTIST_ENTITY = new ArtistEntity();
     static final ArtistRest ARTIST_REST = new ArtistRest();
+    static final PostArtistRest POST_ARTIST_REST = new PostArtistRest();
 
     @Mock
     private ArtistService artistService;
@@ -80,7 +82,7 @@ public class ArtistControllerRestImplTest {
         Mockito.when(artistService.createArtist(any(ArtistEntity.class))).thenReturn(ARTIST_REST);
         Mockito.when(artistMapper.mapToEntity(any(ArtistRest.class))).thenReturn(ARTIST_ENTITY);
 
-        SpotifyResponse<ArtistRest> response = artistControllerRest.createArtist(ARTIST_REST);
+        SpotifyResponse<ArtistRest> response = artistControllerRest.createArtist(POST_ARTIST_REST);
 
         assertNotNull(response);
         assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
@@ -99,7 +101,7 @@ public class ArtistControllerRestImplTest {
         Mockito.when(artistMapper.mapToEntity(any(ArtistRest.class))).thenReturn(artistEntity2);
         Mockito.when(artistService.updateArtist(any(ArtistEntity.class))).thenReturn(artistRest2);
 
-        SpotifyResponse<ArtistRest> response = artistControllerRest.updateArtist(ARTIST_REST);
+        SpotifyResponse<ArtistRest> response = artistControllerRest.updateArtist(POST_ARTIST_REST);
 
         assertNotNull(response);
         assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());

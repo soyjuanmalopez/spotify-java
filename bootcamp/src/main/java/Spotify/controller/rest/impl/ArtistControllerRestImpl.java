@@ -2,8 +2,10 @@ package Spotify.controller.rest.impl;
 
 import Spotify.controller.rest.ArtistControllerRest;
 import Spotify.controller.rest.model.*;
+import Spotify.controller.rest.model.restArtists.PostArtistRest;
 import Spotify.exception.SpotifyException;
 import Spotify.mapper.ArtistMapper;
+import Spotify.mapper.PostArtistMapper;
 import Spotify.persistence.entity.ArtistEntity;
 import Spotify.service.ArtistService;
 import Spotify.util.constant.CommonConstantsUtils;
@@ -32,6 +34,9 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
 
     @Autowired
     private final ArtistMapper artistMapper;
+
+    @Autowired
+    private final PostArtistMapper postArtistMapper;
 
     @Override
     @ResponseStatus(HttpStatus.OK)
@@ -81,8 +86,8 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<ArtistRest> createArtist(@RequestBody final ArtistRest artist) throws SpotifyException {
-        final ArtistEntity artistEntity = artistMapper.mapToEntity(artist);
+    public SpotifyResponse<ArtistRest> createArtist(@RequestBody final PostArtistRest artist) throws SpotifyException {
+        final ArtistEntity artistEntity = postArtistMapper.mapToEntity(artist);
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK,
                 artistService.createArtist(artistEntity));
@@ -99,8 +104,8 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
 
     })
-    public SpotifyResponse<ArtistRest> updateArtist(@RequestBody final ArtistRest artist) throws SpotifyException {
-        final ArtistEntity artistEntity = artistMapper.mapToEntity(artist);
+    public SpotifyResponse<ArtistRest> updateArtist(@RequestBody final PostArtistRest artist) throws SpotifyException {
+        final ArtistEntity artistEntity = postArtistMapper.mapToEntity(artist);
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK,
                 artistService.updateArtist(artistEntity));
@@ -133,7 +138,10 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<D4iPageRest<AlbumRest>> getAlbumsOfArtist(int page, int size, Pageable pageable, Long id) throws SpotifyException {
+    public SpotifyResponse<D4iPageRest<AlbumRest>> getAlbumsOfArtist(
+            @RequestParam(defaultValue = CommonConstantsUtils.ZERO) final int page,
+            @RequestParam(defaultValue = CommonConstantsUtils.TWENTY) final int size,
+            @Parameter(hidden = true) Pageable pageable, Long id) throws SpotifyException {
         Page<AlbumRest> albumRestPage = artistService.getAlbumsOfArtist(pageable,id);
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                 String.valueOf(HttpStatus.OK.value()),
