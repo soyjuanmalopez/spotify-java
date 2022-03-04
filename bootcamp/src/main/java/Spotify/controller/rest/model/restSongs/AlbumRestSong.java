@@ -17,14 +17,6 @@ public class AlbumRestSong implements Serializable {
     @JsonProperty("id")
     private Long id;
 
-    @JsonProperty("title")
-    private String title;
-
-    @JsonProperty("duration")
-    private Double duration;
-
-    @JsonProperty("year_relase")
-    private Integer yearRelease;
 
 
 }

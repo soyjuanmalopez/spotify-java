@@ -127,8 +127,8 @@ public class AlbumControllerRestImpl implements AlbumControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<AlbumRest> updateAlbum(@RequestBody AlbumEntity album) throws SpotifyException {
-        AlbumRest albumRest = albumService.updateAlbum(album, album.getId());
+    public SpotifyResponse<AlbumRestPost> updateAlbum(@RequestBody AlbumRestPost album) throws SpotifyException {
+        AlbumRestPost albumRest = albumService.updateAlbum(album, album.getId());
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                 String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK, albumRest);

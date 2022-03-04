@@ -52,9 +52,11 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public ArtistRest updateArtist(ArtistEntity artistEntity) throws SpotifyException {
-        artistRepository.findById(artistEntity.getId())
+        ArtistEntity artist = artistRepository.findById(artistEntity.getId())
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
-        artistRepository.save(artistEntity);
+        artist.setName(artistEntity.getName());
+        artist.setDescription(artistEntity.getDescription());
+        artistRepository.save(artist);
         return artistMapper.mapToRest(artistEntity);
     }
 

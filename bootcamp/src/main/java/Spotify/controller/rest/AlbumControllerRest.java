@@ -19,7 +19,7 @@ public interface AlbumControllerRest {
 
     SpotifyResponse<AlbumRestPost> createAlbum(AlbumRestPost album) throws SpotifyException;
 
-    SpotifyResponse<AlbumRest> updateAlbum(AlbumEntity album) throws SpotifyException;
+    SpotifyResponse<AlbumRestPost> updateAlbum(AlbumRestPost album) throws SpotifyException;
 
     SpotifyResponse<Object> deleteAlbum(Long id) throws SpotifyException;
 

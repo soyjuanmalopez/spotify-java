@@ -3,8 +3,10 @@ package Spotify.persistence.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Null;
 
-import io.micrometer.core.lang.Nullable;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
 import java.util.List;
@@ -40,7 +42,8 @@ public class SongEntity implements Serializable {
     @Column(name = "duration")
     private Double duration;
 
-    @ManyToMany()//fetch = FetchType.LAZY
+    @Fetch(value = FetchMode.SUBSELECT)
+    @ManyToMany()
     @JoinTable(
             name = "rel_song_artist",
             joinColumns = {@JoinColumn(name = "id_song")},
@@ -48,6 +51,8 @@ public class SongEntity implements Serializable {
     )
     private List<ArtistEntity> artists;
 
+
+    @Fetch(value = FetchMode.SUBSELECT)
     @ManyToMany(mappedBy = "songs")
     private Set<GenreEntity> genres;
 

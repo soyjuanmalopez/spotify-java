@@ -31,6 +31,6 @@ public class ArtistEntity implements Serializable {
     @ManyToMany(mappedBy = "artists",fetch = FetchType.LAZY)
     private Set<SongEntity> songs;
 
-    @ManyToMany(mappedBy = "artists")
+    @ManyToMany(mappedBy = "artists",fetch = FetchType.EAGER)
     private List<AlbumEntity> albums;
 }

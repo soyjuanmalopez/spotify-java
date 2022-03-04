@@ -80,20 +80,15 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public AlbumRest updateAlbum(AlbumEntity album, Long id) throws SpotifyException {
+    public AlbumRestPost updateAlbum(AlbumRestPost album, Long id) throws SpotifyException {
         AlbumEntity albumEntity = albumRepository.findById(id)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
-        if (album.getTitle() != null){
-            albumEntity.setTitle(album.getTitle());
-        }
-        if (album.getDuration() != 0){
-            albumEntity.setDuration(album.getDuration());
-        }
-        if (album.getYearRelease() != 0){
-            albumEntity.setYearRelease(album.getYearRelease());
-        }
+        albumEntity.setTitle(album.getTitle());
+        albumEntity.setDuration(album.getDuration());
+        albumEntity.setYearRelease(album.getYearRelease());
+
         albumRepository.save(albumEntity);
-        return albumMapper.mapToRest(albumEntity);
+        return albumPostMapper.mapToRest(albumEntity);
     }
 
     @Override
