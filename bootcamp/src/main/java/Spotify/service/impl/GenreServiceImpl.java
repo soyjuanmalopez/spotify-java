@@ -80,9 +80,7 @@ public class GenreServiceImpl implements GenreService {
     public GenreRest updateGenre(GenreEntity genre) throws SpotifyException {
         GenreEntity genreEntity = genreRepository.findById(genre.getId())
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
-        if (genre.getName() != null){
-            genreEntity.setName(genre.getName());
-        }
+        genreEntity.setName(genre.getName());
         genreRepository.save(genreEntity);
         return genreMapper.mapToRest(genreEntity);
     }

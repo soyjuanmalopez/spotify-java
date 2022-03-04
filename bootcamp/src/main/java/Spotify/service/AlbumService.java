@@ -22,7 +22,7 @@ public interface AlbumService {
 
     AlbumRestPost createAlbum(AlbumRestPost album) throws SpotifyException;
 
-    AlbumRest updateAlbum(AlbumEntity album, Long id) throws SpotifyException;
+    AlbumRestPost updateAlbum(AlbumRestPost album, Long id) throws SpotifyException;
 
     void deleteAlbum(Long id) throws SpotifyException;
 

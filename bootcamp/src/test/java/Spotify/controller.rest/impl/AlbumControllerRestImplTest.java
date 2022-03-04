@@ -2,6 +2,7 @@ package Spotify.controller.rest.impl;
 
 import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.SpotifyResponse;
+import Spotify.controller.rest.model.restAlbums.AlbumRestPost;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.persistence.entity.AlbumEntity;
@@ -109,18 +110,18 @@ public class AlbumControllerRestImplTest {
     public void getArtistsOfAlbum() throws SpotifyException {
     }
 
-    /*@Test
-    public void createAlbum() throws SpotifyException {
-        AlbumEntity album = new AlbumEntity(-1L, "CreateEntityTest", 1.2, 2022, new ArrayList<>());
-        AlbumRest albumRest = new AlbumRest(-1L, "CreateEntityTest", 1.2, 2022, new ArrayList<>());
-        when(albumService.createAlbum(Mockito.any(AlbumEntity.class))).thenReturn(albumRest);
-        assertEquals(albumControllerRest.createAlbum(album).getData(), albumRest);
-    }*/
-
     @Test
+    public void createAlbum() throws SpotifyException {
+        AlbumRestPost albumRest = new AlbumRestPost(-1L, "CreateEntityTest", 1.2, 2022);
+        when(albumService.createAlbum(Mockito.any(AlbumRestPost.class))).thenReturn(albumRest);
+        assertEquals(albumControllerRest.createAlbum(albumRest).getData(), albumRest);
+    }
+
+   @Test
     public void updateAlbum() throws SpotifyException {
-        when(albumService.updateAlbum(Mockito.any(AlbumEntity.class), Mockito.anyLong())).thenReturn(ALBUM_REST);
-        assertEquals(ALBUM_REST, albumControllerRest.updateAlbum(ALBUM_ENTITY).getData());
+       AlbumRestPost albumRest = new AlbumRestPost(-1L, "CreateEntityTest", 1.2, 2022);
+       when(albumService.updateAlbum(Mockito.any(AlbumRestPost.class), Mockito.anyLong())).thenReturn(albumRest);
+        assertEquals(albumRest, albumControllerRest.updateAlbum(albumRest).getData());
     }
 
     @Test

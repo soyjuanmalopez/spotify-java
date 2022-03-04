@@ -56,7 +56,7 @@ public class SongServiceImpl implements SongService {
     @Transactional(readOnly = false)
     @Override
     public PostSongRest createSong(final PostSongRest song) throws SpotifyException {
-     SongEntity songEntity=  postSongMapper.mapToEntity(song);
+     SongEntity songEntity =  postSongMapper.mapToEntity(song);
 		songRepository.save( songEntity );
 		return song;
 	
@@ -84,18 +84,12 @@ public class SongServiceImpl implements SongService {
                 .orElseThrow(() ->
                         new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
 
-        if (songEntity.getTitle() != null){
-            song.setTitle(songEntity.getTitle());
-        }
-        if (songEntity.getDuration() != 0){
-            song.setDuration(songEntity.getDuration());
-        }
-        if (songEntity.getReproductions() != 0){
-            song.setReproductions(songEntity.getReproductions());
-        }
-        if (songEntity.getAlbum_ref() != null ||songEntity.getAlbum_ref().getId() != 0  ){
-            song.setAlbum_ref(songEntity.getAlbum_ref());
-        }
+        song.setTitle(songEntity.getTitle());
+        song.setDuration(songEntity.getDuration());
+        song.setReproductions(songEntity.getReproductions());
+        song.setAlbum_ref(songEntity.getAlbum_ref());
+
+
 		songRepository.save(song);
 		return postSongMapper.mapToRest(song);
     }
