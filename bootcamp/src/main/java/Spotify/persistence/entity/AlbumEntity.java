@@ -30,10 +30,12 @@ public class AlbumEntity implements Serializable {
     @Column(name= "year_release")
     private Integer yearRelease;
 
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
-            CascadeType.ALL
+            CascadeType.PERSIST,
+            CascadeType.MERGE
     })
-    @Fetch(value = FetchMode.SUBSELECT)
+    @Fetch(value = FetchMode.SUBSELECT)//orphanRemoval = true
     @JoinTable(
             name = "rel_album_artist",
             joinColumns = {@JoinColumn(name = "id_album")},
@@ -42,7 +44,6 @@ public class AlbumEntity implements Serializable {
     private List<ArtistEntity> artists;
 
     @OneToMany(mappedBy = "album_ref", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)//orphanRemoval = true
     private List<SongEntity> songs;
 
 }
