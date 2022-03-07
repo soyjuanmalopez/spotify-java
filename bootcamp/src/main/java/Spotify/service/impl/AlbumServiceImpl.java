@@ -11,8 +11,10 @@ import Spotify.mapper.AlbumMapper;
 import Spotify.mapper.AlbumPostMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.AlbumEntity;
+import Spotify.persistence.entity.ArtistEntity;
 import Spotify.persistence.entity.SongEntity;
 import Spotify.persistence.repository.AlbumRepository;
+import Spotify.persistence.repository.ArtistRepository;
 import Spotify.persistence.repository.SongRepository;
 import Spotify.service.AlbumService;
 import Spotify.util.constant.ExceptionConstantsUtils;
@@ -33,6 +35,9 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Autowired
     private SongRepository songRepository;
+
+    @Autowired
+    private ArtistRepository artistRepository;
 
     @Autowired
     private AlbumMapper albumMapper;
@@ -114,7 +119,15 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public AlbumRest addArtistToAlbum(Long albumId, Long artistId) throws SpotifyException {
-        return null;
+        AlbumEntity album = albumRepository.findById(albumId)
+                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        ArtistEntity artist = artistRepository.findById(artistId)
+                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        album.getArtists().add(artist);
+        artist.getAlbums().add(album);
+        albumRepository.save(album);
+        artistRepository.save(artist);
+        return albumMapper.mapToRest(album);
     }
 
     @Override
@@ -136,6 +149,22 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public AlbumRest deleteArtistOfAlbum(Long albumId, Long artistId) throws SpotifyException {
-        return null;
+        AlbumEntity album = albumRepository.findById(albumId)
+                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        ArtistEntity artistEntity = artistRepository.findById(artistId)
+                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        for (int i = 0; i < album.getArtists().size(); i++) {
+            if (album.getArtists().get(i).getId() == artistId){
+                album.getArtists().remove(i);
+            }
+        }
+        for (int i = 0; i < artistEntity.getAlbums().size(); i++) {
+            if (artistEntity.getAlbums().get(i).getId() == albumId){
+                artistEntity.getAlbums().remove(i);
+            }
+        }
+        albumRepository.save(album);
+        artistRepository.save(artistEntity);
+        return albumMapper.mapToRest(album);
     }
 }

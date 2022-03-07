@@ -1,15 +1,17 @@
 package Spotify.service.impl;
 
 import Spotify.controller.rest.model.AlbumRest;
-import Spotify.controller.rest.model.restAlbums.AlbumRestPost;
+import Spotify.controller.rest.model.ArtistRest;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.mapper.AlbumMapper;
-import Spotify.mapper.AlbumPostMapper;
+import Spotify.mapper.ArtistMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.AlbumEntity;
+import Spotify.persistence.entity.ArtistEntity;
 import Spotify.persistence.entity.SongEntity;
 import Spotify.persistence.repository.AlbumRepository;
+import Spotify.persistence.repository.ArtistRepository;
 import Spotify.persistence.repository.SongRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,11 +42,16 @@ public class AlbumServiceImplTest {
     AlbumPostMapper albumPostMapper;
 
     @Mock
+    public ArtistRepository artistRepository;
+
+    @Mock
     public AlbumMapper albumMapper;
 
     @Mock
     public SongMapper songMapper;
 
+    @Mock
+    public ArtistMapper artistMapper;
 
     @InjectMocks
     public AlbumServiceImpl albumService = new AlbumServiceImpl();
@@ -59,6 +66,12 @@ public class AlbumServiceImplTest {
 
     private final static List<SongRestAlbum> SONG_REST_ALBUMS_LIST = new ArrayList<>();
     private final static SongRestAlbum SONG_REST_ALBUM = new SongRestAlbum();
+
+    private final static List<ArtistEntity> ARTIST_ENTITY_LIST = new ArrayList<>();
+    private final static ArtistEntity ARTIST_ENTITY = new ArtistEntity();
+
+    private final static List<ArtistRest> ARTIST_REST_ALBUMS_LIST = new ArrayList<>();
+    private final static ArtistRest ARTIST_REST_ALBUM = new ArtistRest();
 
     private final static List<AlbumEntity> ALBUM_ENTITY_LIST = new ArrayList<>();
     private final static List<AlbumRest> ALBUM_REST_LIST = new ArrayList<>();
@@ -102,12 +115,26 @@ public class AlbumServiceImplTest {
         SONG_REST_ALBUM.setTitle(SONG_ENTITY.getTitle());
         SONG_REST_ALBUM.setDuration(SONG_ENTITY.getDuration());
 
+        ARTIST_ENTITY.setId(1L);
+        ARTIST_ENTITY.setName("TestingArtist");
+        ARTIST_ENTITY.setDescription("DescriptionTest");
+        ARTIST_ENTITY.setAlbums(new ArrayList<>());
+
+        ARTIST_REST_ALBUM.setId(ARTIST_ENTITY.getId());
+        ARTIST_REST_ALBUM.setName(ARTIST_ENTITY.getName());
+        ARTIST_REST_ALBUM.setDescription(ARTIST_ENTITY.getDescription());
+        ARTIST_REST_ALBUM.setAlbums(new ArrayList<>());
 
         SONG_ENTITY_LIST.add(SONG_ENTITY);
         SONG_REST_ALBUMS_LIST.add(SONG_REST_ALBUM);
 
+        ARTIST_ENTITY_LIST.add(ARTIST_ENTITY);
+        ARTIST_REST_ALBUMS_LIST.add(ARTIST_REST_ALBUM);
+
         ALBUM_ENTITY.setSongs(SONG_ENTITY_LIST);
         ALBUM_REST.setSongs(SONG_REST_ALBUMS_LIST);
+        ALBUM_ENTITY.setArtists(ARTIST_ENTITY_LIST);
+        ALBUM_REST.setArtists(new ArrayList<>());
 
         ALBUM_ENTITY_LIST.add(ALBUM_ENTITY);
         ALBUM_REST_LIST.add(ALBUM_REST);
@@ -222,7 +249,6 @@ public class AlbumServiceImplTest {
         assertEquals(ALBUM_REST, albumService.deleteSongOfAlbum(1L, 1L));
     }
 
-
     @Test
     public void deleteSongOfAlbum() throws SpotifyException {
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ALBUM_ENTITY));
@@ -230,4 +256,44 @@ public class AlbumServiceImplTest {
         when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
         assertEquals(ALBUM_REST, albumService.deleteSongOfAlbum(1L, 1L));
     }
+
+    /**/
+
+    @Test
+    public void addArtistOfAlbum() throws SpotifyException {
+        when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ALBUM_ENTITY));
+        when(artistRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ARTIST_ENTITY));
+        when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
+        assertEquals(ALBUM_REST, albumService.addArtistToAlbum(1L, 1L));
+    }
+
+    @Test(expected = SpotifyException.class)
+    public void addArtistOfAlbumNotFoundAlbum() throws SpotifyException {
+        when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+        when(artistRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ARTIST_ENTITY));
+        albumService.addArtistToAlbum(1L, 1L);
+    }
+
+    @Test(expected = SpotifyException.class)
+    public void addArtistOfArtistNotFoundAlbumSong() throws SpotifyException {
+        when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ALBUM_ENTITY));
+        when(artistRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+        albumService.addArtistToAlbum(1L, 1L);
+    }
+
+    @Test(expected = SpotifyException.class)
+    public void deleteArtistOfAlbumNotFound() throws SpotifyException {
+        when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+        when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
+        assertEquals(ALBUM_REST, albumService.deleteSongOfAlbum(1L, 1L));
+    }
+
+    @Test
+    public void deleteArtistOfAlbum() throws SpotifyException {
+        when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ALBUM_ENTITY));
+        when(artistRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ARTIST_ENTITY));
+        when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
+        assertEquals(ALBUM_REST, albumService.deleteArtistOfAlbum(1L, 1L));
+    }
+
 }
