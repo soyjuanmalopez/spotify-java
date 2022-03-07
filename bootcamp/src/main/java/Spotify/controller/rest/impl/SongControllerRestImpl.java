@@ -33,9 +33,6 @@ public class SongControllerRestImpl implements SongControllerRest {
     private final SongService songService;
 
     @Autowired
-    private final SongMapper songMapper;
-
-    @Autowired
     private final PostSongMapper postSongMapper;
 
     @Override

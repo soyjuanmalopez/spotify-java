@@ -2,6 +2,7 @@ package Spotify.controller.rest.impl;
 
 import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.SpotifyResponse;
+import Spotify.controller.rest.model.restAlbums.AlbumRestPost;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.persistence.entity.AlbumEntity;
@@ -117,10 +118,11 @@ public class AlbumControllerRestImplTest {
         assertEquals(albumControllerRest.createAlbum(album).getData(), albumRest);
     }
 
-    @Test
+   @Test
     public void updateAlbum() throws SpotifyException {
-        when(albumService.updateAlbum(Mockito.any(AlbumEntity.class), Mockito.anyLong())).thenReturn(ALBUM_REST);
-        assertEquals(ALBUM_REST, albumControllerRest.updateAlbum(ALBUM_ENTITY).getData());
+       AlbumRestPost albumRest = new AlbumRestPost(-1L, "CreateEntityTest", 1.2, 2022);
+       when(albumService.updateAlbum(Mockito.any(AlbumRestPost.class), Mockito.anyLong())).thenReturn(albumRest);
+        assertEquals(albumRest, albumControllerRest.updateAlbum(albumRest).getData());
     }
 
     @Test

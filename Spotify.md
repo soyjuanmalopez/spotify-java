@@ -298,7 +298,7 @@ CREATE TABLE `spotify`.`song`
     CONSTRAINT `album_fk`
         FOREIGN KEY (`album_ref`)
             REFERENCES `spotify`.`album` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE
 );
 ```
@@ -341,12 +341,12 @@ CREATE TABLE `spotify`.`rel_genre_songs`
     CONSTRAINT `fk_rel_genre`
         FOREIGN KEY (`id_genre`)
             REFERENCES `spotify`.`genre` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE,
     CONSTRAINT `fk_rel_song`
         FOREIGN KEY (`id_song`)
             REFERENCES `spotify`.`song` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE
 );
 ```
@@ -363,12 +363,12 @@ CREATE TABLE `spotify`.`rel_album_artist`
     CONSTRAINT `fk_rel_albumartist_album`
         FOREIGN KEY (`id_album`)
             REFERENCES `spotify`.`album` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE,
     CONSTRAINT `fk_rel_albumartist_artist`
         FOREIGN KEY (`id_artist`)
             REFERENCES `spotify`.`artist` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE
 );
 ```
@@ -386,12 +386,12 @@ CREATE TABLE `spotify`.`rel_song_artist`
     CONSTRAINT `fk_rel_songartist_song`
         FOREIGN KEY (`id_song`)
             REFERENCES `spotify`.`song` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE,
     CONSTRAINT `fk_rel_songartist_artist`
         FOREIGN KEY (`id_artist`)
             REFERENCES `spotify`.`artist` (`id`)
-            ON DELETE SET NULL
+            ON DELETE CASCADE
             ON UPDATE CASCADE
 );
 ```
@@ -604,51 +604,6 @@ VALUES ('1', '21');
 INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
 VALUES ('1', '22');
 
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '1');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '2');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '3');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '4');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '5');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '6');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '7');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '8');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '9');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '10');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '11');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '12');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '13');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '14');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '15');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '16');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '17');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '18');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '19');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '20');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '21');
-INSERT INTO `spotify`.`rel_album_song` (`id_album`, `id_song`)
-VALUES ('1', '22');
-
 ```
 
 ### Query Examples
@@ -797,9 +752,8 @@ And in this part, I show the variable path for each table.
 ````json
 {
   "id": "number",
-  "title": "string",
-  "duration": "decimal",
-  "year_release": "decimal"
+  "name": "string",
+  "description": "string"
 }
 ````
 

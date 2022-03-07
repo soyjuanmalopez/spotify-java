@@ -30,7 +30,6 @@ public class AlbumEntity implements Serializable {
     @Column(name= "year_release")
     private Integer yearRelease;
 
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE

@@ -2,11 +2,13 @@ package Spotify.service.impl;
 
 import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.ArtistRest;
+import Spotify.controller.rest.model.restAlbums.AlbumRestPost;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.exception.SpotifyNotFoundException;
 import Spotify.exception.error.ErrorDto;
 import Spotify.mapper.AlbumMapper;
+import Spotify.mapper.AlbumPostMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.AlbumEntity;
 import Spotify.persistence.entity.ArtistEntity;
@@ -41,6 +43,9 @@ public class AlbumServiceImpl implements AlbumService {
     private AlbumMapper albumMapper;
 
     @Autowired
+    private AlbumPostMapper albumPostMapper;
+
+    @Autowired
     private SongMapper songMapper;
 
 
@@ -73,26 +78,22 @@ public class AlbumServiceImpl implements AlbumService {
 
 
     @Override
-    public AlbumRest createAlbum(AlbumEntity album) throws SpotifyException {
-        albumRepository.save(album);
-        return albumMapper.mapToRest(album);
+    public AlbumRestPost createAlbum(AlbumRestPost album) throws SpotifyException {
+        AlbumEntity albumEntity = albumPostMapper.mapToEntity(album);
+        albumRepository.save(albumEntity);
+        return album;
     }
 
     @Override
-    public AlbumRest updateAlbum(AlbumEntity album, Long id) throws SpotifyException {
+    public AlbumRestPost updateAlbum(AlbumRestPost album, Long id) throws SpotifyException {
         AlbumEntity albumEntity = albumRepository.findById(id)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
-        if (album.getTitle() != null){
-            albumEntity.setTitle(album.getTitle());
-        }
-        if (album.getDuration() != 0){
-            albumEntity.setDuration(album.getDuration());
-        }
-        if (album.getYearRelease() != 0){
-            albumEntity.setYearRelease(album.getYearRelease());
-        }
+        albumEntity.setTitle(album.getTitle());
+        albumEntity.setDuration(album.getDuration());
+        albumEntity.setYearRelease(album.getYearRelease());
+
         albumRepository.save(albumEntity);
-        return albumMapper.mapToRest(albumEntity);
+        return albumPostMapper.mapToRest(albumEntity);
     }
 
     @Override

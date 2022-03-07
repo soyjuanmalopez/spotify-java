@@ -2,10 +2,12 @@ package Spotify.service.impl;
 
 import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.ArtistRest;
+import Spotify.controller.rest.model.restArtists.PostArtistRest;
 import Spotify.exception.SpotifyException;
 import Spotify.exception.SpotifyNotFoundException;
 import Spotify.exception.error.ErrorDto;
 import Spotify.mapper.ArtistMapper;
+import Spotify.mapper.PostArtistMapper;
 import Spotify.persistence.entity.ArtistEntity;
 import Spotify.persistence.repository.ArtistRepository;
 import Spotify.service.ArtistService;
@@ -29,6 +31,8 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Autowired
     private final ArtistMapper artistMapper;
+    @Autowired
+    private final PostArtistMapper postartistMapper;
 
     @Transactional(readOnly = true)
     @Override
@@ -45,17 +49,19 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public ArtistRest createArtist(final ArtistEntity artist) throws SpotifyException {
+    public PostArtistRest createArtist(final ArtistEntity artist) throws SpotifyException {
         artistRepository.save(artist);
-        return artistMapper.mapToRest(artist);
+        return postartistMapper.mapToRest(artist);
     }
 
     @Override
-    public ArtistRest updateArtist(ArtistEntity artistEntity) throws SpotifyException {
-        artistRepository.findById(artistEntity.getId())
+    public PostArtistRest updateArtist(ArtistEntity artistEntity) throws SpotifyException {
+        ArtistEntity artist = artistRepository.findById(artistEntity.getId())
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
-        artistRepository.save(artistEntity);
-        return artistMapper.mapToRest(artistEntity);
+        artist.setName(artistEntity.getName());
+        artist.setDescription(artistEntity.getDescription());
+        artistRepository.save(artist);
+        return postartistMapper.mapToRest(artistEntity);
     }
 
     @Override

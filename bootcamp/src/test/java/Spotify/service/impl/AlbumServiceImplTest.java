@@ -38,6 +38,8 @@ public class AlbumServiceImplTest {
 
     @Mock
     public SongRepository songRepository;
+    @Mock
+    AlbumPostMapper albumPostMapper;
 
     @Mock
     public ArtistRepository artistRepository;
@@ -57,6 +59,7 @@ public class AlbumServiceImplTest {
 
     private final static AlbumEntity ALBUM_ENTITY = new AlbumEntity();
     private final static AlbumRest ALBUM_REST = new AlbumRest();
+    private final static AlbumRestPost ALBUM_REST_POST = new AlbumRestPost();
 
     private final static List<SongEntity> SONG_ENTITY_LIST = new ArrayList<>();
     private final static SongEntity SONG_ENTITY = new SongEntity();
@@ -97,6 +100,11 @@ public class AlbumServiceImplTest {
         ALBUM_REST.setTitle(ALBUM_ENTITY.getTitle());
         ALBUM_REST.setDuration(ALBUM_ENTITY.getDuration());
         ALBUM_REST.setYearRelease(ALBUM_ENTITY.getYearRelease());
+
+        ALBUM_REST_POST.setId(ALBUM_ENTITY.getId());
+        ALBUM_REST_POST.setTitle(ALBUM_ENTITY.getTitle());
+        ALBUM_REST_POST.setDuration(ALBUM_ENTITY.getDuration());
+        ALBUM_REST_POST.setYearRelease(ALBUM_ENTITY.getYearRelease());
 
         SONG_ENTITY.setId(1L);
         SONG_ENTITY.setTitle("TestingSong");
@@ -183,21 +191,21 @@ public class AlbumServiceImplTest {
 
     @Test
     public void createAlbum() throws SpotifyException {
-        when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
-        assertEquals(ALBUM_REST, albumService.createAlbum(ALBUM_ENTITY));
+        when(albumPostMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST_POST);
+        assertEquals(ALBUM_REST_POST, albumService.createAlbum(ALBUM_REST_POST));
     }
 
     @Test
     public void updateAlbum() throws SpotifyException {
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ALBUM_ENTITY));
-        when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
-        assertEquals(ALBUM_REST, albumService.updateAlbum(ALBUM_ENTITY, 1L));
+        when(albumPostMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST_POST);
+        assertEquals(ALBUM_REST_POST, albumService.updateAlbum(ALBUM_REST_POST, 1L));
     }
 
     @Test(expected = SpotifyException.class)
     public void updateAlbumNotFound() throws SpotifyException {
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
-        albumService.updateAlbum(ALBUM_ENTITY, -1L);
+        albumService.updateAlbum(ALBUM_REST_POST, -1L);
     }
 
     @Test
