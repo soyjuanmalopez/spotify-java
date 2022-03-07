@@ -2,9 +2,12 @@ package Spotify.service.impl;
 
 import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.ArtistRest;
+import Spotify.controller.rest.model.restAlbums.AlbumRestPost;
+import Spotify.controller.rest.model.restAlbums.ArtistRestAlbum;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.mapper.AlbumMapper;
+import Spotify.mapper.AlbumPostMapper;
 import Spotify.mapper.ArtistMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.AlbumEntity;
@@ -71,6 +74,7 @@ public class AlbumServiceImplTest {
     private final static ArtistEntity ARTIST_ENTITY = new ArtistEntity();
 
     private final static List<ArtistRest> ARTIST_REST_ALBUMS_LIST = new ArrayList<>();
+    private final static List<ArtistRestAlbum> ARTIST_REST__ALBUMS_LIST = new ArrayList<>();
     private final static ArtistRest ARTIST_REST_ALBUM = new ArtistRest();
 
     private final static List<AlbumEntity> ALBUM_ENTITY_LIST = new ArrayList<>();
@@ -130,11 +134,12 @@ public class AlbumServiceImplTest {
 
         ARTIST_ENTITY_LIST.add(ARTIST_ENTITY);
         ARTIST_REST_ALBUMS_LIST.add(ARTIST_REST_ALBUM);
+        ARTIST_REST__ALBUMS_LIST.add(new ArtistRestAlbum(1L, "TestingArtist", "DescriptionTest"));
 
         ALBUM_ENTITY.setSongs(SONG_ENTITY_LIST);
         ALBUM_REST.setSongs(SONG_REST_ALBUMS_LIST);
         ALBUM_ENTITY.setArtists(ARTIST_ENTITY_LIST);
-        ALBUM_REST.setArtists(new ArrayList<>());
+        ALBUM_REST.setArtists(ARTIST_REST__ALBUMS_LIST);
 
         ALBUM_ENTITY_LIST.add(ALBUM_ENTITY);
         ALBUM_REST_LIST.add(ALBUM_REST);
@@ -187,6 +192,10 @@ public class AlbumServiceImplTest {
 
     @Test
     public void getArtistsOfAlbum() throws SpotifyException {
+        Optional<AlbumEntity> optionalAlbum = Optional.of(ALBUM_ENTITY);
+        when(albumRepository.findById(Mockito.anyLong())).thenReturn(optionalAlbum);
+        when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
+        assertEquals(albumService.getArtistsOfAlbum(Pageable.unpaged(), 1L).getContent(), ARTIST_REST__ALBUMS_LIST);
     }
 
     @Test

@@ -2,9 +2,9 @@ package Spotify.controller.rest;
 
 import Spotify.controller.rest.model.*;
 import Spotify.controller.rest.model.restAlbums.AlbumRestPost;
+import Spotify.controller.rest.model.restAlbums.ArtistRestAlbum;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
-import Spotify.persistence.entity.AlbumEntity;
 import org.springframework.data.domain.Pageable;
 
 public interface AlbumControllerRest {
@@ -15,7 +15,7 @@ public interface AlbumControllerRest {
 
     SpotifyResponse<D4iPageRest<SongRestAlbum>> getSongsOfAlbum(int page, int size, Pageable pageable, Long id) throws SpotifyException;
 
-    SpotifyResponse<D4iPageRest<ArtistRest>> getArtistsOfAlbum(int page, int size, Pageable pageable, Long id) throws SpotifyException;
+    SpotifyResponse<D4iPageRest<ArtistRestAlbum>> getArtistsOfAlbum(int page, int size, Pageable pageable, Long id) throws SpotifyException;
 
     SpotifyResponse<AlbumRestPost> createAlbum(AlbumRestPost album) throws SpotifyException;
 

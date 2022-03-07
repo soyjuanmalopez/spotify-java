@@ -18,7 +18,7 @@ public class ArtistRestAlbum implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("id")
-    private int id;
+    private Long id;
 
     @JsonProperty("name")
     private String name;

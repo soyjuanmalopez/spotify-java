@@ -1,8 +1,8 @@
 package Spotify.service.impl;
 
 import Spotify.controller.rest.model.AlbumRest;
-import Spotify.controller.rest.model.ArtistRest;
 import Spotify.controller.rest.model.restAlbums.AlbumRestPost;
+import Spotify.controller.rest.model.restAlbums.ArtistRestAlbum;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.exception.SpotifyNotFoundException;
@@ -18,7 +18,6 @@ import Spotify.persistence.repository.ArtistRepository;
 import Spotify.persistence.repository.SongRepository;
 import Spotify.service.AlbumService;
 import Spotify.util.constant.ExceptionConstantsUtils;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -72,8 +71,11 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public Page<ArtistRest> getArtistsOfAlbum(Pageable pageable, Long id) throws SpotifyException {
-        return null;
+    public Page<ArtistRestAlbum> getArtistsOfAlbum(Pageable pageable, Long id) throws SpotifyException {
+        AlbumEntity album = albumRepository.findById(id)
+                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        List<ArtistRestAlbum> artistRest = albumMapper.mapToRest(album).getArtists();
+        return new PageImpl(artistRest, pageable, artistRest.size());
     }
 
 

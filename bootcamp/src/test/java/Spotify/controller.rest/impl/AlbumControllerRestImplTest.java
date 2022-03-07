@@ -3,6 +3,7 @@ package Spotify.controller.rest.impl;
 import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.SpotifyResponse;
 import Spotify.controller.rest.model.restAlbums.AlbumRestPost;
+import Spotify.controller.rest.model.restAlbums.ArtistRestAlbum;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.persistence.entity.AlbumEntity;
@@ -44,12 +45,15 @@ public class AlbumControllerRestImplTest {
     private final static AlbumEntity ALBUM_ENTITY = new AlbumEntity();
     private final static List<SongRestAlbum> SONG_REST_ALBUMS_LIST = new ArrayList<>();
     private final static SongRestAlbum SONG_REST_ALBUM = new SongRestAlbum();
+    private final static List<ArtistRestAlbum> ARTIST_REST_ALBUM_LIST = new ArrayList<>();
+    private final static ArtistRestAlbum ARTIST_REST_ALBUM = new ArtistRestAlbum();
     private final static List<AlbumRest> ALBUM_REST_LIST = new ArrayList<>();
 
     private static final Pageable pageable = PageRequest.of(1,8);
 
     private static Page<AlbumRest> ALBUM_REST_PAGE;
     private static Page<SongRestAlbum> SONG_REST_PAGE;
+    private static Page<ArtistRestAlbum> ARTIST_REST_PAGE;
 
     @Before
     public void init() {
@@ -75,15 +79,22 @@ public class AlbumControllerRestImplTest {
         SONG_REST_ALBUM.setTitle("TestingSong");
         SONG_REST_ALBUM.setDuration(1.4);
 
+        ARTIST_REST_ALBUM.setId(1L);
+        ARTIST_REST_ALBUM.setName("TestArtist");
+        ARTIST_REST_ALBUM.setDescription("TestDescription");
+
         SONG_REST_ALBUMS_LIST.add(SONG_REST_ALBUM);
+        ARTIST_REST_ALBUM_LIST.add(ARTIST_REST_ALBUM);
 
         ALBUM_REST.setSongs(SONG_REST_ALBUMS_LIST);
+        ALBUM_REST.setArtists(ARTIST_REST_ALBUM_LIST);
 
         ALBUM_REST_LIST.add(ALBUM_REST);
 
 
         ALBUM_REST_PAGE = new PageImpl<>(ALBUM_REST_LIST);
         SONG_REST_PAGE = new PageImpl<>(SONG_REST_ALBUMS_LIST);
+        ARTIST_REST_PAGE = new PageImpl<>(ARTIST_REST_ALBUM_LIST);
 
 
     }
@@ -108,14 +119,15 @@ public class AlbumControllerRestImplTest {
 
     @Test
     public void getArtistsOfAlbum() throws SpotifyException {
+        when(albumService.getArtistsOfAlbum(Mockito.any(Pageable.class), Mockito.anyLong())).thenReturn(ARTIST_REST_PAGE);
+        assertEquals(ARTIST_REST_ALBUM_LIST, Arrays.stream(albumControllerRest.getArtistsOfAlbum(1, 8, pageable, 1L).getData().getContent()).collect(Collectors.toList()));
     }
 
     @Test
     public void createAlbum() throws SpotifyException {
-        AlbumEntity album = new AlbumEntity(-1L, "CreateEntityTest", 1.2, 2022, new ArrayList<>(), new ArrayList<>());
-        AlbumRest albumRest = new AlbumRest(-1L, "CreateEntityTest", 1.2, 2022, new ArrayList<>(), new ArrayList<>());
-        when(albumService.createAlbum(Mockito.any(AlbumEntity.class))).thenReturn(albumRest);
-        assertEquals(albumControllerRest.createAlbum(album).getData(), albumRest);
+        AlbumRestPost albumRest = new AlbumRestPost(-1L, "CreateEntityTest", 1.2, 2022);
+        when(albumService.createAlbum(Mockito.any(AlbumRestPost.class))).thenReturn(albumRest);
+        assertEquals(albumControllerRest.createAlbum(albumRest).getData(), albumRest);
     }
 
    @Test
@@ -144,4 +156,17 @@ public class AlbumControllerRestImplTest {
         when(albumService.addSongOfAlbum(Mockito.anyLong(), Mockito.anyLong())).thenReturn(ALBUM_REST);
         assertEquals(ALBUM_REST, albumControllerRest.addSongOfAlbum(1L, 1L).getData());
     }
+
+    @Test
+    public void deleteArtistOfAlbum() throws SpotifyException {
+        when(albumService.deleteArtistOfAlbum(Mockito.anyLong(), Mockito.anyLong())).thenReturn(ALBUM_REST);
+        assertEquals(ALBUM_REST, albumControllerRest.deleteArtistOfAlbum(1L, 1L).getData());
+    }
+
+    @Test
+    public void addArtistOfAlbum() throws SpotifyException {
+        when(albumService.addArtistToAlbum(Mockito.anyLong(), Mockito.anyLong())).thenReturn(ALBUM_REST);
+        assertEquals(ALBUM_REST, albumControllerRest.addArtistToAlbum(1L, 1L).getData());
+    }
+
 }
