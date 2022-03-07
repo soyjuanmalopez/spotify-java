@@ -93,7 +93,7 @@ public class SongControllerRestImpl implements SongControllerRest {
     @Override
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = RestConstantsUtils.RESOURCE_SONG)
-    @Operation(summary = "SongClient", description = "Create a new Song")
+    @Operation(summary = "createSong", description = "Create a new Song")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
@@ -123,7 +123,7 @@ public class SongControllerRestImpl implements SongControllerRest {
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "updateSongStatus", description = "Update Song status")
+    @Operation(summary = "updateArtistBySongId", description = "updateArtistBySongId")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),

@@ -80,7 +80,7 @@ public class GenreControllerRestImpl implements GenreControllerRest {
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "getAlbumBySongId", description = "Get an album from a song")
+    @Operation(summary = "getSongByGenreId", description = "Get an album from a song")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
@@ -96,7 +96,7 @@ public class GenreControllerRestImpl implements GenreControllerRest {
     @Override
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = RestConstantsUtils.RESOURCE_GENRE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "getAllGenres", description = "Get all Genres paginated")
+    @Operation(summary = "createGenre", description = "createGenre")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
@@ -112,7 +112,7 @@ public class GenreControllerRestImpl implements GenreControllerRest {
     @Override
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = RestConstantsUtils.RESOURCE_GENRE)
-    @Operation(summary = "getAllGenres", description = "Get all Genres paginated")
+    @Operation(summary = "updateGenre", description = "updateGenre")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
@@ -125,7 +125,7 @@ public class GenreControllerRestImpl implements GenreControllerRest {
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "updateSongStatus", description = "Update Song status")
+    @Operation(summary = "updateSongByGenreId", description = "updateSongByGenreId")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
@@ -154,7 +154,7 @@ public class GenreControllerRestImpl implements GenreControllerRest {
     @Override
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = RestConstantsUtils.RESOURCE_GENRE+RestConstantsUtils.RESOURCE_GENREID+RestConstantsUtils.RESOURCE_SONG+RestConstantsUtils.SONGID)
-    @Operation(summary = "deleteSongFromGenre", description = "Delte a certain song from its genre")
+    @Operation(summary = "deleteSongFromGenreById", description = "Delte a certain song from its genre")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
