@@ -84,7 +84,7 @@ public class SongControllerRestImpl implements SongControllerRest {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
     })
     @GetMapping(value = RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.RESOURCE_SONGID + RestConstantsUtils.RESOURCE_ALBUM)
-    public SpotifyResponse<AlbumRest> getAlbumBySongId(Long songId) throws SpotifyException {
+    public SpotifyResponse<AlbumRest> getAlbumBySongId(final Long songId) throws SpotifyException {
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK,(songService.getAlbumBySongId(songId)));
     }
@@ -131,7 +131,7 @@ public class SongControllerRestImpl implements SongControllerRest {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
     })
     @PutMapping(value = RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.RESOURCE_SONGID+RestConstantsUtils.RESOURCE_ARTIST+RestConstantsUtils.RESOURCE_ARTISTID)
-    public SpotifyResponse<SongRest> updateArtistBySongId(@PathVariable Long songId,@PathVariable Long artistId) throws SpotifyException {
+    public SpotifyResponse<SongRest> updateArtistBySongId(@PathVariable final Long songId,@PathVariable final Long artistId) throws SpotifyException {
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK,songService.updateArtistBySongId(songId,artistId));
     }
@@ -159,7 +159,7 @@ public class SongControllerRestImpl implements SongControllerRest {
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
     @DeleteMapping(value = RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.RESOURCE_SONGID+RestConstantsUtils.RESOURCE_ARTIST+RestConstantsUtils.RESOURCE_ARTISTID)
-    public void deleteArtistFromSongById(@PathVariable Long songId, @PathVariable Long artistId) throws SpotifyException {
+    public void deleteArtistFromSongById(@PathVariable final Long songId, @PathVariable final Long artistId) throws SpotifyException {
         songService.deleteArtistFromSongById(songId,artistId);
 
     }
