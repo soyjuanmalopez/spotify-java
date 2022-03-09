@@ -130,14 +130,14 @@ public class SongServiceImplTest {
 
     @Test
     public void updateSong() throws SpotifyException { //PostSongRest
-		PostSongRest response = songService.updateSong(SONG_ENTITY);
+		PostSongRest response = songService.updateSong(POST_SONG_REST);
 		Mockito.verify(songRepository, Mockito.times(1)).save(Mockito.any(SongEntity.class));
         Assertions.assertThat(response).isEqualTo(POST_SONG_REST);
     }
     @Test(expected = SpotifyNotFoundException.class)
     public void updateSongException() throws SpotifyException { //PostSongRest
         when(songRepository.findById(anyLong())).thenReturn(Optional.empty());
-        PostSongRest response = songService.updateSong(SONG_ENTITY);
+        PostSongRest response = songService.updateSong(POST_SONG_REST);
 
     }
 

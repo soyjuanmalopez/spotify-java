@@ -19,7 +19,7 @@ public interface SongService {
 
     PostSongRest createSong(PostSongRest Song) throws SpotifyException;
 
-    PostSongRest updateSong(SongEntity SongDetails) throws SpotifyException;
+    PostSongRest updateSong(PostSongRest postSongRest) throws SpotifyException;
 
     SongRest updateArtistBySongId(Long songId, Long artistId) throws SpotifyException;
 

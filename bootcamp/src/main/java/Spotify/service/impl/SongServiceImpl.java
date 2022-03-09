@@ -50,7 +50,7 @@ public class SongServiceImpl implements SongService {
     @Transactional(readOnly = true)
     @Override
     public Page<SongRest> getAllSongs(final Pageable pageable) throws SpotifyException {
-		return songRepository.findAll(pageable).map(song -> songMapper.mapToRest(song));
+		return songRepository.findAll(pageable).map(songMapper::mapToRest);
     }
 
     @Transactional(readOnly = false)
@@ -79,19 +79,19 @@ public class SongServiceImpl implements SongService {
 
     @Transactional(readOnly = false)
     @Override
-    public PostSongRest updateSong(final SongEntity songEntity) throws SpotifyException {
-        SongEntity song = songRepository.findById(songEntity.getId())
+    public PostSongRest updateSong(final PostSongRest postSongRest) throws SpotifyException {
+
+        SongEntity song = songRepository.findById(postSongRest.getId())
                 .orElseThrow(() ->
                         new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
-
+        SongEntity songEntity = postSongMapper.mapToEntity(postSongRest);
         song.setTitle(songEntity.getTitle());
         song.setDuration(songEntity.getDuration());
         song.setReproductions(songEntity.getReproductions());
         song.setAlbum_ref(songEntity.getAlbum_ref());
 
-
 		songRepository.save(song);
-		return postSongMapper.mapToRest(song);
+		return postSongRest;
     }
 
     @Transactional(readOnly = false)

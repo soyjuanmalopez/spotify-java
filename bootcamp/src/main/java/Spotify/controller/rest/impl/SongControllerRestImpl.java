@@ -118,7 +118,7 @@ public class SongControllerRestImpl implements SongControllerRest {
     @PutMapping(value = RestConstantsUtils.RESOURCE_SONG)
     public SpotifyResponse<PostSongRest> updateSong(@RequestBody final PostSongRest songRest) throws SpotifyException {
 	return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-		CommonConstantsUtils.OK,songService.updateSong(postSongMapper.mapToEntity(songRest)));
+		CommonConstantsUtils.OK,songService.updateSong(songRest));
     }
 
     @Override
