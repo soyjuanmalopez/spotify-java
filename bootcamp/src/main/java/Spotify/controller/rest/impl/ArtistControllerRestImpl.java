@@ -122,7 +122,7 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
 
     })
-    public void deleteArtist(@PathVariable(value = RestConstantsUtils.ARTIST_ID) Long id) throws SpotifyException {
+    public void deleteArtist(@PathVariable(value = RestConstantsUtils.ARTIST_ID) final Long id) throws SpotifyException {
         artistService.deleteArtist(id);
     }
 
@@ -141,8 +141,8 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
     public SpotifyResponse<D4iPageRest<AlbumRest>> getAlbumsOfArtist(
             @RequestParam(defaultValue = CommonConstantsUtils.ZERO) final int page,
             @RequestParam(defaultValue = CommonConstantsUtils.TWENTY) final int size,
-            @Parameter(hidden = true) Pageable pageable, Long id) throws SpotifyException {
-        Page<AlbumRest> albumRestPage = artistService.getAlbumsOfArtist(pageable,id);
+            @Parameter(hidden = true) final Pageable pageable, final Long id) throws SpotifyException {
+        final Page<AlbumRest> albumRestPage = artistService.getAlbumsOfArtist(pageable,id);
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                 String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK,
