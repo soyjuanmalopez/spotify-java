@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AlbumControllerRestImpl implements AlbumControllerRest {
 
-    private AlbumService albumService;
+    private final AlbumService albumService;
 
     @Override
     @ResponseStatus(HttpStatus.OK)

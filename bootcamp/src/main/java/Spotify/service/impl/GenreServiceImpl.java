@@ -30,15 +30,15 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class GenreServiceImpl implements GenreService {
 
-    GenreRepository genreRepository;
+    private final GenreRepository genreRepository;
 
-    GenreMapper genreMapper;
+    private final GenreMapper genreMapper;
 
-    SongMapper songMapper;
+    private final SongMapper songMapper;
 
-    SongRepository songRepository;
+    private final SongRepository songRepository;
 
-    GenreSongMapper genreSongMapper;
+    private final GenreSongMapper genreSongMapper;
 
     @Transactional(readOnly = true)
     @Override
