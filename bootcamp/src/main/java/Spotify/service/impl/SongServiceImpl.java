@@ -32,19 +32,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SongServiceImpl implements SongService {
 
-    @Autowired
     private final SongRepository songRepository;
 
-    @Autowired
     private final ArtistRepository artistRepository;
 
-    @Autowired
     private final SongMapper songMapper;
 
-    @Autowired
     private final AlbumMapper albumMapper;
 
-    @Autowired
     private final PostSongMapper postSongMapper;
 
     @Transactional(readOnly = true)

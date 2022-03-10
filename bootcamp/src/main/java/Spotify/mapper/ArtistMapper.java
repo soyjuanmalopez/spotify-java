@@ -11,7 +11,7 @@ public interface ArtistMapper {
 
     ArtistMapper INSTANCE = Mappers.getMapper(ArtistMapper.class);
 
-    public ArtistEntity mapToEntity(ArtistRest rest);
+    ArtistEntity mapToEntity(ArtistRest rest);
 
-    public ArtistRest mapToRest(ArtistEntity entity);
+    ArtistRest mapToRest(ArtistEntity entity);
 }

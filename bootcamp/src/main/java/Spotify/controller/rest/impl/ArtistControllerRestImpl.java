@@ -29,13 +29,10 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Artist", description = "Artist controller")
 public class ArtistControllerRestImpl implements ArtistControllerRest {
 
-    @Autowired
     private final ArtistService artistService;
 
-    @Autowired
     private final ArtistMapper artistMapper;
 
-    @Autowired
     private final PostArtistMapper postArtistMapper;
 
     @Override

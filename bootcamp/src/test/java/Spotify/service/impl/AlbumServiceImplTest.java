@@ -57,7 +57,7 @@ public class AlbumServiceImplTest {
     public ArtistMapper artistMapper;
 
     @InjectMocks
-    public AlbumServiceImpl albumService = new AlbumServiceImpl();
+    public AlbumServiceImpl albumService;
 
 
     private final static AlbumEntity ALBUM_ENTITY = new AlbumEntity();

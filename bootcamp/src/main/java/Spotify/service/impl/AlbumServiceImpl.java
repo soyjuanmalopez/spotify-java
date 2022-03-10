@@ -18,6 +18,7 @@ import Spotify.persistence.repository.ArtistRepository;
 import Spotify.persistence.repository.SongRepository;
 import Spotify.service.AlbumService;
 import Spotify.util.constant.ExceptionConstantsUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -27,25 +28,20 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AlbumServiceImpl implements AlbumService {
 
-    @Autowired
-    private AlbumRepository albumRepository;
+    private final AlbumRepository albumRepository;
 
-    @Autowired
-    private SongRepository songRepository;
+    private final SongRepository songRepository;
 
-    @Autowired
-    private ArtistRepository artistRepository;
+    private final ArtistRepository artistRepository;
 
-    @Autowired
-    private AlbumMapper albumMapper;
+    private final AlbumMapper albumMapper;
 
-    @Autowired
-    private AlbumPostMapper albumPostMapper;
+    private final AlbumPostMapper albumPostMapper;
 
-    @Autowired
-    private SongMapper songMapper;
+    private final SongMapper songMapper;
 
 
     @Override

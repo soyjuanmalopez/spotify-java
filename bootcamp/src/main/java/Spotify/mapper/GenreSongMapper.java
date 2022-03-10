@@ -10,6 +10,6 @@ public interface GenreSongMapper {
 
     GenreSongMapper INSTANCE = Mappers.getMapper(GenreSongMapper.class);
 
-    public GenreEntity mapToEntity(GenreSongRest rest);
-    public GenreSongRest mapToRest(GenreEntity entity);
+    GenreEntity mapToEntity(GenreSongRest rest);
+    GenreSongRest mapToRest(GenreEntity entity);
 }
