@@ -130,6 +130,7 @@ public class SongServiceImplTest {
 
     @Test
     public void updateSong() throws SpotifyException { //PostSongRest
+        when(postSongMapper.mapToEntity(POST_SONG_REST)).thenReturn(SONG_ENTITY);
 		PostSongRest response = songService.updateSong(POST_SONG_REST);
 		Mockito.verify(songRepository, Mockito.times(1)).save(Mockito.any(SongEntity.class));
         Assertions.assertThat(response).isEqualTo(POST_SONG_REST);

@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
@@ -118,7 +119,7 @@ public class SongServiceImpl implements SongService {
         SongEntity song = songRepository.findById(songId).orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         List<ArtistEntity> artistToDelete= new ArrayList<>();
         song.getArtists().forEach(artist -> {
-            if (artist.getId() == artistId) {
+            if (Objects.equals(artist.getId(), artistId)) {
                 artistToDelete.add(artist);
             }
         });

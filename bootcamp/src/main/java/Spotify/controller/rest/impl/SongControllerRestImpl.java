@@ -4,8 +4,7 @@ import Spotify.controller.rest.SongControllerRest;
 import Spotify.controller.rest.model.*;
 import Spotify.controller.rest.model.restSongs.PostSongRest;
 import Spotify.exception.SpotifyException;
-import Spotify.mapper.PostSongMapper;
-import Spotify.mapper.SongMapper;
+
 import Spotify.service.SongService;
 import Spotify.util.constant.CommonConstantsUtils;
 import Spotify.util.constant.RestConstantsUtils;
@@ -31,9 +30,6 @@ public class SongControllerRestImpl implements SongControllerRest {
 
     @Autowired
     private final SongService songService;
-
-    @Autowired
-    private final PostSongMapper postSongMapper;
 
     @Override
     @ResponseStatus(HttpStatus.OK)
