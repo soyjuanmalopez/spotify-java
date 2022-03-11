@@ -58,11 +58,7 @@ public class AlbumControllerRestImplTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-    }
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
         SONG_REST_ALBUMS_LIST.clear();
 
         ALBUM_REST.setId(1L);
@@ -91,12 +87,9 @@ public class AlbumControllerRestImplTest {
 
         ALBUM_REST_LIST.add(ALBUM_REST);
 
-
         ALBUM_REST_PAGE = new PageImpl<>(ALBUM_REST_LIST);
         SONG_REST_PAGE = new PageImpl<>(SONG_REST_ALBUMS_LIST);
         ARTIST_REST_PAGE = new PageImpl<>(ARTIST_REST_ALBUM_LIST);
-
-
     }
 
     @Test

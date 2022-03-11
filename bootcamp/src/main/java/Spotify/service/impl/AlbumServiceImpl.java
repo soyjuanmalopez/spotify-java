@@ -41,8 +41,6 @@ public class AlbumServiceImpl implements AlbumService {
 
     private final AlbumPostMapper albumPostMapper;
 
-    private final SongMapper songMapper;
-
 
     @Override
     public Page<AlbumRest> getAllAlbums(Pageable pageable) throws SpotifyException {
