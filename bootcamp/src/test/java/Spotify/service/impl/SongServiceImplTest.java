@@ -8,6 +8,7 @@ import Spotify.exception.SpotifyNotFoundException;
 import Spotify.mapper.AlbumMapper;
 import Spotify.mapper.PostSongMapper;
 import Spotify.mapper.SongMapper;
+import Spotify.persistence.entity.AlbumEntity;
 import Spotify.persistence.entity.ArtistEntity;
 import Spotify.persistence.entity.SongEntity;
 
@@ -30,6 +31,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.*;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -74,7 +76,7 @@ public class SongServiceImplTest {
 		SONG_ENTITY.setId(ID);
 		SONG_REST.setId(ID);
         ARTIST_ENTITY.setId(ID);
-
+        POST_SONG_REST.setId(ID);
 
 
 		Mockito.when(songRepository.findById(anyLong())).thenReturn(Optional.of(SONG_ENTITY));
@@ -130,10 +132,10 @@ public class SongServiceImplTest {
 
     @Test
     public void updateSong() throws SpotifyException { //PostSongRest
-        when(postSongMapper.mapToEntity(POST_SONG_REST)).thenReturn(SONG_ENTITY);
-		PostSongRest response = songService.updateSong(POST_SONG_REST);
-		Mockito.verify(songRepository, Mockito.times(1)).save(Mockito.any(SongEntity.class));
-        Assertions.assertThat(response).isEqualTo(POST_SONG_REST);
+        when(songRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(SONG_ENTITY));
+        when(postSongMapper.mapToEntity(Mockito.any(PostSongRest.class))).thenReturn(SONG_ENTITY);
+        when(postSongMapper.mapToRest(Mockito.any(SongEntity.class))).thenReturn(POST_SONG_REST);
+        assertEquals(POST_SONG_REST, songService.updateSong(POST_SONG_REST));
     }
     @Test(expected = SpotifyNotFoundException.class)
     public void updateSongException() throws SpotifyException { //PostSongRest

@@ -92,7 +92,7 @@ public class SongServiceImpl implements SongService {
         song.setAlbum_ref(songEntity.getAlbum_ref());
 
 		songRepository.save(song);
-		return postSongRest;
+		return postSongMapper.mapToRest(song);
     }
 
     @Transactional(readOnly = false)
