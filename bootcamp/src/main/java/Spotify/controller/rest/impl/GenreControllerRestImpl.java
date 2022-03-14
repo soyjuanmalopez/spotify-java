@@ -30,11 +30,9 @@ import java.util.List;
 @Tag(name = "Genre", description = "Genre controller")
 public class GenreControllerRestImpl implements GenreControllerRest {
 
-    @Autowired
-    GenreService genreService;
+    private final GenreService genreService;
 
-    @Autowired
-    GenreMapper genreMapper;
+    private final GenreMapper genreMapper;
 
     @Override
     @ResponseStatus(HttpStatus.OK)

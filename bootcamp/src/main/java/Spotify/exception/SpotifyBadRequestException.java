@@ -6,9 +6,8 @@ import org.springframework.http.HttpStatus;
 
 import Spotify.exception.error.ErrorDto;
 
-import lombok.Getter;
 
-@Getter
+
 public class SpotifyBadRequestException extends SpotifyException {
 
 	private static final long serialVersionUID = 105837498733124083L;

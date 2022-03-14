@@ -8,8 +8,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface PostSongMapper {
 
-    PostSongMapper INSTANCE = Mappers.getMapper(PostSongMapper.class);
-
     SongEntity mapToEntity(PostSongRest rest);
 
     PostSongRest mapToRest(SongEntity entity);

@@ -9,8 +9,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface AlbumPostMapper {
 
-    AlbumPostMapper INSTANCE = Mappers.getMapper(AlbumPostMapper.class);
-
     AlbumEntity mapToEntity(AlbumRestPost rest);
     AlbumRestPost mapToRest(AlbumEntity entity);
 }

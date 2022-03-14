@@ -28,8 +28,9 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Song", description = "Song controller")
 public class SongControllerRestImpl implements SongControllerRest {
 
-    @Autowired
     private final SongService songService;
+
+    private final PostSongMapper postSongMapper;
 
     @Override
     @ResponseStatus(HttpStatus.OK)

@@ -8,8 +8,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface GenreMapper {
 
-    GenreMapper INSTANCE = Mappers.getMapper(GenreMapper.class);
-
-    public GenreEntity mapToEntity(GenreRest rest);
-    public GenreRest mapToRest(GenreEntity entity);
+    GenreEntity mapToEntity(GenreRest rest);
+    GenreRest mapToRest(GenreEntity entity);
 }

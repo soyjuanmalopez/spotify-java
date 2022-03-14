@@ -27,12 +27,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ArtistServiceImpl implements ArtistService {
 
-    @Autowired
     private final ArtistRepository artistRepository;
 
-    @Autowired
     private final ArtistMapper artistMapper;
-    @Autowired
+
     private final PostArtistMapper postartistMapper;
 
     @Transactional(readOnly = true)

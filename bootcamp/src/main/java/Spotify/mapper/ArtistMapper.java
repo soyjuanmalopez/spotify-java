@@ -9,9 +9,7 @@ import org.mapstruct.factory.Mappers;
 
 public interface ArtistMapper {
 
-    ArtistMapper INSTANCE = Mappers.getMapper(ArtistMapper.class);
+    ArtistEntity mapToEntity(ArtistRest rest);
 
-    public ArtistEntity mapToEntity(ArtistRest rest);
-
-    public ArtistRest mapToRest(ArtistEntity entity);
+    ArtistRest mapToRest(ArtistEntity entity);
 }
