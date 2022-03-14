@@ -11,8 +11,6 @@ import java.util.*;
 
 import Spotify.controller.rest.model.*;
 import Spotify.controller.rest.model.restSongs.PostSongRest;
-import Spotify.mapper.PostSongMapper;
-import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.ArtistEntity;
 import Spotify.persistence.repository.ArtistRepository;
 import Spotify.persistence.repository.SongRepository;
@@ -45,11 +43,6 @@ public class SongControllerRestImplTest {
 	static final AlbumRest ALBUM_REST = new AlbumRest();
 	static final ArtistEntity ARTIST_ENTITY = new ArtistEntity();
 
-	@Mock
-	SongMapper songMapper;
-
-	@Mock
-	PostSongMapper postSongMapper;
 
 	@Mock
 	private SongRepository songRepository;;
@@ -76,11 +69,6 @@ public class SongControllerRestImplTest {
 		ARTIST_ENTITY.setId(ID);
 
 		Mockito.when(songRepository.findById(anyLong())).thenReturn(Optional.of(SONG_ENTITY));
-		Mockito.when(songMapper.mapToRest(any(SongEntity.class))).thenReturn(SONG_REST);
-		Mockito.when(songMapper.mapToEntity(any(SongRest.class))).thenReturn(SONG_ENTITY);
-		Mockito.when(postSongMapper.mapToRest(any(SongEntity.class))).thenReturn(POST_SONG_REST);
-		Mockito.when(postSongMapper.mapToEntity(any(PostSongRest.class))).thenReturn(SONG_ENTITY);
-
 	}
 
     @Test

@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
@@ -45,7 +46,7 @@ public class SongServiceImpl implements SongService {
     @Transactional(readOnly = true)
     @Override
     public Page<SongRest> getAllSongs(final Pageable pageable) throws SpotifyException {
-		return songRepository.findAll(pageable).map(song -> songMapper.mapToRest(song));
+		return songRepository.findAll(pageable).map(songMapper::mapToRest);
     }
 
     @Transactional(readOnly = false)
@@ -74,16 +75,16 @@ public class SongServiceImpl implements SongService {
 
     @Transactional(readOnly = false)
     @Override
-    public PostSongRest updateSong(final SongEntity songEntity) throws SpotifyException {
-        SongEntity song = songRepository.findById(songEntity.getId())
+    public PostSongRest updateSong(final PostSongRest postSongRest) throws SpotifyException {
+
+        SongEntity song = songRepository.findById(postSongRest.getId())
                 .orElseThrow(() ->
                         new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
-
+        SongEntity songEntity = postSongMapper.mapToEntity(postSongRest);
         song.setTitle(songEntity.getTitle());
         song.setDuration(songEntity.getDuration());
         song.setReproductions(songEntity.getReproductions());
         song.setAlbum_ref(songEntity.getAlbum_ref());
-
 
 		songRepository.save(song);
 		return postSongMapper.mapToRest(song);
@@ -113,7 +114,7 @@ public class SongServiceImpl implements SongService {
         SongEntity song = songRepository.findById(songId).orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         List<ArtistEntity> artistToDelete= new ArrayList<>();
         song.getArtists().forEach(artist -> {
-            if (artist.getId() == artistId) {
+            if (Objects.equals(artist.getId(), artistId)) {
                 artistToDelete.add(artist);
             }
         });

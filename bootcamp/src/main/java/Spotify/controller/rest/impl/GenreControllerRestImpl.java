@@ -86,7 +86,7 @@ public class GenreControllerRestImpl implements GenreControllerRest {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
     })
     @GetMapping(value = RestConstantsUtils.RESOURCE_GENRE + RestConstantsUtils.RESOURCE_GENREID + RestConstantsUtils.RESOURCE_SONG)
-    public SpotifyResponse<List<SongRest>> getSongByGenreId(Long genreId) throws SpotifyException {
+    public SpotifyResponse<List<SongRest>> getSongByGenreId(final Long genreId) throws SpotifyException {
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK,(genreService.getSongsByGenreId(genreId)));
     }
@@ -116,9 +116,9 @@ public class GenreControllerRestImpl implements GenreControllerRest {
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<GenreRest> updateGenre(@RequestBody GenreRest genre) throws SpotifyException {
+    public SpotifyResponse<GenreRest> updateGenre(@RequestBody final GenreRest genre) throws SpotifyException {
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-                CommonConstantsUtils.OK,genreService.updateGenre(genreMapper.mapToEntity(genre)));
+                CommonConstantsUtils.OK,genreService.updateGenre(genre));
     }
 
     @Override
@@ -131,7 +131,7 @@ public class GenreControllerRestImpl implements GenreControllerRest {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
     })
     @PutMapping(value = RestConstantsUtils.RESOURCE_GENRE+RestConstantsUtils.RESOURCE_GENREID+RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.RESOURCE_SONGID)
-    public SpotifyResponse<GenreSongRest> updateSongByGenreId(@RequestParam Long genreId, @RequestParam Long songId) throws SpotifyException {
+    public SpotifyResponse<GenreSongRest> updateSongByGenreId(@RequestParam final Long genreId, @RequestParam final Long songId) throws SpotifyException {
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK,genreService.updateSongByGenreId(genreId,songId));
     }

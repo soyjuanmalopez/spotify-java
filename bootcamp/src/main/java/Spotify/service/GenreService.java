@@ -19,7 +19,7 @@ public interface GenreService {
 
     GenreRest createGenre(GenreRest genre) throws SpotifyException;
 
-    GenreRest updateGenre(GenreEntity genre) throws SpotifyException;
+    GenreRest updateGenre(GenreRest genre) throws SpotifyException;
 
     GenreSongRest updateSongByGenreId(Long genreId, Long songId) throws SpotifyException;
 

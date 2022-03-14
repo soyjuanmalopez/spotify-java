@@ -72,7 +72,7 @@ public class GenreServiceImpl implements GenreService {
 
     @Transactional(readOnly = false)
     @Override
-    public GenreRest updateGenre(GenreEntity genre) throws SpotifyException {
+    public GenreRest updateGenre(GenreRest genre) throws SpotifyException {
         GenreEntity genreEntity = genreRepository.findById(genre.getId())
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         genreEntity.setName(genre.getName());

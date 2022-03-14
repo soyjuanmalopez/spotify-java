@@ -4,9 +4,7 @@ import Spotify.controller.rest.ArtistControllerRest;
 import Spotify.controller.rest.model.*;
 import Spotify.controller.rest.model.restArtists.PostArtistRest;
 import Spotify.exception.SpotifyException;
-import Spotify.mapper.ArtistMapper;
 import Spotify.mapper.PostArtistMapper;
-import Spotify.persistence.entity.ArtistEntity;
 import Spotify.service.ArtistService;
 import Spotify.util.constant.CommonConstantsUtils;
 import Spotify.util.constant.RestConstantsUtils;
@@ -84,10 +82,9 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
     public SpotifyResponse<PostArtistRest> createArtist(@RequestBody final PostArtistRest artist) throws SpotifyException {
-        final ArtistEntity artistEntity = postArtistMapper.mapToEntity(artist);
+        final PostArtistRest postArtistRest = artistService.createArtist(artist);
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-                CommonConstantsUtils.OK,
-                artistService.createArtist(artistEntity));
+                CommonConstantsUtils.OK, postArtistRest);
     }
 
     @Override
@@ -102,10 +99,8 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
 
     })
     public SpotifyResponse<PostArtistRest> updateArtist(@RequestBody final PostArtistRest artist) throws SpotifyException {
-        final ArtistEntity artistEntity = postArtistMapper.mapToEntity(artist);
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-                CommonConstantsUtils.OK,
-                artistService.updateArtist(artistEntity));
+                CommonConstantsUtils.OK,artistService.updateArtist(artist));
     }
 
     @Override
@@ -119,7 +114,7 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
 
     })
-    public void deleteArtist(@PathVariable(value = RestConstantsUtils.ARTIST_ID) Long id) throws SpotifyException {
+    public void deleteArtist(@PathVariable(value = RestConstantsUtils.ARTIST_ID) final Long id) throws SpotifyException {
         artistService.deleteArtist(id);
     }
 
@@ -138,8 +133,8 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
     public SpotifyResponse<D4iPageRest<AlbumRest>> getAlbumsOfArtist(
             @RequestParam(defaultValue = CommonConstantsUtils.ZERO) final int page,
             @RequestParam(defaultValue = CommonConstantsUtils.TWENTY) final int size,
-            @Parameter(hidden = true) Pageable pageable, Long id) throws SpotifyException {
-        Page<AlbumRest> albumRestPage = artistService.getAlbumsOfArtist(pageable,id);
+            @Parameter(hidden = true) final Pageable pageable, final Long id) throws SpotifyException {
+        final Page<AlbumRest> albumRestPage = artistService.getAlbumsOfArtist(pageable,id);
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                 String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK,
