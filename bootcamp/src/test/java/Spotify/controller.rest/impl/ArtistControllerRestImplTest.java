@@ -86,7 +86,7 @@ public class ArtistControllerRestImplTest {
 
     @Test
     public void createArtistTest() throws SpotifyException{
-        Mockito.when(artistService.createArtist(any(ArtistEntity.class))).thenReturn(POST_ARTIST_REST);
+        Mockito.when(artistService.createArtist(any(PostArtistRest.class))).thenReturn(POST_ARTIST_REST);
         Mockito.when(postartistMapper.mapToEntity(any(PostArtistRest.class))).thenReturn(ARTIST_ENTITY);
 
         SpotifyResponse<PostArtistRest> response = artistControllerRest.createArtist(POST_ARTIST_REST);
@@ -104,7 +104,7 @@ public class ArtistControllerRestImplTest {
         artistEntity2.setId(2L);
 
         Mockito.when(postartistMapper.mapToEntity(any(PostArtistRest.class))).thenReturn(artistEntity2);
-        Mockito.when(artistService.updateArtist(any(ArtistEntity.class))).thenReturn(POST_ARTIST_REST);
+        Mockito.when(artistService.updateArtist(any(PostArtistRest.class))).thenReturn(POST_ARTIST_REST);
 
         SpotifyResponse<PostArtistRest> response = artistControllerRest.updateArtist(POST_ARTIST_REST);
 

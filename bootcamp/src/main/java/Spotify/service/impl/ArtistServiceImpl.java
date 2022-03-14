@@ -9,6 +9,7 @@ import Spotify.exception.error.ErrorDto;
 import Spotify.mapper.ArtistMapper;
 import Spotify.mapper.PostArtistMapper;
 import Spotify.persistence.entity.ArtistEntity;
+
 import Spotify.persistence.repository.ArtistRepository;
 import Spotify.service.ArtistService;
 import Spotify.util.constant.ExceptionConstantsUtils;
@@ -37,7 +38,7 @@ public class ArtistServiceImpl implements ArtistService {
     @Transactional(readOnly = true)
     @Override
     public Page<ArtistRest> getAllArtists(Pageable pageable) throws SpotifyException {
-        return artistRepository.findAll(pageable).map(artist -> artistMapper.mapToRest(artist));
+        return artistRepository.findAll(pageable).map(artistMapper::mapToRest);
     }
 
     @Override
@@ -49,19 +50,20 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public PostArtistRest createArtist(final ArtistEntity artist) throws SpotifyException {
-        artistRepository.save(artist);
-        return postartistMapper.mapToRest(artist);
+    public PostArtistRest createArtist(final PostArtistRest artist) throws SpotifyException {
+        ArtistEntity artistEntity =  postartistMapper.mapToEntity(artist);
+        artistRepository.save(artistEntity);
+        return artist;
     }
 
     @Override
-    public PostArtistRest updateArtist(ArtistEntity artistEntity) throws SpotifyException {
-        ArtistEntity artist = artistRepository.findById(artistEntity.getId())
+    public PostArtistRest updateArtist(PostArtistRest postArtistRest) throws SpotifyException {
+        ArtistEntity artist = artistRepository.findById(postArtistRest.getId())
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
-        artist.setName(artistEntity.getName());
-        artist.setDescription(artistEntity.getDescription());
+        artist.setName(postArtistRest.getName());
+        artist.setDescription(postArtistRest.getDescription());
         artistRepository.save(artist);
-        return postartistMapper.mapToRest(artistEntity);
+        return postartistMapper.mapToRest(artist);
     }
 
     @Override

@@ -4,9 +4,7 @@ import Spotify.controller.rest.ArtistControllerRest;
 import Spotify.controller.rest.model.*;
 import Spotify.controller.rest.model.restArtists.PostArtistRest;
 import Spotify.exception.SpotifyException;
-import Spotify.mapper.ArtistMapper;
 import Spotify.mapper.PostArtistMapper;
-import Spotify.persistence.entity.ArtistEntity;
 import Spotify.service.ArtistService;
 import Spotify.util.constant.CommonConstantsUtils;
 import Spotify.util.constant.RestConstantsUtils;
@@ -31,9 +29,6 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
 
     @Autowired
     private final ArtistService artistService;
-
-    @Autowired
-    private final ArtistMapper artistMapper;
 
     @Autowired
     private final PostArtistMapper postArtistMapper;
@@ -87,10 +82,9 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
     public SpotifyResponse<PostArtistRest> createArtist(@RequestBody final PostArtistRest artist) throws SpotifyException {
-        final ArtistEntity artistEntity = postArtistMapper.mapToEntity(artist);
+        final PostArtistRest postArtistRest = artistService.createArtist(artist);
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-                CommonConstantsUtils.OK,
-                artistService.createArtist(artistEntity));
+                CommonConstantsUtils.OK, postArtistRest);
     }
 
     @Override
@@ -105,10 +99,8 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
 
     })
     public SpotifyResponse<PostArtistRest> updateArtist(@RequestBody final PostArtistRest artist) throws SpotifyException {
-        final ArtistEntity artistEntity = postArtistMapper.mapToEntity(artist);
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-                CommonConstantsUtils.OK,
-                artistService.updateArtist(artistEntity));
+                CommonConstantsUtils.OK,artistService.updateArtist(artist));
     }
 
     @Override
