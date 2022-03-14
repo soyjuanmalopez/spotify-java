@@ -120,7 +120,7 @@ public class GenreControllerRestImpl implements GenreControllerRest {
     })
     public SpotifyResponse<GenreRest> updateGenre(@RequestBody final GenreRest genre) throws SpotifyException {
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-                CommonConstantsUtils.OK,genreService.updateGenre(genreMapper.mapToEntity(genre)));
+                CommonConstantsUtils.OK,genreService.updateGenre(genre));
     }
 
     @Override
