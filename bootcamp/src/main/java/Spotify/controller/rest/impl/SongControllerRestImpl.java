@@ -5,6 +5,7 @@ import Spotify.controller.rest.model.*;
 import Spotify.controller.rest.model.restSongs.PostSongRest;
 import Spotify.exception.SpotifyException;
 
+import Spotify.mapper.PostSongMapper;
 import Spotify.service.SongService;
 import Spotify.util.constant.CommonConstantsUtils;
 import Spotify.util.constant.RestConstantsUtils;
@@ -29,8 +30,6 @@ import org.springframework.web.bind.annotation.*;
 public class SongControllerRestImpl implements SongControllerRest {
 
     private final SongService songService;
-
-    private final PostSongMapper postSongMapper;
 
     @Override
     @ResponseStatus(HttpStatus.OK)

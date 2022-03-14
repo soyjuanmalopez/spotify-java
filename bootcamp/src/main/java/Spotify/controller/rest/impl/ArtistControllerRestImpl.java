@@ -29,10 +29,6 @@ public class ArtistControllerRestImpl implements ArtistControllerRest {
 
     private final ArtistService artistService;
 
-    private final ArtistMapper artistMapper;
-
-    private final PostArtistMapper postArtistMapper;
-
     @Override
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = RestConstantsUtils.RESOURCE_ARTISTS, produces = MediaType.APPLICATION_JSON_VALUE)

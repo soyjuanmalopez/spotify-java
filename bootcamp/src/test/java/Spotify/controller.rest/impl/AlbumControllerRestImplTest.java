@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-/*@RunWith(MockitoJUnitRunner.class)*/
 public class AlbumControllerRestImplTest {
 
     @Mock
