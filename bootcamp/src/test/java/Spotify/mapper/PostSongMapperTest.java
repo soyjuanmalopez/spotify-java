@@ -44,7 +44,7 @@ public class PostSongMapperTest {
         when(song.getTitle()).thenReturn(title);
         when(song.getReproductions()).thenReturn(reproductions);
         when(song.getDuration()).thenReturn(duration);
-        when(song.getAlbum_ref()).thenReturn(albumRest);
+        when(song.getAlbum()).thenReturn(albumRest);
 
 
         SongEntity response = postSongMapperImpl.mapToEntity(song);
@@ -53,14 +53,14 @@ public class PostSongMapperTest {
         assertThat(response.getTitle()).isEqualTo(title);
         assertThat(response.getDuration()).isEqualTo(duration);
         assertThat(response.getReproductions()).isEqualTo(reproductions);
-        assertThat(response.getAlbum_ref()).usingRecursiveComparison().isEqualTo(albumEntity);
+        assertThat(response.getAlbum()).usingRecursiveComparison().isEqualTo(albumEntity);
     }
     @Test
     public void mapToEntityAlbumNull() {
         PostSongRest song = Mockito.mock(PostSongRest.class);
-        when(song.getAlbum_ref()).thenReturn(null);
+        when(song.getAlbum()).thenReturn(null);
         SongEntity response = postSongMapperImpl.mapToEntity(song);
-        assertThat(response.getAlbum_ref()).isEqualTo(null);
+        assertThat(response.getAlbum()).isEqualTo(null);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class PostSongMapperTest {
         when(song.getTitle()).thenReturn(title);
         when(song.getReproductions()).thenReturn(reproductions);
         when(song.getDuration()).thenReturn(duration);
-        when(song.getAlbum_ref()).thenReturn(albumEntity);
+        when(song.getAlbum()).thenReturn(albumEntity);
 
         PostSongRest response = postSongMapperImpl.mapToRest(song);
 
@@ -85,15 +85,15 @@ public class PostSongMapperTest {
         assertThat(response.getTitle()).isEqualTo(title);
         assertThat(response.getDuration()).isEqualTo(duration);
         assertThat(response.getReproductions()).isEqualTo(reproductions);
-        assertThat(response.getAlbum_ref()).usingRecursiveComparison().isEqualTo(albumRest);
+        assertThat(response.getAlbum()).usingRecursiveComparison().isEqualTo(albumRest);
     }
 
     @Test
     public void mapToRestAlbumNull() {
         SongEntity song = Mockito.mock(SongEntity.class);
-        when(song.getAlbum_ref()).thenReturn(null);
+        when(song.getAlbum()).thenReturn(null);
         PostSongRest response = postSongMapperImpl.mapToRest(song);
-        assertThat(response.getAlbum_ref()).isEqualTo(null);
+        assertThat(response.getAlbum()).isEqualTo(null);
     }
     @Test
     public void mapToRestNull() {

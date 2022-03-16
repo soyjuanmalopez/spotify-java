@@ -51,8 +51,8 @@ public class GenreSongMapperTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        songEntity.setAlbum_ref(albumEntity);
-        songRest.setAlbum_ref(albumRest);
+        songEntity.setAlbum(albumEntity);
+        songRest.setAlbum(albumRest);
         songEntitySet.add(songEntity);
         postSongRestSet.add(songRest);
         postSongRestSet.add(null);

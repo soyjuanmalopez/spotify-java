@@ -55,7 +55,7 @@ public class AlbumEntityMapperTest {
         SONG_ENTITY.setId(1L);
         SONG_ENTITY.setTitle("TestingSong");
         SONG_ENTITY.setDuration(1.4);
-        SONG_ENTITY.setAlbum_ref(ALBUM_ENTITY);
+        SONG_ENTITY.setAlbum(ALBUM_ENTITY);
 
         SONG_REST_ALBUM.setId(SONG_ENTITY.getId());
         SONG_REST_ALBUM.setTitle(SONG_ENTITY.getTitle());

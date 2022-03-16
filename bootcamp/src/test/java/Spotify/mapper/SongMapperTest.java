@@ -1,6 +1,5 @@
 package Spotify.mapper;
 
-import Spotify.controller.rest.model.AlbumRest;
 import Spotify.controller.rest.model.ArtistRest;
 import Spotify.controller.rest.model.GenreRest;
 import Spotify.controller.rest.model.SongRest;
@@ -69,7 +68,7 @@ public class SongMapperTest {
         when(song.getTitle()).thenReturn(title);
         when(song.getReproductions()).thenReturn(reproductions);
         when(song.getDuration()).thenReturn(duration);
-        when(song.getAlbum_ref()).thenReturn(albumRest);
+        when(song.getAlbum()).thenReturn(albumRest);
         when(song.getGenres()).thenReturn(genreRestSet);
         when(song.getArtists()).thenReturn(artistRestSet);
 
@@ -79,7 +78,7 @@ public class SongMapperTest {
         assertThat(response.getTitle()).isEqualTo(title);
         assertThat(response.getDuration()).isEqualTo(duration);
         assertThat(response.getReproductions()).isEqualTo(reproductions);
-        assertThat(response.getAlbum_ref()).usingRecursiveComparison().isEqualTo(albumEntity);
+        assertThat(response.getAlbum()).usingRecursiveComparison().isEqualTo(albumEntity);
         assertThat(response.getGenres()).usingRecursiveComparison().isEqualTo(genreEntitySet);
         assertThat(response.getArtists()).usingRecursiveComparison().isEqualTo(artistEntityList);
 
@@ -89,13 +88,13 @@ public class SongMapperTest {
     @Test
     public void mapToEntityListSetAndAlbumNull() {
         SongRest song = Mockito.mock(SongRest.class);
-        when(song.getAlbum_ref()).thenReturn(null);
+        when(song.getAlbum()).thenReturn(null);
         when(song.getGenres()).thenReturn(null);
         when(song.getArtists()).thenReturn(null);
 
         SongEntity response = songMapperImpl.mapToEntity(song);
 
-        assertThat(response.getAlbum_ref()).isEqualTo(null);
+        assertThat(response.getAlbum()).isEqualTo(null);
         assertThat(response.getGenres()).isEqualTo(null);
         assertThat(response.getArtists()).isEqualTo(null);
 
@@ -115,7 +114,7 @@ public class SongMapperTest {
         when(song.getTitle()).thenReturn(title);
         when(song.getReproductions()).thenReturn(reproductions);
         when(song.getDuration()).thenReturn(duration);
-        when(song.getAlbum_ref()).thenReturn(albumEntity);
+        when(song.getAlbum()).thenReturn(albumEntity);
         when(song.getGenres()).thenReturn(genreEntitySet);
         when(song.getArtists()).thenReturn(artistEntityList);
 
@@ -126,7 +125,7 @@ public class SongMapperTest {
         assertThat(response.getTitle()).isEqualTo(title);
         assertThat(response.getDuration()).isEqualTo(duration);
         assertThat(response.getReproductions()).isEqualTo(reproductions);
-        assertThat(response.getAlbum_ref()).usingRecursiveComparison().isEqualTo(albumRest);
+        assertThat(response.getAlbum()).usingRecursiveComparison().isEqualTo(albumRest);
         assertThat(response.getGenres()).usingRecursiveComparison().isEqualTo(genreRestSet);
         assertThat(response.getArtists()).usingRecursiveComparison().isEqualTo(artistRestSet);
 
@@ -136,13 +135,13 @@ public class SongMapperTest {
         SongEntity song = Mockito.mock(SongEntity.class);
 
 
-        when(song.getAlbum_ref()).thenReturn(null);
+        when(song.getAlbum()).thenReturn(null);
         when(song.getGenres()).thenReturn(null);
         when(song.getArtists()).thenReturn(null);
 
         SongRest response = songMapperImpl.mapToRest(song);
 
-        assertThat(response.getAlbum_ref()).isEqualTo(null);
+        assertThat(response.getAlbum()).isEqualTo(null);
         assertThat(response.getGenres()).isEqualTo(null);
         assertThat(response.getArtists()).isEqualTo(null);
 

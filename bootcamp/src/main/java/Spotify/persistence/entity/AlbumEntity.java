@@ -42,7 +42,7 @@ public class AlbumEntity implements Serializable {
     )
     private List<ArtistEntity> artists;
 
-    @OneToMany(mappedBy = "album_ref", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<SongEntity> songs;
 
 }

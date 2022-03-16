@@ -32,7 +32,7 @@ public class SongEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "album_ref")
-    private AlbumEntity album_ref;
+    private AlbumEntity album;
 
 
     @Column(name = "reproductions")

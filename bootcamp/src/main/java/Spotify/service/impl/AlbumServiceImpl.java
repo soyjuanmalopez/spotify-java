@@ -107,7 +107,7 @@ public class AlbumServiceImpl implements AlbumService {
         SongEntity songEntity = songRepository.findById(songId)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         album.getSongs().add(songEntity);
-        songEntity.setAlbum_ref(album);
+        songEntity.setAlbum(album);
         albumRepository.save(album);
         songRepository.save(songEntity);
         return albumMapper.mapToRest(album);
@@ -137,7 +137,7 @@ public class AlbumServiceImpl implements AlbumService {
                 album.getSongs().remove(i);
             }
         }
-        songEntity.setAlbum_ref(null);
+        songEntity.setAlbum(null);
         albumRepository.save(album);
         songRepository.save(songEntity);
         return albumMapper.mapToRest(album);
