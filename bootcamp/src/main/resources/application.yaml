@@ -50,8 +50,8 @@ management:
 Spotify:
   resource:
     version: /v1
-    endpoint1: {}
-    endpoint2: {}
+    endpoint1: { }
+    endpoint2: { }
 
   error:
     codes:
