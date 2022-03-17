@@ -50,13 +50,27 @@ public class AlbumServiceImpl implements AlbumService {
     public AlbumRest getAlbumById(Long id) throws SpotifyException {
         AlbumEntity album = albumRepository.findById(id)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        spotifyBadRequestSongsOrArtistEmpty(album);        
         return albumMapper.mapToRest(album);
+    }
+
+    public void spotifyBadRequestSongsOrArtistEmpty(AlbumEntity album) throws SpotifyException {
+        if (album.getArtists().isEmpty() && album.getSongs().isEmpty()) {
+            throw new SpotifyException(ExceptionConstantsUtils.BAD_REQUEST_INT,"Songs and Artist list are empty",new ErrorDto(ExceptionConstantsUtils.BAD_REQUEST_GENERIC, "Songs and Artist list are empty"));
+        }
+        if (album.getArtists().isEmpty()) {
+            throw new SpotifyException(ExceptionConstantsUtils.BAD_REQUEST_INT,"Artist list is empty",new ErrorDto(ExceptionConstantsUtils.BAD_REQUEST_GENERIC));
+        }
+        if (album.getSongs().isEmpty()) {
+            throw new SpotifyException(ExceptionConstantsUtils.BAD_REQUEST_INT,"Songs list is empty",new ErrorDto(ExceptionConstantsUtils.BAD_REQUEST_GENERIC));
+        }
     }
 
     @Override
     public Page<SongRestAlbum> getSongsOfAlbum(Pageable pageable, Long id) throws SpotifyException {
         AlbumEntity album = albumRepository.findById(id)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        spotifyBadRequestSongsOrArtistEmpty(album);        
         List<SongRestAlbum> songRest = albumMapper.mapToRest(album).getSongs();
         return new PageImpl(songRest, pageable, songRest.size());
     }
@@ -65,6 +79,7 @@ public class AlbumServiceImpl implements AlbumService {
     public Page<ArtistRestAlbum> getArtistsOfAlbum(Pageable pageable, Long id) throws SpotifyException {
         AlbumEntity album = albumRepository.findById(id)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        spotifyBadRequestSongsOrArtistEmpty(album);        
         List<ArtistRestAlbum> artistRest = albumMapper.mapToRest(album).getArtists();
         return new PageImpl(artistRest, pageable, artistRest.size());
     }
