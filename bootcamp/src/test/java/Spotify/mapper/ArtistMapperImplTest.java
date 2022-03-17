@@ -34,13 +34,13 @@ public class ArtistMapperImplTest {
         String description = "Is an American singer and songwriter. She was originally a member of the girl group Choice.";
         List<AlbumRest> albumRestList = new ArrayList<>();
         List<AlbumEntity> albumEntityList = new ArrayList<>();
-        ArtistRest artistRest = Mockito.mock(ArtistRest.class);
-        ArtistRest artistRest2 = null;
 
-        Mockito.when(artistRest.getId()).thenReturn(id);
-        Mockito.when(artistRest.getName()).thenReturn(name);
-        Mockito.when(artistRest.getDescription()).thenReturn(description);
-        Mockito.when(artistRest.getAlbums()).thenReturn(albumRestList);
+        ArtistRest artistRest = new ArtistRest();
+        ArtistRest artistRest2 = null;
+        artistRest.setId(id);
+        artistRest.setName(name);
+        artistRest.setDescription(description);
+        artistRest.setAlbums(albumRestList);
 
         ArtistEntity artistEntityResult = artistMapperImpl.mapToEntity(artistRest);
         ArtistEntity artistEntityResultNull = artistMapperImpl.mapToEntity(artistRest2);
@@ -59,13 +59,12 @@ public class ArtistMapperImplTest {
         String description = "Was a Jamaican singer-songwriter. One of the innovators of rocksteady, he was given the informal title \"Godfather of Rocksteady\".";
         List<AlbumRest> albumRestList = new ArrayList<>();
         List<AlbumEntity> albumEntityList = new ArrayList<>();
-        ArtistEntity artistEntity = Mockito.mock(ArtistEntity.class);
+        ArtistEntity artistEntity = new ArtistEntity();
         ArtistEntity artistEntity2 = null;
-
-        Mockito.when(artistEntity.getId()).thenReturn(id);
-        Mockito.when(artistEntity.getName()).thenReturn(name);
-        Mockito.when(artistEntity.getDescription()).thenReturn(description);
-        Mockito.when(artistEntity.getAlbums()).thenReturn(albumEntityList);
+        artistEntity.setId(id);
+        artistEntity.setName(name);
+        artistEntity.setDescription(description);
+        artistEntity.setAlbums(albumEntityList);
 
         ArtistRest artistRestResult = artistMapperImpl.mapToRest(artistEntity);
         ArtistRest artistRestResultNull = artistMapperImpl.mapToRest(artistEntity2);

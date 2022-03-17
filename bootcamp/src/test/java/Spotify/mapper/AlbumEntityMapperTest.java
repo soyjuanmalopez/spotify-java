@@ -47,11 +47,6 @@ public class AlbumEntityMapperTest {
     public void setUp(){
         SONG_ENTITY_LIST.clear();
 
-        /*ALBUM_ENTITY.setId(1L);
-        ALBUM_ENTITY.setTitle("TestingAlbum");
-        ALBUM_ENTITY.setDuration(1.1);
-        ALBUM_ENTITY.setYearRelease(2021);*/
-
         SONG_ENTITY.setId(1L);
         SONG_ENTITY.setTitle("TestingSong");
         SONG_ENTITY.setDuration(1.4);
@@ -77,13 +72,13 @@ public class AlbumEntityMapperTest {
         int yearRelease = 2021;
 
 
-        AlbumRest album = Mockito.mock(AlbumRest.class);
+        AlbumRest album = new AlbumRest();
 
-        Mockito.when(album.getId()).thenReturn(id);
-        Mockito.when(album.getTitle()).thenReturn(title);
-        Mockito.when(album.getDuration()).thenReturn(duration);
-        Mockito.when(album.getYearRelease()).thenReturn(yearRelease);
-        Mockito.when(album.getSongs()).thenReturn(SONG_REST_ALBUMS_LIST);
+        album.setId(id);
+        album.setTitle(title);
+        album.setDuration(duration);
+        album.setYearRelease(yearRelease);
+        album.setSongs(SONG_REST_ALBUMS_LIST);
 
 
         AlbumEntity result = albumMapper.mapToEntity(album);
@@ -110,13 +105,13 @@ public class AlbumEntityMapperTest {
         double duration= 1.1;
         int yearRelease = 2021;
 
-        AlbumEntity album = Mockito.mock(AlbumEntity.class);
+        AlbumEntity album = new AlbumEntity();
 
-        Mockito.when(album.getId()).thenReturn(id);
-        Mockito.when(album.getTitle()).thenReturn(title);
-        Mockito.when(album.getDuration()).thenReturn(duration);
-        Mockito.when(album.getYearRelease()).thenReturn(yearRelease);
-        Mockito.when(album.getSongs()).thenReturn(SONG_ENTITY_LIST);
+        album.setId(id);
+        album.setTitle(title);
+        album.setDuration(duration);
+        album.setYearRelease(yearRelease);
+        album.setSongs(SONG_ENTITY_LIST);
 
         AlbumRest result = albumMapper.mapToRest(album);
 
