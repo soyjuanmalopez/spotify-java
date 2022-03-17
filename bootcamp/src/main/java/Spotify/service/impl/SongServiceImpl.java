@@ -7,7 +7,6 @@ import Spotify.exception.SpotifyException;
 import Spotify.exception.SpotifyNotFoundException;
 import Spotify.exception.error.ErrorDto;
 import Spotify.mapper.AlbumMapper;
-import Spotify.mapper.PostSongMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.ArtistEntity;
 import Spotify.persistence.entity.SongEntity;
@@ -17,7 +16,6 @@ import Spotify.persistence.repository.SongRepository;
 import Spotify.service.SongService;
 
 import Spotify.util.constant.ExceptionConstantsUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -41,29 +39,30 @@ public class SongServiceImpl implements SongService {
 
     private final AlbumMapper albumMapper;
 
-    private final PostSongMapper postSongMapper;
 
     @Transactional(readOnly = true)
     @Override
     public Page<SongRest> getAllSongs(final Pageable pageable) throws SpotifyException {
-		return songRepository.findAll(pageable).map(songMapper::mapToRest);
+        return songRepository.findAll(pageable).map(songMapper::mapToRest);
     }
 
     @Transactional(readOnly = false)
     @Override
     public PostSongRest createSong(final PostSongRest song) throws SpotifyException {
-     SongEntity songEntity =  postSongMapper.mapToEntity(song);
-		songRepository.save( songEntity );
-		return song;
-	
+        SongEntity songEntity = songMapper.mapToEntity(song);
+        songRepository.save(songEntity);
+        return song;
+
     }
+
     @Transactional(readOnly = true)
     @Override
     public SongRest getSongById(final Long id) throws SpotifyException {
-	SongEntity song = songRepository.findById(id)
-		.orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
-		return songMapper.mapToRest(song);
+        SongEntity song = songRepository.findById(id)
+                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        return songMapper.mapToRest(song);
     }
+
     @Transactional(readOnly = true)
     @Override
     public AlbumRest getAlbumBySongId(Long songId) throws SpotifyException {
@@ -80,14 +79,14 @@ public class SongServiceImpl implements SongService {
         SongEntity song = songRepository.findById(postSongRest.getId())
                 .orElseThrow(() ->
                         new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
-        SongEntity songEntity = postSongMapper.mapToEntity(postSongRest);
+        SongEntity songEntity = songMapper.mapToEntity(postSongRest);
         song.setTitle(songEntity.getTitle());
         song.setDuration(songEntity.getDuration());
         song.setReproductions(songEntity.getReproductions());
         song.setAlbum(songEntity.getAlbum());
 
-		songRepository.save(song);
-		return postSongMapper.mapToRest(song);
+        songRepository.save(song);
+        return songMapper.mapToRestPost(song);
     }
 
     @Transactional(readOnly = false)
@@ -105,14 +104,14 @@ public class SongServiceImpl implements SongService {
     @Transactional(readOnly = false)
     @Override
     public void deleteSong(final Long id) throws SpotifyException {
-	songRepository.deleteById(id);
+        songRepository.deleteById(id);
     }
 
     @Transactional(readOnly = false)
     @Override
     public void deleteArtistFromSongById(Long songId, Long artistId) throws SpotifyException {
         SongEntity song = songRepository.findById(songId).orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
-        List<ArtistEntity> artistToDelete= new ArrayList<>();
+        List<ArtistEntity> artistToDelete = new ArrayList<>();
         song.getArtists().forEach(artist -> {
             if (Objects.equals(artist.getId(), artistId)) {
                 artistToDelete.add(artist);
@@ -124,7 +123,6 @@ public class SongServiceImpl implements SongService {
         songRepository.save(song);
 
     }
-
 
 
 }

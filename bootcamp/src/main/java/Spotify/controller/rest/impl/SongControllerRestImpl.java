@@ -5,7 +5,6 @@ import Spotify.controller.rest.model.*;
 import Spotify.controller.rest.model.restSongs.PostSongRest;
 import Spotify.exception.SpotifyException;
 
-import Spotify.mapper.PostSongMapper;
 import Spotify.service.SongService;
 import Spotify.util.constant.CommonConstantsUtils;
 import Spotify.util.constant.RestConstantsUtils;
@@ -16,7 +15,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

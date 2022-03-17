@@ -15,7 +15,7 @@ import lombok.Data;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SongRest implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("id")
@@ -38,7 +38,6 @@ public class SongRest implements Serializable {
 
     @JsonProperty("genres")
     private Set<GenreRest> genres;
-
 
 
 }

@@ -4,7 +4,6 @@ import Spotify.controller.rest.model.*;
 import Spotify.controller.rest.model.restSongs.GenreSongRest;
 import Spotify.exception.SpotifyException;
 import Spotify.mapper.GenreMapper;
-import Spotify.mapper.GenreSongMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.GenreEntity;
 import Spotify.persistence.entity.SongEntity;
@@ -59,9 +58,6 @@ public class GenreControllerRestImplTest {
     SongRepository songRepository;
 
     @Mock
-    GenreSongMapper genreSongMapper;
-
-    @Mock
     GenreServiceImpl genreService;
 
     @InjectMocks
@@ -72,7 +68,7 @@ public class GenreControllerRestImplTest {
         MockitoAnnotations.initMocks(this);
 
         SONG_HASHSET.add(SONG_ENTITY);
-        GENRE_ENTITY= new GenreEntity(GENRE_ID, NAME, SONG_HASHSET);
+        GENRE_ENTITY = new GenreEntity(GENRE_ID, NAME, SONG_HASHSET);
         SONG_ENTITY.setId(SONG_ID);
         SONG_REST.setId(SONG_ID);
         Set<GenreEntity> GENREENTITY_HASHSET = new HashSet<>();
@@ -119,6 +115,7 @@ public class GenreControllerRestImplTest {
         assertEquals(RestConstantsUtils.OK, response.getMessage());
         assertEquals(GENRE_REST, response.getData());
     }
+
     @Test
     public void getSongByGenreIdTest() throws SpotifyException {
 
@@ -149,10 +146,11 @@ public class GenreControllerRestImplTest {
         genreControllerRest.deleteGenre(GENRE_ID);
         Mockito.verify(genreService, Mockito.times(1)).deleteGenre(Mockito.anyLong());
     }
+
     @Test
-    public void deleteArtistFromSongById() throws SpotifyException{
-        genreControllerRest.deleteSongFromGenreById(GENRE_ID,SONG_ID);
-        verify(genreService,times(1)).deleteSongFromGenreById(GENRE_ID,SONG_ID);
+    public void deleteArtistFromSongById() throws SpotifyException {
+        genreControllerRest.deleteSongFromGenreById(GENRE_ID, SONG_ID);
+        verify(genreService, times(1)).deleteSongFromGenreById(GENRE_ID, SONG_ID);
     }
 
     @Test
@@ -166,10 +164,11 @@ public class GenreControllerRestImplTest {
         assertEquals("200", response.getCode());
         assertEquals(RestConstantsUtils.OK, response.getMessage());
     }
+
     @Test
     public void updateArtistBySongIdTest() throws SpotifyException {
 
-        SpotifyResponse<GenreSongRest> response = genreControllerRest.updateSongByGenreId(GENRE_ID,SONG_ID);
+        SpotifyResponse<GenreSongRest> response = genreControllerRest.updateSongByGenreId(GENRE_ID, SONG_ID);
         assertNotNull(response);
         assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
         assertEquals("200", response.getCode());

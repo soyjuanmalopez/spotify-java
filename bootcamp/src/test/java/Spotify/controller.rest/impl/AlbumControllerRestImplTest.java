@@ -48,7 +48,7 @@ public class AlbumControllerRestImplTest {
     private final static ArtistRestAlbum ARTIST_REST_ALBUM = new ArtistRestAlbum();
     private final static List<AlbumRest> ALBUM_REST_LIST = new ArrayList<>();
 
-    private static final Pageable pageable = PageRequest.of(1,8);
+    private static final Pageable pageable = PageRequest.of(1, 8);
 
     private static Page<AlbumRest> ALBUM_REST_PAGE;
     private static Page<SongRestAlbum> SONG_REST_PAGE;
@@ -122,10 +122,10 @@ public class AlbumControllerRestImplTest {
         assertEquals(albumControllerRest.createAlbum(albumRest).getData(), albumRest);
     }
 
-   @Test
+    @Test
     public void updateAlbum() throws SpotifyException {
-       AlbumRestPost albumRest = new AlbumRestPost(-1L, "CreateEntityTest", 1.2, 2022);
-       when(albumService.updateAlbum(Mockito.any(AlbumRestPost.class), Mockito.anyLong())).thenReturn(albumRest);
+        AlbumRestPost albumRest = new AlbumRestPost(-1L, "CreateEntityTest", 1.2, 2022);
+        when(albumService.updateAlbum(Mockito.any(AlbumRestPost.class), Mockito.anyLong())).thenReturn(albumRest);
         assertEquals(albumRest, albumControllerRest.updateAlbum(albumRest).getData());
     }
 

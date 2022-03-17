@@ -6,7 +6,6 @@ import Spotify.controller.rest.model.restArtists.PostArtistRest;
 import Spotify.exception.SpotifyException;
 import Spotify.exception.SpotifyNotFoundException;
 import Spotify.mapper.ArtistMapper;
-import Spotify.mapper.PostArtistMapper;
 import Spotify.persistence.entity.ArtistEntity;
 import Spotify.persistence.repository.ArtistRepository;
 import org.junit.Before;
@@ -41,16 +40,13 @@ public class ArtistServiceImplTest {
     private ArtistRepository artistRepository;
 
     @Mock
-    private PostArtistMapper postartistMapper;
-
-    @Mock
     private ArtistMapper artistMapper;
 
     @InjectMocks
     private ArtistServiceImpl artistServiceImpl;
 
     @Before
-    public void init(){
+    public void init() {
         MockitoAnnotations.initMocks(this);
         ARTIST_ENTITY.setId(ID);
         ARTIST_REST.setId(ID);
@@ -61,14 +57,14 @@ public class ArtistServiceImplTest {
         Mockito.when(artistRepository.findById(anyLong())).thenReturn(Optional.of(ARTIST_ENTITY));
         Mockito.when(artistMapper.mapToEntity(any(ArtistRest.class))).thenReturn(ARTIST_ENTITY);
         Mockito.when(artistMapper.mapToRest(any(ArtistEntity.class))).thenReturn(ARTIST_REST);
-        Mockito.when(postartistMapper.mapToEntity(any(PostArtistRest.class))).thenReturn(ARTIST_ENTITY);
-        Mockito.when(postartistMapper.mapToRest(any(ArtistEntity.class))).thenReturn(POST_ARTIST_REST);
+        Mockito.when(artistMapper.mapToEntity(any(PostArtistRest.class))).thenReturn(ARTIST_ENTITY);
+        Mockito.when(artistMapper.mapToRestPost(any(ArtistEntity.class))).thenReturn(POST_ARTIST_REST);
     }
 
     @Test
-    public void getAllArtistsTest() throws SpotifyException{
-        Pageable pageable = PageRequest.of(0,1);
-        Page<ArtistEntity> artistPage = new PageImpl<>(List.of(ARTIST_ENTITY), pageable,0);
+    public void getAllArtistsTest() throws SpotifyException {
+        Pageable pageable = PageRequest.of(0, 1);
+        Page<ArtistEntity> artistPage = new PageImpl<>(List.of(ARTIST_ENTITY), pageable, 0);
 
         Mockito.when(artistRepository.findAll(any(Pageable.class))).thenReturn(artistPage);
 
@@ -78,14 +74,14 @@ public class ArtistServiceImplTest {
     }
 
     @Test
-    public void getArtistByIdTest() throws SpotifyException{
+    public void getArtistByIdTest() throws SpotifyException {
         Mockito.when(artistRepository.findById(anyLong())).thenReturn(Optional.of(ARTIST_ENTITY));
         Mockito.when(artistMapper.mapToRest(any(ArtistEntity.class))).thenReturn(ARTIST_REST);
         artistServiceImpl.getArtistById(anyLong());
     }
 
     @Test(expected = SpotifyNotFoundException.class)
-    public void getArtistByIdFailTest() throws SpotifyException{
+    public void getArtistByIdFailTest() throws SpotifyException {
         Mockito.when(artistRepository.findById(anyLong())).thenReturn(Optional.empty());
         artistServiceImpl.getArtistById(anyLong());
     }
@@ -97,7 +93,7 @@ public class ArtistServiceImplTest {
     }
 
     @Test
-    public void updateArtistTest() throws SpotifyException{
+    public void updateArtistTest() throws SpotifyException {
         Mockito.when(artistRepository.findById(anyLong())).thenReturn(Optional.of(ARTIST_ENTITY));
         Mockito.when(artistRepository.save(ARTIST_ENTITY)).thenReturn(ARTIST_ENTITY);
 
@@ -107,31 +103,31 @@ public class ArtistServiceImplTest {
     }
 
     @Test(expected = SpotifyNotFoundException.class)
-    public void updateArtistFailTest() throws SpotifyException{
+    public void updateArtistFailTest() throws SpotifyException {
         Mockito.when(artistRepository.findById(ID)).thenReturn(Optional.empty());
         artistServiceImpl.updateArtist(POST_ARTIST_REST);
     }
 
     @Test
-    public void deleteArtistTest() throws SpotifyException{
+    public void deleteArtistTest() throws SpotifyException {
         artistServiceImpl.deleteArtist(ID);
         Mockito.verify(artistRepository, Mockito.times(1)).deleteById(anyLong());
     }
 
     @Test
-    public void getAlbumsOfArtistTest() throws SpotifyException{
-        Pageable pageable = PageRequest.of(0,1);
+    public void getAlbumsOfArtistTest() throws SpotifyException {
+        Pageable pageable = PageRequest.of(0, 1);
         ARTIST_REST.setAlbums(ALBUM_REST_LIST);
         Mockito.when(artistRepository.findById(anyLong())).thenReturn(Optional.of(ARTIST_ENTITY));
         Mockito.when(artistMapper.mapToRest(any(ArtistEntity.class))).thenReturn(ARTIST_REST);
-        Page<AlbumRest> albumRestPage = artistServiceImpl.getAlbumsOfArtist(pageable,ID);
+        Page<AlbumRest> albumRestPage = artistServiceImpl.getAlbumsOfArtist(pageable, ID);
         assertNotNull(albumRestPage);
     }
 
     @Test(expected = SpotifyNotFoundException.class)
-    public void getAlbumsOfArtistFailTest() throws SpotifyException{
-        Pageable pageable = PageRequest.of(0,1);
+    public void getAlbumsOfArtistFailTest() throws SpotifyException {
+        Pageable pageable = PageRequest.of(0, 1);
         Mockito.when(artistRepository.findById(ID)).thenReturn(Optional.empty());
-        artistServiceImpl.getAlbumsOfArtist(pageable,ID);
+        artistServiceImpl.getAlbumsOfArtist(pageable, ID);
     }
 }

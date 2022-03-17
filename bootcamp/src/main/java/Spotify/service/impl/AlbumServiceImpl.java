@@ -8,7 +8,6 @@ import Spotify.exception.SpotifyException;
 import Spotify.exception.SpotifyNotFoundException;
 import Spotify.exception.error.ErrorDto;
 import Spotify.mapper.AlbumMapper;
-import Spotify.mapper.AlbumPostMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.AlbumEntity;
 import Spotify.persistence.entity.ArtistEntity;
@@ -38,8 +37,6 @@ public class AlbumServiceImpl implements AlbumService {
     private final ArtistRepository artistRepository;
 
     private final AlbumMapper albumMapper;
-
-    private final AlbumPostMapper albumPostMapper;
 
 
     @Override
@@ -75,7 +72,7 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public AlbumRestPost createAlbum(AlbumRestPost album) throws SpotifyException {
-        AlbumEntity albumEntity = albumPostMapper.mapToEntity(album);
+        AlbumEntity albumEntity = albumMapper.mapToEntity(album);
         albumRepository.save(albumEntity);
         return album;
     }
@@ -89,12 +86,12 @@ public class AlbumServiceImpl implements AlbumService {
         albumEntity.setYearRelease(album.getYearRelease());
 
         albumRepository.save(albumEntity);
-        return albumPostMapper.mapToRest(albumEntity);
+        return albumMapper.mapToRestPost(albumEntity);
     }
 
     @Override
     public void deleteAlbum(Long id) throws SpotifyException {
-        if (!albumRepository.existsById(id)){
+        if (!albumRepository.existsById(id)) {
             throw new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC));
         }
         albumRepository.deleteById(id);
@@ -133,7 +130,7 @@ public class AlbumServiceImpl implements AlbumService {
         SongEntity songEntity = songRepository.findById(songId)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         for (int i = 0; i < album.getSongs().size(); i++) {
-            if (album.getSongs().get(i).getId() == songId){
+            if (album.getSongs().get(i).getId() == songId) {
                 album.getSongs().remove(i);
             }
         }
@@ -150,12 +147,12 @@ public class AlbumServiceImpl implements AlbumService {
         ArtistEntity artistEntity = artistRepository.findById(artistId)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         for (int i = 0; i < album.getArtists().size(); i++) {
-            if (album.getArtists().get(i).getId() == artistId){
+            if (album.getArtists().get(i).getId() == artistId) {
                 album.getArtists().remove(i);
             }
         }
         for (int i = 0; i < artistEntity.getAlbums().size(); i++) {
-            if (artistEntity.getAlbums().get(i).getId() == albumId){
+            if (artistEntity.getAlbums().get(i).getId() == albumId) {
                 artistEntity.getAlbums().remove(i);
             }
         }

@@ -7,14 +7,12 @@ import Spotify.exception.SpotifyException;
 import Spotify.exception.SpotifyNotFoundException;
 import Spotify.exception.error.ErrorDto;
 import Spotify.mapper.ArtistMapper;
-import Spotify.mapper.PostArtistMapper;
 import Spotify.persistence.entity.ArtistEntity;
 
 import Spotify.persistence.repository.ArtistRepository;
 import Spotify.service.ArtistService;
 import Spotify.util.constant.ExceptionConstantsUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +29,6 @@ public class ArtistServiceImpl implements ArtistService {
 
     private final ArtistMapper artistMapper;
 
-    private final PostArtistMapper postartistMapper;
 
     @Transactional(readOnly = true)
     @Override
@@ -49,7 +46,7 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public PostArtistRest createArtist(final PostArtistRest artist) throws SpotifyException {
-        ArtistEntity artistEntity =  postartistMapper.mapToEntity(artist);
+        ArtistEntity artistEntity = artistMapper.mapToEntity(artist);
         artistRepository.save(artistEntity);
         return artist;
     }
@@ -61,7 +58,7 @@ public class ArtistServiceImpl implements ArtistService {
         artist.setName(postArtistRest.getName());
         artist.setDescription(postArtistRest.getDescription());
         artistRepository.save(artist);
-        return postartistMapper.mapToRest(artist);
+        return artistMapper.mapToRestPost(artist);
     }
 
     @Override
