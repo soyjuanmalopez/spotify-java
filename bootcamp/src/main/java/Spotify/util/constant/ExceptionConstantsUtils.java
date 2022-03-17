@@ -18,5 +18,6 @@ public class ExceptionConstantsUtils {
 
 	// INTERNAL SERVER ERROR
 	public static final String INTERNAL_SERVER_GENERIC = "500";
+	public static final int BAD_REQUEST_INT = 400;
 
 }
