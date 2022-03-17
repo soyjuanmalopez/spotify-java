@@ -5,7 +5,6 @@ import Spotify.controller.rest.model.SongRest;
 import Spotify.exception.SpotifyException;
 import Spotify.exception.SpotifyNotFoundException;
 import Spotify.mapper.GenreMapper;
-import Spotify.mapper.GenreSongMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.GenreEntity;
 import Spotify.persistence.entity.SongEntity;
@@ -48,7 +47,7 @@ public class GenreServiceImplTest {
         MockitoAnnotations.initMocks(this);
 
         SONG_HASHSET.add(SONG_ENTITY);
-        GENRE_ENTITY= new GenreEntity(GENRE_ID, NAME, SONG_HASHSET);
+        GENRE_ENTITY = new GenreEntity(GENRE_ID, NAME, SONG_HASHSET);
         SONG_ENTITY.setId(SONG_ID);
         SONG_REST.setId(SONG_ID);
         Set<GenreEntity> GENREENTITY_HASHSET = new HashSet<>();
@@ -76,8 +75,6 @@ public class GenreServiceImplTest {
     @Mock
     SongRepository songRepository;
 
-    @Mock
-    GenreSongMapper genreSongMapper;
 
     @InjectMocks
     GenreServiceImpl genreService;
@@ -143,16 +140,17 @@ public class GenreServiceImplTest {
     public void updateSongByGenreId() throws SpotifyException {
         when(songRepository.findById(anyLong())).thenReturn(Optional.of(SONG_ENTITY));
 
-        genreService.updateSongByGenreId(GENRE_ID,SONG_ID);
+        genreService.updateSongByGenreId(GENRE_ID, SONG_ID);
         verify(genreRepository, times(1)).save(any(GenreEntity.class));
         verify(songRepository, times(1)).save(any(SongEntity.class));
 
     }
+
     @Test(expected = SpotifyNotFoundException.class)
     public void updateSongByGenreIdGenreException() throws SpotifyException {
 
         when(genreRepository.findById(anyLong())).thenReturn(Optional.empty());
-        genreService.updateSongByGenreId(GENRE_ID,SONG_ID);
+        genreService.updateSongByGenreId(GENRE_ID, SONG_ID);
 
     }
 
@@ -167,16 +165,17 @@ public class GenreServiceImplTest {
     @Test
     public void deleteSongFromGenreById() throws SpotifyException {
 
-        genreService.deleteSongFromGenreById(GENRE_ID,SONG_ID);
+        genreService.deleteSongFromGenreById(GENRE_ID, SONG_ID);
         verify(genreRepository, times(1)).save(any(GenreEntity.class));
         verify(songRepository, times(1)).save(any(SongEntity.class));
 
 
     }
+
     @Test(expected = SpotifyNotFoundException.class)
     public void deleteSongFromGenreByIdException() throws SpotifyException {
         when(genreRepository.findById(anyLong())).thenReturn(Optional.empty());
-        genreService.deleteSongFromGenreById(GENRE_ID,SONG_ID);
+        genreService.deleteSongFromGenreById(GENRE_ID, SONG_ID);
     }
 
 }

@@ -10,8 +10,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface ArtistService {
 
-    Page<ArtistRest> getAllArtists(Pageable pageable)
-        throws SpotifyException;
+    Page<ArtistRest> getAllArtists(Pageable pageable) throws SpotifyException;
 
     ArtistRest getArtistById(Long id) throws SpotifyException;
 
@@ -21,6 +20,6 @@ public interface ArtistService {
 
     void deleteArtist(Long id) throws SpotifyException;
 
-    Page<AlbumRest> getAlbumsOfArtist (Pageable pageable, Long id) throws SpotifyException;
+    Page<AlbumRest> getAlbumsOfArtist(Pageable pageable, Long id) throws SpotifyException;
 
 }

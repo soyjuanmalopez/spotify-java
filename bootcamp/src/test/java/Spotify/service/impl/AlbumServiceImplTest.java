@@ -7,7 +7,6 @@ import Spotify.controller.rest.model.restAlbums.ArtistRestAlbum;
 import Spotify.controller.rest.model.restAlbums.SongRestAlbum;
 import Spotify.exception.SpotifyException;
 import Spotify.mapper.AlbumMapper;
-import Spotify.mapper.AlbumPostMapper;
 import Spotify.mapper.ArtistMapper;
 import Spotify.mapper.SongMapper;
 import Spotify.persistence.entity.AlbumEntity;
@@ -41,8 +40,7 @@ public class AlbumServiceImplTest {
 
     @Mock
     public SongRepository songRepository;
-    @Mock
-    AlbumPostMapper albumPostMapper;
+
 
     @Mock
     public ArtistRepository artistRepository;
@@ -200,14 +198,14 @@ public class AlbumServiceImplTest {
 
     @Test
     public void createAlbum() throws SpotifyException {
-        when(albumPostMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST_POST);
+        when(albumMapper.mapToRestPost(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST_POST);
         assertEquals(ALBUM_REST_POST, albumService.createAlbum(ALBUM_REST_POST));
     }
 
     @Test
     public void updateAlbum() throws SpotifyException {
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(ALBUM_ENTITY));
-        when(albumPostMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST_POST);
+        when(albumMapper.mapToRestPost(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST_POST);
         assertEquals(ALBUM_REST_POST, albumService.updateAlbum(ALBUM_REST_POST, 1L));
     }
 

@@ -102,7 +102,7 @@ public class SongMapperTest {
     }
     @Test
     public void mapToEntityNull() {
-        SongEntity response = songMapperImpl.mapToEntity(null);
+        SongEntity response = songMapperImpl.mapToEntity((SongRest) null);
         assertThat(response).isEqualTo(null);
     }
 

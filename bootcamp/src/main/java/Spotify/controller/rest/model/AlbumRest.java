@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,10 +30,10 @@ public class AlbumRest implements Serializable {
     @JsonProperty("year_relase")
     private Integer yearRelease;
 
-   @JsonProperty("songs")
-   private List<SongRestAlbum> songs;
+    @JsonProperty("songs")
+    private List<SongRestAlbum> songs;
 
-   @JsonProperty("artists")
-   private List<ArtistRestAlbum> artists;
+    @JsonProperty("artists")
+    private List<ArtistRestAlbum> artists;
 
 }

@@ -7,7 +7,6 @@ import Spotify.controller.rest.model.SpotifyResponse;
 import Spotify.controller.rest.model.restArtists.PostArtistRest;
 import Spotify.exception.SpotifyException;
 import Spotify.mapper.ArtistMapper;
-import Spotify.mapper.PostArtistMapper;
 import Spotify.persistence.entity.ArtistEntity;
 import Spotify.service.ArtistService;
 import Spotify.util.constant.RestConstantsUtils;
@@ -42,14 +41,12 @@ public class ArtistControllerRestImplTest {
     @Mock
     private ArtistMapper artistMapper;
 
-    @Mock
-    private PostArtistMapper postartistMapper;
 
     @InjectMocks
     private ArtistControllerRestImpl artistControllerRest;
 
     @Before
-    public void init(){
+    public void init() {
         MockitoAnnotations.initMocks(this);
         POST_ARTIST_REST.setId(1L);
         POST_ARTIST_REST.setDescription("desc");
@@ -61,11 +58,11 @@ public class ArtistControllerRestImplTest {
         //given
         int page = 0;
         int size = 1;
-        Pageable pageable = PageRequest.of(page,size);
+        Pageable pageable = PageRequest.of(page, size);
         Page<ArtistRest> artistsPagedModel = new PageImpl<>(Collections.singletonList(new ArtistRest()));
         Mockito.when(artistService.getAllArtists(any(Pageable.class))).thenReturn(artistsPagedModel);
         //when
-        SpotifyResponse<D4iPageRest<ArtistRest>> response = artistControllerRest.getAllArtists(page,size,pageable);
+        SpotifyResponse<D4iPageRest<ArtistRest>> response = artistControllerRest.getAllArtists(page, size, pageable);
         //then
         assertNotNull(response);
         assertEquals(RestConstantsUtils.OK, response.getMessage());
@@ -81,13 +78,13 @@ public class ArtistControllerRestImplTest {
         assertNotNull(response);
         assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
         assertEquals(RestConstantsUtils.OK, response.getMessage());
-        assertEquals(ARTIST_REST,response.getData());
+        assertEquals(ARTIST_REST, response.getData());
     }
 
     @Test
-    public void createArtistTest() throws SpotifyException{
+    public void createArtistTest() throws SpotifyException {
         Mockito.when(artistService.createArtist(any(PostArtistRest.class))).thenReturn(POST_ARTIST_REST);
-        Mockito.when(postartistMapper.mapToEntity(any(PostArtistRest.class))).thenReturn(ARTIST_ENTITY);
+        Mockito.when(artistMapper.mapToEntity(any(PostArtistRest.class))).thenReturn(ARTIST_ENTITY);
 
         SpotifyResponse<PostArtistRest> response = artistControllerRest.createArtist(POST_ARTIST_REST);
 
@@ -99,11 +96,11 @@ public class ArtistControllerRestImplTest {
     }
 
     @Test
-    public void updateArtistTest() throws SpotifyException{
+    public void updateArtistTest() throws SpotifyException {
         ArtistEntity artistEntity2 = new ArtistEntity();
         artistEntity2.setId(2L);
 
-        Mockito.when(postartistMapper.mapToEntity(any(PostArtistRest.class))).thenReturn(artistEntity2);
+        Mockito.when(artistMapper.mapToEntity(any(PostArtistRest.class))).thenReturn(artistEntity2);
         Mockito.when(artistService.updateArtist(any(PostArtistRest.class))).thenReturn(POST_ARTIST_REST);
 
         SpotifyResponse<PostArtistRest> response = artistControllerRest.updateArtist(POST_ARTIST_REST);
@@ -116,22 +113,22 @@ public class ArtistControllerRestImplTest {
     }
 
     @Test
-    public void deleteArtistTest() throws SpotifyException{
+    public void deleteArtistTest() throws SpotifyException {
         artistControllerRest.deleteArtist(ID);
 
         Mockito.verify(artistService, Mockito.times(1)).deleteArtist(Mockito.anyLong());
     }
 
     @Test
-    public void getAlbumsOfArtistTest() throws SpotifyException{
+    public void getAlbumsOfArtistTest() throws SpotifyException {
         //given
         int page = 0;
         int size = 1;
-        Pageable pageable = PageRequest.of(page,size);
+        Pageable pageable = PageRequest.of(page, size);
         Page<AlbumRest> albumsPagedModel = new PageImpl<>(Collections.singletonList(new AlbumRest()));
-        Mockito.when(artistService.getAlbumsOfArtist(any(Pageable.class),anyLong())).thenReturn(albumsPagedModel);
+        Mockito.when(artistService.getAlbumsOfArtist(any(Pageable.class), anyLong())).thenReturn(albumsPagedModel);
         //When
-        SpotifyResponse<D4iPageRest<AlbumRest>> response = artistControllerRest.getAlbumsOfArtist(page,size,pageable,ID);
+        SpotifyResponse<D4iPageRest<AlbumRest>> response = artistControllerRest.getAlbumsOfArtist(page, size, pageable, ID);
         //Then
         assertNotNull(response);
         assertEquals(RestConstantsUtils.OK, response.getMessage());

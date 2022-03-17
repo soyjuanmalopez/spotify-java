@@ -68,7 +68,7 @@ public class GenreMapperImplTest {
     @Test
     public void mapToEntityNull() {
 
-        GenreEntity response = genreMapperImpl.mapToEntity(null);
+        GenreEntity response = genreMapperImpl.mapToEntity((GenreRest) null);
         assertThat(response).isEqualTo(null);
 
     }

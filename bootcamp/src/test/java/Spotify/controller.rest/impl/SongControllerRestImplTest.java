@@ -34,128 +34,132 @@ import Spotify.util.constant.RestConstantsUtils;
 
 public class SongControllerRestImplTest {
 
-	static final Long ID = 1L;
-	static final SongEntity SONG_ENTITY = new SongEntity();
-	static final Set<SongEntity> SONG_ENTITY_SET= new HashSet<>();
-	static final List<ArtistEntity> ARTIST_ENTITY_LIST= new ArrayList<>();
-	static final SongRest SONG_REST = new SongRest();
-	static final PostSongRest POST_SONG_REST = new PostSongRest();
-	static final AlbumRest ALBUM_REST = new AlbumRest();
-	static final ArtistEntity ARTIST_ENTITY = new ArtistEntity();
+    static final Long ID = 1L;
+    static final SongEntity SONG_ENTITY = new SongEntity();
+    static final Set<SongEntity> SONG_ENTITY_SET = new HashSet<>();
+    static final List<ArtistEntity> ARTIST_ENTITY_LIST = new ArrayList<>();
+    static final SongRest SONG_REST = new SongRest();
+    static final PostSongRest POST_SONG_REST = new PostSongRest();
+    static final AlbumRest ALBUM_REST = new AlbumRest();
+    static final ArtistEntity ARTIST_ENTITY = new ArtistEntity();
 
 
-	@Mock
-	private SongRepository songRepository;;
+    @Mock
+    private SongRepository songRepository;
+    ;
 
     @Mock
     private SongService songService;
 
-	@Mock
-	private ArtistRepository artistRepository;
+    @Mock
+    private ArtistRepository artistRepository;
 
     @InjectMocks
     private SongControllerRestImpl songControllerRestImpl;
 
-	@Before
-	public void init() {
-		MockitoAnnotations.initMocks(this);
-		ARTIST_ENTITY_LIST.add(ARTIST_ENTITY);
-		SONG_ENTITY_SET.add(SONG_ENTITY);
-		ARTIST_ENTITY.setSongs(SONG_ENTITY_SET);
-		SONG_ENTITY.setArtists(ARTIST_ENTITY_LIST);
-		ALBUM_REST.setId(ID);
-		SONG_ENTITY.setId(ID);
-		SONG_REST.setId(ID);
-		ARTIST_ENTITY.setId(ID);
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+        ARTIST_ENTITY_LIST.add(ARTIST_ENTITY);
+        SONG_ENTITY_SET.add(SONG_ENTITY);
+        ARTIST_ENTITY.setSongs(SONG_ENTITY_SET);
+        SONG_ENTITY.setArtists(ARTIST_ENTITY_LIST);
+        ALBUM_REST.setId(ID);
+        SONG_ENTITY.setId(ID);
+        SONG_REST.setId(ID);
+        ARTIST_ENTITY.setId(ID);
 
-		Mockito.when(songRepository.findById(anyLong())).thenReturn(Optional.of(SONG_ENTITY));
-	}
+        Mockito.when(songRepository.findById(anyLong())).thenReturn(Optional.of(SONG_ENTITY));
+    }
 
     @Test
     public void getAllSongsTest() throws SpotifyException {
-		// given
-		int page = 0;
-		int size = 2;
+        // given
+        int page = 0;
+        int size = 2;
 
-		Pageable pageable = PageRequest.of(0, 1);
-		Page<SongEntity> songPage = new PageImpl<>(List.of(SONG_ENTITY), pageable, 0);
-		Page<SongRest> songRestPage = new PageImpl<>(List.of(SONG_REST), pageable, 0);
-		// when
-		Mockito.when(songService.getAllSongs(any(Pageable.class))).thenReturn(songRestPage);
-		SpotifyResponse<D4iPageRest<SongRest>> response = songControllerRestImpl.getAllSongs(0L, 2L, pageable);
+        Pageable pageable = PageRequest.of(0, 1);
+        Page<SongEntity> songPage = new PageImpl<>(List.of(SONG_ENTITY), pageable, 0);
+        Page<SongRest> songRestPage = new PageImpl<>(List.of(SONG_REST), pageable, 0);
+        // when
+        Mockito.when(songService.getAllSongs(any(Pageable.class))).thenReturn(songRestPage);
+        SpotifyResponse<D4iPageRest<SongRest>> response = songControllerRestImpl.getAllSongs(0L, 2L, pageable);
 
-		// then
-		assertNotNull(response);
-		assertEquals(RestConstantsUtils.OK, response.getMessage());
-		assertNotNull(response.getData().getContent());
+        // then
+        assertNotNull(response);
+        assertEquals(RestConstantsUtils.OK, response.getMessage());
+        assertNotNull(response.getData().getContent());
 
-	}
+    }
 
     @Test
     public void getSongByIdTest() throws SpotifyException {
 
-		Mockito.when(songService.getSongById(anyLong())).thenReturn(SONG_REST);
-		SpotifyResponse<SongRest> response = songControllerRestImpl.getSongById(ID);
+        Mockito.when(songService.getSongById(anyLong())).thenReturn(SONG_REST);
+        SpotifyResponse<SongRest> response = songControllerRestImpl.getSongById(ID);
 
-		assertNotNull(response);
-		assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
-		assertEquals(RestConstantsUtils.OK, response.getMessage());
-		assertEquals(SONG_REST, response.getData());
-	}
-	@Test
-	public void getAlbumBySongIdTest() throws SpotifyException {
+        assertNotNull(response);
+        assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
+        assertEquals(RestConstantsUtils.OK, response.getMessage());
+        assertEquals(SONG_REST, response.getData());
+    }
 
-		Mockito.when(songService.getAlbumBySongId(anyLong())).thenReturn(ALBUM_REST);
-		SpotifyResponse<AlbumRest> response = songControllerRestImpl.getAlbumBySongId(ID);
+    @Test
+    public void getAlbumBySongIdTest() throws SpotifyException {
 
-		assertNotNull(response);
-		assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
-		assertEquals(RestConstantsUtils.OK, response.getMessage());
-		assertEquals(ALBUM_REST, response.getData());
-	}
+        Mockito.when(songService.getAlbumBySongId(anyLong())).thenReturn(ALBUM_REST);
+        SpotifyResponse<AlbumRest> response = songControllerRestImpl.getAlbumBySongId(ID);
+
+        assertNotNull(response);
+        assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
+        assertEquals(RestConstantsUtils.OK, response.getMessage());
+        assertEquals(ALBUM_REST, response.getData());
+    }
 
     @Test
     public void createSongTest() throws SpotifyException {
 
-		Mockito.when(songService.createSong(any(PostSongRest.class))).thenReturn(POST_SONG_REST);
-		SpotifyResponse<PostSongRest> response = songControllerRestImpl.createSong(POST_SONG_REST);
+        Mockito.when(songService.createSong(any(PostSongRest.class))).thenReturn(POST_SONG_REST);
+        SpotifyResponse<PostSongRest> response = songControllerRestImpl.createSong(POST_SONG_REST);
 
-		assertNotNull(response);
-		assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
-		assertEquals("200", response.getCode());
-		assertEquals(RestConstantsUtils.OK, response.getMessage());
-		Assertions.assertThat(response.getData()).isEqualTo(POST_SONG_REST);
-	}
+        assertNotNull(response);
+        assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
+        assertEquals("200", response.getCode());
+        assertEquals(RestConstantsUtils.OK, response.getMessage());
+        Assertions.assertThat(response.getData()).isEqualTo(POST_SONG_REST);
+    }
 
     @Test
     public void deleteSongTest() throws SpotifyException {
-		songControllerRestImpl.deleteSong(ID);
-		Mockito.verify(songService, Mockito.times(1)).deleteSong(Mockito.anyLong());
-	}
-	@Test
-	public void deleteArtistFromSongById() throws SpotifyException{
-		songControllerRestImpl.deleteArtistFromSongById(ID,ID);
-		verify(songService,times(1)).deleteArtistFromSongById(ID,ID);
-	}
+        songControllerRestImpl.deleteSong(ID);
+        Mockito.verify(songService, Mockito.times(1)).deleteSong(Mockito.anyLong());
+    }
+
+    @Test
+    public void deleteArtistFromSongById() throws SpotifyException {
+        songControllerRestImpl.deleteArtistFromSongById(ID, ID);
+        verify(songService, times(1)).deleteArtistFromSongById(ID, ID);
+    }
 
     @Test
     public void updateSongTest() throws SpotifyException {
 
 
-		SpotifyResponse<PostSongRest> response = songControllerRestImpl.updateSong(POST_SONG_REST);
+        SpotifyResponse<PostSongRest> response = songControllerRestImpl.updateSong(POST_SONG_REST);
 
-		assertNotNull(response);
-		assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
-		assertEquals("200", response.getCode());
-		assertEquals(RestConstantsUtils.OK, response.getMessage());
-	}
-	@Test
-	public void updateArtistBySongIdTest() throws SpotifyException {
+        assertNotNull(response);
+        assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
+        assertEquals("200", response.getCode());
+        assertEquals(RestConstantsUtils.OK, response.getMessage());
+    }
 
-		SpotifyResponse<SongRest> response = songControllerRestImpl.updateArtistBySongId(ID,ID);
-		assertNotNull(response);
-		assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
-		assertEquals("200", response.getCode());
-		assertEquals(RestConstantsUtils.OK, response.getMessage());
-	}
+    @Test
+    public void updateArtistBySongIdTest() throws SpotifyException {
+
+        SpotifyResponse<SongRest> response = songControllerRestImpl.updateArtistBySongId(ID, ID);
+        assertNotNull(response);
+        assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
+        assertEquals("200", response.getCode());
+        assertEquals(RestConstantsUtils.OK, response.getMessage());
+    }
 }
