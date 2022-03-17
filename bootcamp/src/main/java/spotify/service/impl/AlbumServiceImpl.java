@@ -40,8 +40,7 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public Page<AlbumRest> getAllAlbums(Pageable pageable) throws SpotifyException {
         Page<AlbumEntity> page = albumRepository.findAll(pageable);
-        Page<AlbumRest> albumRests = page.map(albumMapper::mapToRest);
-        return albumRests;
+        return page.map(albumMapper::mapToRest);
     }
 
     @Override

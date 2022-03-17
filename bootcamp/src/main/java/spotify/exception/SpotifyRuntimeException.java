@@ -11,6 +11,6 @@ public class SpotifyRuntimeException extends RuntimeException {
 
     private static final long serialVersionUID = 475941979339214878L;
 
-    private SpotifyException spotifyException;
+    private final SpotifyException spotifyException;
 
 }

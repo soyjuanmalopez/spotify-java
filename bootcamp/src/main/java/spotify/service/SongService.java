@@ -15,7 +15,7 @@ public interface SongService {
 
     AlbumRest getAlbumBySongId(Long songId) throws SpotifyException;
 
-    PostSongRest createSong(PostSongRest Song) throws SpotifyException;
+    PostSongRest createSong(PostSongRest song) throws SpotifyException;
 
     PostSongRest updateSong(PostSongRest postSongRest) throws SpotifyException;
 

@@ -147,7 +147,7 @@ public class AlbumServiceImplTest {
         Optional<AlbumEntity> optionalAlbum = Optional.of(ALBUM_ENTITY);
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(optionalAlbum);
         when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
-        assertEquals(albumService.getAlbumById(1L), ALBUM_REST);
+        assertEquals(ALBUM_REST, albumService.getAlbumById(1L));
     }
 
 
@@ -163,7 +163,7 @@ public class AlbumServiceImplTest {
         Optional<AlbumEntity> optionalAlbum = Optional.of(ALBUM_ENTITY);
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(optionalAlbum);
         when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
-        assertEquals(albumService.getSongsOfAlbum(Pageable.unpaged(), 1L).getContent(), SONG_REST_ALBUMS_LIST);
+        assertEquals(SONG_REST_ALBUMS_LIST, albumService.getSongsOfAlbum(Pageable.unpaged(), 1L).getContent());
     }
 
     @Test(expected = SpotifyException.class)
@@ -178,7 +178,7 @@ public class AlbumServiceImplTest {
         Optional<AlbumEntity> optionalAlbum = Optional.of(ALBUM_ENTITY);
         when(albumRepository.findById(Mockito.anyLong())).thenReturn(optionalAlbum);
         when(albumMapper.mapToRest(Mockito.any(AlbumEntity.class))).thenReturn(ALBUM_REST);
-        assertEquals(albumService.getArtistsOfAlbum(Pageable.unpaged(), 1L).getContent(), ARTIST_REST__ALBUMS_LIST);
+        assertEquals(ARTIST_REST__ALBUMS_LIST, albumService.getArtistsOfAlbum(Pageable.unpaged(), 1L).getContent());
     }
 
     @Test
