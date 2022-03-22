@@ -63,6 +63,15 @@ public class AlbumServiceImpl implements AlbumService {
         }
     }
 
+    public void spotifyDeleteBadRequestSongsOrArtistEmpty(AlbumEntity album, int option) throws SpotifyException {
+        if (album.getArtists().size() == 1 && option == 1) {
+            throw new SpotifyException(ExceptionConstantsUtils.BAD_REQUEST_INT, "DELETE ERROR! You can't delete the last artist", new ErrorDto(ExceptionConstantsUtils.BAD_REQUEST_GENERIC));
+        }
+        if (album.getSongs().size() == 1 && option == 2) {
+            throw new SpotifyException(ExceptionConstantsUtils.BAD_REQUEST_INT, "DELETE ERROR! You can't delete the last song", new ErrorDto(ExceptionConstantsUtils.BAD_REQUEST_GENERIC));
+        }
+    }
+
     @Override
     public Page<SongRestAlbum> getSongsOfAlbum(Pageable pageable, Long id) throws SpotifyException {
         AlbumEntity album = albumRepository.findById(id)
@@ -141,6 +150,7 @@ public class AlbumServiceImpl implements AlbumService {
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         SongEntity songEntity = songRepository.findById(songId)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        spotifyDeleteBadRequestSongsOrArtistEmpty(album, 2);        
         for (int i = 0; i < album.getSongs().size(); i++) {
             if (album.getSongs().get(i).getId() == songId) {
                 album.getSongs().remove(i);
@@ -158,6 +168,7 @@ public class AlbumServiceImpl implements AlbumService {
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         ArtistEntity artistEntity = artistRepository.findById(artistId)
                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+        spotifyDeleteBadRequestSongsOrArtistEmpty(album, 1);        
         for (int i = 0; i < album.getArtists().size(); i++) {
             if (album.getArtists().get(i).getId() == artistId) {
                 album.getArtists().remove(i);
