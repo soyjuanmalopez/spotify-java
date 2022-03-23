@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 
@@ -40,13 +41,17 @@ public class AlbumServiceImplTest {
     private final static AlbumRestPost ALBUM_REST_POST = new AlbumRestPost();
     private final static List<SongEntity> SONG_ENTITY_LIST = new ArrayList<>();
     private final static SongEntity SONG_ENTITY = new SongEntity();
+    private final static SongEntity SONG_ENTITY2 = new SongEntity();
     private final static List<SongRestAlbum> SONG_REST_ALBUMS_LIST = new ArrayList<>();
     private final static SongRestAlbum SONG_REST_ALBUM = new SongRestAlbum();
+    private final static SongRestAlbum SONG_REST_ALBUM2 = new SongRestAlbum();
     private final static List<ArtistEntity> ARTIST_ENTITY_LIST = new ArrayList<>();
     private final static ArtistEntity ARTIST_ENTITY = new ArtistEntity();
+    private final static ArtistEntity ARTIST_ENTITY2 = new ArtistEntity();
     private final static List<ArtistRest> ARTIST_REST_ALBUMS_LIST = new ArrayList<>();
     private final static List<ArtistRestAlbum> ARTIST_REST__ALBUMS_LIST = new ArrayList<>();
     private final static ArtistRest ARTIST_REST_ALBUM = new ArtistRest();
+    private final static ArtistRest ARTIST_REST_ALBUM2 = new ArtistRest();
     private final static List<AlbumEntity> ALBUM_ENTITY_LIST = new ArrayList<>();
     private final static List<AlbumRest> ALBUM_REST_LIST = new ArrayList<>();
     private static Page<AlbumEntity> ALBUM_ENTITY_PAGE;
@@ -98,25 +103,47 @@ public class AlbumServiceImplTest {
         SONG_ENTITY.setDuration(1.4);
         SONG_ENTITY.setAlbum(ALBUM_ENTITY);
 
+        SONG_ENTITY2.setId(2L);
+        SONG_ENTITY2.setTitle("TestingSong2");
+        SONG_ENTITY2.setDuration(4.1);
+        SONG_ENTITY2.setAlbum(ALBUM_ENTITY);
+
         SONG_REST_ALBUM.setId(SONG_ENTITY.getId());
         SONG_REST_ALBUM.setTitle(SONG_ENTITY.getTitle());
         SONG_REST_ALBUM.setDuration(SONG_ENTITY.getDuration());
+        SONG_REST_ALBUM2.setId(SONG_ENTITY2.getId());
+        SONG_REST_ALBUM2.setTitle(SONG_ENTITY2.getTitle());
+        SONG_REST_ALBUM2.setDuration(SONG_ENTITY2.getDuration());
 
         ARTIST_ENTITY.setId(1L);
         ARTIST_ENTITY.setName("TestingArtist");
         ARTIST_ENTITY.setDescription("DescriptionTest");
         ARTIST_ENTITY.setAlbums(new ArrayList<>());
 
+        ARTIST_ENTITY2.setId(2L);
+        ARTIST_ENTITY2.setName("TestingArtist2");
+        ARTIST_ENTITY2.setDescription("DescriptionTest2");
+        ARTIST_ENTITY2.setAlbums(new ArrayList<>());
+
         ARTIST_REST_ALBUM.setId(ARTIST_ENTITY.getId());
         ARTIST_REST_ALBUM.setName(ARTIST_ENTITY.getName());
         ARTIST_REST_ALBUM.setDescription(ARTIST_ENTITY.getDescription());
         ARTIST_REST_ALBUM.setAlbums(new ArrayList<>());
 
+        ARTIST_REST_ALBUM2.setId(ARTIST_ENTITY2.getId());
+        ARTIST_REST_ALBUM2.setName(ARTIST_ENTITY2.getName());
+        ARTIST_REST_ALBUM2.setDescription(ARTIST_ENTITY2.getDescription());
+        ARTIST_REST_ALBUM2.setAlbums(new ArrayList<>());
+
         SONG_ENTITY_LIST.add(SONG_ENTITY);
+        SONG_ENTITY_LIST.add(SONG_ENTITY2);
         SONG_REST_ALBUMS_LIST.add(SONG_REST_ALBUM);
+        SONG_REST_ALBUMS_LIST.add(SONG_REST_ALBUM2);
 
         ARTIST_ENTITY_LIST.add(ARTIST_ENTITY);
+        ARTIST_ENTITY_LIST.add(ARTIST_ENTITY2);
         ARTIST_REST_ALBUMS_LIST.add(ARTIST_REST_ALBUM);
+        ARTIST_REST_ALBUMS_LIST.add(ARTIST_REST_ALBUM2);
         ARTIST_REST__ALBUMS_LIST.add(new ArtistRestAlbum(1L, "TestingArtist", "DescriptionTest"));
 
         ALBUM_ENTITY.setSongs(SONG_ENTITY_LIST);
@@ -204,12 +231,14 @@ public class AlbumServiceImplTest {
     public void deleteAlbum() throws SpotifyException {
         when(albumRepository.existsById(Mockito.anyLong())).thenReturn(true);
         albumService.deleteAlbum(1L);
+        assertEquals(null, ALBUM_ENTITY);
     }
 
     @Test(expected = SpotifyException.class)
     public void deleteAlbumNotFound() throws SpotifyException {
         when(albumRepository.existsById(Mockito.anyLong())).thenReturn(false);
         albumService.deleteAlbum(-1L);
+        assertNull(ALBUM_ENTITY);
     }
 
     @Test
