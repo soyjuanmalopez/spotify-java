@@ -1,4 +1,6 @@
-CREATE TABLE `spotify`.`album`
+CREATE SCHEMA if NOT EXISTS `spotify` DEFAULT CHARACTER SET utf8;
+USE `spotify`;
+CREATE TABLE if NOT EXISTS `spotify`.`album`
 (
     `id`           INT          NOT NULL AUTO_INCREMENT,
     `title`        VARCHAR(250) NULL,
@@ -6,7 +8,7 @@ CREATE TABLE `spotify`.`album`
     `year_release` INT          NULL,
     PRIMARY KEY (`id`)
 );
-CREATE TABLE `spotify`.`song`
+CREATE TABLE if NOT EXISTS `spotify`.`song`
 (
     `id`            INT          NOT NULL AUTO_INCREMENT,
     `title`         VARCHAR(250) NULL,
@@ -21,20 +23,20 @@ CREATE TABLE `spotify`.`song`
             ON DELETE CASCADE
             ON UPDATE CASCADE
 );
-CREATE TABLE `spotify`.`artist`
+CREATE TABLE if NOT EXISTS `spotify`.`artist`
 (
     `id`          INT          NOT NULL AUTO_INCREMENT,
     `name`        VARCHAR(250) NULL,
     `description` VARCHAR(800) NULL,
     PRIMARY KEY (`id`)
 );
-CREATE TABLE `spotify`.`genre`
+CREATE TABLE if NOT EXISTS `spotify`.`genre`
 (
     `id`   INT         NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(90) NULL,
     PRIMARY KEY (`id`)
 );
-CREATE TABLE `spotify`.`rel_genre_songs`
+CREATE TABLE if NOT EXISTS `spotify`.`rel_genre_songs`
 (
     `id_genre` INT NOT NULL,
     `id_song`  INT NOT NULL,
@@ -51,7 +53,7 @@ CREATE TABLE `spotify`.`rel_genre_songs`
             ON DELETE CASCADE
             ON UPDATE CASCADE
 );
-CREATE TABLE `spotify`.`rel_album_artist`
+CREATE TABLE if NOT EXISTS `spotify`.`rel_album_artist`
 (
     `id_album`  INT NOT NULL,
     `id_artist` INT NOT NULL,
@@ -68,7 +70,7 @@ CREATE TABLE `spotify`.`rel_album_artist`
             ON DELETE CASCADE
             ON UPDATE CASCADE
 );
-CREATE TABLE `spotify`.`rel_song_artist`
+CREATE TABLE if NOT EXISTS `spotify`.`rel_song_artist`
 (
     `id_song`   INT NOT NULL,
     `id_artist` INT NOT NULL,

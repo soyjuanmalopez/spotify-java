@@ -231,7 +231,6 @@ public class AlbumServiceImplTest {
     public void deleteAlbum() throws SpotifyException {
         when(albumRepository.existsById(Mockito.anyLong())).thenReturn(true);
         albumService.deleteAlbum(1L);
-        assertEquals(null, ALBUM_ENTITY);
     }
 
     @Test(expected = SpotifyException.class)
