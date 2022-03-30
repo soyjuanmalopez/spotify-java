@@ -266,7 +266,7 @@ this [URL](https://gitlab.com/bootcamp-2.0/welcome-pack/-/blob/development/Welco
 ![spotify1](media/DataBase/database1.png)
 
 
-When you have created the schema, the next step it is starts to create the different tables.
+When you have created the schema 'spotify', the next step it is starts to create the different tables.
 
 ### Table creation scripts
 
