@@ -236,11 +236,11 @@ public interface SpotifyMapper{
 ## Archetype
 
 When starting a project first you have to build the structure: the archetype.
-As we know from the description, in Spotify you have different objects that interact between them: songs, albums, artists, genres and awards.
+As we know from the description, in Spotify you have different objects that interact between them: songs, albums, artists, and genres.
 
 That means that we need an entity for each one of them. There we are going to define it's attributes, getters and setters.
 
---> imagen entity definida (explicación)
+![Artist Entity example](media/Spotify/entityArtist.png)
 
 Not only that, we also need other classes such as a repository in order to be able to communicate with the tables defined in our DB, a rest structure for the respose, controller and service (and it's implementation) to define the methods so then the user can interact with our programm. One of the previous one for each object that participates in the programm, as a general rule.
 
