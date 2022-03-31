@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: { { include "helm.name" . } }
+  labels:
+    app: { { .Values.deployment.app } }
+spec:
+  replicas: { { .Values.deployment.replicas | default 1 } }
+  selector:
+    matchLabels:
+      app: { { .Values.deployment.app } }
+  template:
+    metadata:
+      labels:
+        app: { { .Values.deployment.app } }
+    spec:
+      containers:
+        - name: { { .Chart.Name } }
+          image: "{{ .Values.deployment.image }}:{{ .Values.deployment.tag }}"
+          readinessProbe:
+            httpGet:
+              port: { { .Values.deployment.readinessProbe.port } }
+              path: { { .Values.deployment.readinessProbe.path } }
+            failureThreshold: { { .Values.deployment.readinessProbe.failureThreshold } }
+            periodSeconds: { { .Values.deployment.readinessProbe.periodSeconds } }
+          ports:
+            - containerPort: { { .Values.deployment.containerPort } }
+          #          envFrom:
+          #            - secretRef:
+          #                name: {{ .Values.deployment.app }}
+          resources:
+            limits:
+              cpu: { { .Values.deployment.resources.limits.cpu } }
+              memory: { { .Values.deployment.resources.limits.memory } }
+            requests:
+              cpu: { { .Values.deployment.resources.requests.cpu } }
+              memory: { { .Values.deployment.resources.requests.memory } }
+
