@@ -14,7 +14,6 @@
 
 ## Respuestas de las peticiones
 
-
 ```js 
 {
 	code: 200, 

@@ -9,17 +9,6 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
-
-    services:
-      redis:
-        image: redis
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 6379:6379
             
     steps:
     - uses: actions/checkout@v2
@@ -48,7 +37,7 @@ jobs:
           with:
             java-version: 14
         - run: mvn -B package --file pom.xml -DskipTests
-        - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
+        - run: mkdir staging && cp target/*1.0.0-SNAPSHOT.jar staging
         - uses: actions/upload-artifact@v1
           with:
             name: Package
