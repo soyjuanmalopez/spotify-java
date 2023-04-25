@@ -141,6 +141,10 @@
             <artifactId>flyway-core</artifactId>
             <version>5.2.4</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.flywaydb</groupId>-->
+<!--            <artifactId>flyway-mysql</artifactId>-->
+<!--        </dependency>-->
         <!-- h2 Database Connection -->
         <dependency>
             <groupId>com.h2database</groupId>

@@ -13,16 +13,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import spotify.controller.rest.model.D4iPageRest;
-import spotify.controller.rest.model.GenreRest;
+import spotify.controller.rest.model.GenereRest;
 import spotify.controller.rest.model.SongRest;
 import spotify.controller.rest.model.SpotifyResponse;
-import spotify.controller.rest.model.restSongs.GenreSongRest;
+import spotify.controller.rest.model.restSongs.GenereSongRest;
 import spotify.exception.SpotifyException;
-import spotify.mapper.GenreMapper;
-import spotify.persistence.entity.GenreEntity;
+import spotify.mapper.GenereMapper;
+import spotify.persistence.entity.GenereEntity;
 import spotify.persistence.entity.SongEntity;
-import spotify.persistence.repository.GenreRepository;
-import spotify.service.impl.GenreServiceImpl;
+import spotify.persistence.repository.GenereRepository;
+import spotify.service.impl.GenereServiceImpl;
 import spotify.util.constant.RestConstantsUtils;
 
 import java.util.HashSet;
@@ -36,7 +36,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.*;
 
-public class GenreControllerRestImplTest {
+public class GenereControllerRestImplTest {
 
     Long SONG_ID = 2L;
     SongRest SONG_REST = new SongRest();
@@ -44,51 +44,51 @@ public class GenreControllerRestImplTest {
     Set<SongEntity> SONG_HASHSET = new HashSet<>();
     Long GENRE_ID = 1L;
     String NAME = "Test name";
-    GenreRest GENRE_REST = new GenreRest(GENRE_ID, NAME);
-    GenreEntity GENRE_ENTITY;
+    GenereRest GENRE_REST = new GenereRest(GENRE_ID, NAME);
+    GenereEntity GENRE_ENTITY;
 
 
     @Mock
-    GenreRepository genreRepository;
+    GenereRepository genereRepository;
 
     @Mock
-    GenreMapper genreMapper;
+    GenereMapper genereMapper;
 
     @Mock
-    GenreServiceImpl genreService;
+    GenereServiceImpl genereService;
 
     @InjectMocks
-    GenreControllerRestImpl genreControllerRest;
+    GenereControllerRestImpl genereControllerRest;
 
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
 
         SONG_HASHSET.add(SONG_ENTITY);
-        GENRE_ENTITY = new GenreEntity(GENRE_ID, NAME, SONG_HASHSET);
+        GENRE_ENTITY = new GenereEntity(GENRE_ID, NAME, SONG_HASHSET);
         SONG_ENTITY.setId(SONG_ID);
         SONG_REST.setId(SONG_ID);
-        Set<GenreEntity> GENREENTITY_HASHSET = new HashSet<>();
+        Set<GenereEntity> GENREENTITY_HASHSET = new HashSet<>();
         GENREENTITY_HASHSET.add(GENRE_ENTITY);
-        Set<GenreRest> GENREREST_HASHSET = new HashSet<>();
+        Set<GenereRest> GENREREST_HASHSET = new HashSet<>();
         GENREREST_HASHSET.add(GENRE_REST);
-        SONG_ENTITY.setGenres(GENREENTITY_HASHSET);
-        SONG_REST.setGenres(GENREREST_HASHSET);
+        SONG_ENTITY.setGeneres(GENREENTITY_HASHSET);
+        SONG_REST.setGeneres(GENREREST_HASHSET);
 
-        when(genreRepository.findById(anyLong())).thenReturn(Optional.of(GENRE_ENTITY));
-        when(genreMapper.mapToEntity(any(GenreRest.class))).thenReturn(GENRE_ENTITY);
-        when(genreMapper.mapToRest(any(GenreEntity.class))).thenReturn(GENRE_REST);
+        when(genereRepository.findById(anyLong())).thenReturn(Optional.of(GENRE_ENTITY));
+        when(genereMapper.mapToEntity(any(GenereRest.class))).thenReturn(GENRE_ENTITY);
+        when(genereMapper.mapToRest(any(GenereEntity.class))).thenReturn(GENRE_REST);
     }
 
     @Test
-    public void getAllGenresTest() throws SpotifyException {
+    public void getAllGeneresTest() throws SpotifyException {
 
 
         Pageable pageable = PageRequest.of(0, 1);
-        Page<GenreRest> genreRestPage = new PageImpl<>(List.of(GENRE_REST));
+        Page<GenereRest> genereRestPage = new PageImpl<>(List.of(GENRE_REST));
 
-        Mockito.when(genreService.getAllGenres(any(Pageable.class))).thenReturn(genreRestPage);
-        SpotifyResponse<D4iPageRest<GenreRest>> response = genreControllerRest.getAllGenres(0L, 2L, pageable);
+        Mockito.when(genereService.getAllGeneres(any(Pageable.class))).thenReturn(genereRestPage);
+        SpotifyResponse<D4iPageRest<GenereRest>> response = genereControllerRest.getAllGeneres(0L, 2L, pageable);
 
 
         assertNotNull(response);
@@ -97,10 +97,10 @@ public class GenreControllerRestImplTest {
     }
 
     @Test
-    public void getGenreByIdTest() throws SpotifyException {
+    public void getGenereByIdTest() throws SpotifyException {
 
-        when(genreService.getGenreById(anyLong())).thenReturn(GENRE_REST);
-        SpotifyResponse<GenreRest> response = genreControllerRest.getGenreById(GENRE_ID);
+        when(genereService.getGenereById(anyLong())).thenReturn(GENRE_REST);
+        SpotifyResponse<GenereRest> response = genereControllerRest.getGenereById(GENRE_ID);
 
         assertNotNull(response);
         assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
@@ -109,10 +109,10 @@ public class GenreControllerRestImplTest {
     }
 
     @Test
-    public void getSongByGenreIdTest() throws SpotifyException {
+    public void getSongByGenereIdTest() throws SpotifyException {
 
-        Mockito.when(genreService.getSongsByGenreId(anyLong())).thenReturn(List.of(SONG_REST));
-        SpotifyResponse<List<SongRest>> response = genreControllerRest.getSongByGenreId(GENRE_ID);
+        Mockito.when(genereService.getSongsByGenereId(anyLong())).thenReturn(List.of(SONG_REST));
+        SpotifyResponse<List<SongRest>> response = genereControllerRest.getSongByGenereId(GENRE_ID);
 
         assertNotNull(response);
         assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
@@ -121,10 +121,10 @@ public class GenreControllerRestImplTest {
     }
 
     @Test
-    public void createGenreTest() throws SpotifyException {
+    public void createGenereTest() throws SpotifyException {
 
-        Mockito.when(genreService.createGenre(any(GenreRest.class))).thenReturn(GENRE_REST);
-        SpotifyResponse<GenreRest> response = genreControllerRest.createGenre(GENRE_REST);
+        Mockito.when(genereService.createGenere(any(GenereRest.class))).thenReturn(GENRE_REST);
+        SpotifyResponse<GenereRest> response = genereControllerRest.createGenere(GENRE_REST);
 
         assertNotNull(response);
         assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
@@ -135,21 +135,21 @@ public class GenreControllerRestImplTest {
 
     @Test
     public void deleteSongTest() throws SpotifyException {
-        genreControllerRest.deleteGenre(GENRE_ID);
-        Mockito.verify(genreService, Mockito.times(1)).deleteGenre(Mockito.anyLong());
+        genereControllerRest.deleteGenere(GENRE_ID);
+        Mockito.verify(genereService, Mockito.times(1)).deleteGenere(Mockito.anyLong());
     }
 
     @Test
     public void deleteArtistFromSongById() throws SpotifyException {
-        genreControllerRest.deleteSongFromGenreById(GENRE_ID, SONG_ID);
-        verify(genreService, times(1)).deleteSongFromGenreById(GENRE_ID, SONG_ID);
+        genereControllerRest.deleteSongFromGenereById(GENRE_ID, SONG_ID);
+        verify(genereService, times(1)).deleteSongFromGenereById(GENRE_ID, SONG_ID);
     }
 
     @Test
     public void updateSongTest() throws SpotifyException {
 
 
-        SpotifyResponse<GenreRest> response = genreControllerRest.updateGenre(GENRE_REST);
+        SpotifyResponse<GenereRest> response = genereControllerRest.updateGenere(GENRE_REST);
 
         assertNotNull(response);
         assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
@@ -160,7 +160,7 @@ public class GenreControllerRestImplTest {
     @Test
     public void updateArtistBySongIdTest() throws SpotifyException {
 
-        SpotifyResponse<GenreSongRest> response = genreControllerRest.updateSongByGenreId(GENRE_ID, SONG_ID);
+        SpotifyResponse<GenereSongRest> response = genereControllerRest.updateSongByGenereId(GENRE_ID, SONG_ID);
         assertNotNull(response);
         assertEquals(String.valueOf(HttpStatus.OK), response.getStatus());
         assertEquals("200", response.getCode());

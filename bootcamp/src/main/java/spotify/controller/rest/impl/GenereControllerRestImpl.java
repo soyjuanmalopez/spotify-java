@@ -12,12 +12,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import spotify.controller.rest.GenreControllerRest;
+import spotify.controller.rest.GenereControllerRest;
 import spotify.controller.rest.model.*;
-import spotify.controller.rest.model.restSongs.GenreSongRest;
+import spotify.controller.rest.model.restSongs.GenereSongRest;
 import spotify.exception.SpotifyException;
-import spotify.mapper.GenreMapper;
-import spotify.service.GenreService;
+import spotify.mapper.GenereMapper;
+import spotify.service.GenereService;
 import spotify.util.constant.CommonConstantsUtils;
 import spotify.util.constant.RestConstantsUtils;
 
@@ -26,58 +26,58 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "Genre", description = "Genre controller")
-public class GenreControllerRestImpl implements GenreControllerRest {
+@Tag(name = "Genere", description = "Genere controller")
+public class GenereControllerRestImpl implements GenereControllerRest {
 
-    private final GenreService genreService;
+    private final GenereService genereService;
 
-    private final GenreMapper genreMapper;
+    private final GenereMapper genereMapper;
 
     @Override
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = RestConstantsUtils.RESOURCE_GENRE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "getAllGenres", description = "Get all Genres paginated")
+    @Operation(summary = "getAllGeneres", description = "Get all Generes paginated")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<D4iPageRest<GenreRest>> getAllGenres(
+    public SpotifyResponse<D4iPageRest<GenereRest>> getAllGeneres(
             @RequestParam(defaultValue = CommonConstantsUtils.ZERO) final Long page,
             @RequestParam(defaultValue = CommonConstantsUtils.TWENTY) final Long size,
             @Parameter(hidden = true) final Pageable pageable) throws SpotifyException {
 
-        final Page<GenreRest> genreRestList = genreService.getAllGenres(pageable);
+        final Page<GenereRest> genereRestList = genereService.getAllGeneres(pageable);
         return new SpotifyResponse<>(HttpStatus.OK.toString(),
                 String.valueOf(HttpStatus.OK.value()),
                 CommonConstantsUtils.OK,
-                new D4iPageRest<>(genreRestList.getContent().toArray(GenreRest[]::new),
-                        new D4iPaginationInfo(genreRestList.getNumber(),
+                new D4iPageRest<>(genereRestList.getContent().toArray(GenereRest[]::new),
+                        new D4iPaginationInfo(genereRestList.getNumber(),
                                 pageable.getPageSize(),
-                                genreRestList.getTotalPages())));
+                                genereRestList.getTotalPages())));
     }
 
 
     @Override
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = RestConstantsUtils.RESOURCE_GENRE + RestConstantsUtils.RESOURCE_GENREID, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "getGenreById", description = "Get a genre by its id")
+    @Operation(summary = "getGenereById", description = "Get a genere by its id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<GenreRest> getGenreById(@RequestParam final Long id) throws SpotifyException {
+    public SpotifyResponse<GenereRest> getGenereById(@RequestParam final Long id) throws SpotifyException {
         return new SpotifyResponse<>(HttpStatus.OK.toString()
                 , String.valueOf(HttpStatus.OK.value())
                 , CommonConstantsUtils.OK
-                , (genreService.getGenreById(id)));
+                , (genereService.getGenereById(id)));
 
     }
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "getSongByGenreId", description = "Get an album from a song")
+    @Operation(summary = "getSongByGenereId", description = "Get an album from a song")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
@@ -85,44 +85,44 @@ public class GenreControllerRestImpl implements GenreControllerRest {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
     })
     @GetMapping(value = RestConstantsUtils.RESOURCE_GENRE + RestConstantsUtils.RESOURCE_GENREID + RestConstantsUtils.RESOURCE_SONG)
-    public SpotifyResponse<List<SongRest>> getSongByGenreId(final Long genreId) throws SpotifyException {
+    public SpotifyResponse<List<SongRest>> getSongByGenereId(final Long genereId) throws SpotifyException {
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-                CommonConstantsUtils.OK, (genreService.getSongsByGenreId(genreId)));
+                CommonConstantsUtils.OK, (genereService.getSongsByGenereId(genereId)));
     }
 
     @Override
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = RestConstantsUtils.RESOURCE_GENRE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "createGenre", description = "createGenre")
+    @Operation(summary = "createGenere", description = "createGenere")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<GenreRest> createGenre(@RequestBody final GenreRest genre) throws SpotifyException {
-        final GenreRest genreRest =
-                genreService.createGenre(genre);
+    public SpotifyResponse<GenereRest> createGenere(@RequestBody final GenereRest genere) throws SpotifyException {
+        final GenereRest genereRest =
+                genereService.createGenere(genere);
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-                CommonConstantsUtils.OK, genreRest);
+                CommonConstantsUtils.OK, genereRest);
     }
 
     @Override
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = RestConstantsUtils.RESOURCE_GENRE)
-    @Operation(summary = "updateGenre", description = "updateGenre")
+    @Operation(summary = "updateGenere", description = "updateGenere")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public SpotifyResponse<GenreRest> updateGenre(@RequestBody final GenreRest genre) throws SpotifyException {
+    public SpotifyResponse<GenereRest> updateGenere(@RequestBody final GenereRest genere) throws SpotifyException {
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-                CommonConstantsUtils.OK, genreService.updateGenre(genre));
+                CommonConstantsUtils.OK, genereService.updateGenere(genere));
     }
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "updateSongByGenreId", description = "updateSongByGenreId")
+    @Operation(summary = "updateSongByGenereId", description = "updateSongByGenereId")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
@@ -130,35 +130,35 @@ public class GenreControllerRestImpl implements GenreControllerRest {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content)
     })
     @PutMapping(value = RestConstantsUtils.RESOURCE_GENRE + RestConstantsUtils.RESOURCE_GENREID + RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.RESOURCE_SONGID)
-    public SpotifyResponse<GenreSongRest> updateSongByGenreId(@RequestParam final Long genreId, @RequestParam final Long songId) throws SpotifyException {
+    public SpotifyResponse<GenereSongRest> updateSongByGenereId(@RequestParam final Long genereId, @RequestParam final Long songId) throws SpotifyException {
         return new SpotifyResponse<>(HttpStatus.OK.toString(), String.valueOf(HttpStatus.OK.value()),
-                CommonConstantsUtils.OK, genreService.updateSongByGenreId(genreId, songId));
+                CommonConstantsUtils.OK, genereService.updateSongByGenereId(genereId, songId));
     }
 
     @Override
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = RestConstantsUtils.RESOURCE_GENRE + RestConstantsUtils.RESOURCE_GENREID)
-    @Operation(summary = "deleteGenres", description = "Delte a certain genre")
+    @Operation(summary = "deleteGeneres", description = "Delte a certain genere")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public void deleteGenre(@RequestParam final Long id) throws SpotifyException {
-        genreService.deleteGenre(id);
+    public void deleteGenere(@RequestParam final Long id) throws SpotifyException {
+        genereService.deleteGenere(id);
     }
 
     @Override
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = RestConstantsUtils.RESOURCE_GENRE + RestConstantsUtils.RESOURCE_GENREID + RestConstantsUtils.RESOURCE_SONG + RestConstantsUtils.SONGID)
-    @Operation(summary = "deleteSongFromGenreById", description = "Delte a certain song from its genre")
+    @Operation(summary = "deleteSongFromGenereById", description = "Delte a certain song from its genere")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
     })
-    public void deleteSongFromGenreById(@RequestParam final Long genreId, @RequestParam final Long songId)
+    public void deleteSongFromGenereById(@RequestParam final Long genereId, @RequestParam final Long songId)
             throws SpotifyException {
-        genreService.deleteSongFromGenreById(genreId, songId);
+        genereService.deleteSongFromGenereById(genereId, songId);
     }
 }

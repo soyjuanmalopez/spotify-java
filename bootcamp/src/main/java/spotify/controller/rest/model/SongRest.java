@@ -36,8 +36,8 @@ public class SongRest implements Serializable {
     @JsonProperty("artists")
     private Set<ArtistRest> artists;
 
-    @JsonProperty("genres")
-    private Set<GenreRest> genres;
+    @JsonProperty("generes")
+    private Set<GenereRest> generes;
 
 
 }

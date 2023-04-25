@@ -101,7 +101,7 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public AlbumRestPost updateAlbum(AlbumRestPost album, Long id) throws SpotifyException {
         AlbumEntity albumEntity = albumRepository.findById(id)
-                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+                                                 .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         albumEntity.setTitle(album.getTitle());
         albumEntity.setDuration(album.getDuration());
         albumEntity.setYearRelease(album.getYearRelease());
@@ -121,9 +121,9 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public AlbumRest addSongOfAlbum(Long albumId, Long songId) throws SpotifyException {
         AlbumEntity album = albumRepository.findById(albumId)
-                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+                                           .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         SongEntity songEntity = songRepository.findById(songId)
-                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+                                              .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         album.getSongs().add(songEntity);
         songEntity.setAlbum(album);
         albumRepository.save(album);
@@ -134,9 +134,9 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public AlbumRest addArtistToAlbum(Long albumId, Long artistId) throws SpotifyException {
         AlbumEntity album = albumRepository.findById(albumId)
-                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+                                            .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         ArtistEntity artist = artistRepository.findById(artistId)
-                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+                                              .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         album.getArtists().add(artist);
         artist.getAlbums().add(album);
         albumRepository.save(album);
@@ -147,9 +147,9 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public AlbumRest deleteSongOfAlbum(Long albumId, Long songId) throws SpotifyException {
         AlbumEntity album = albumRepository.findById(albumId)
-                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+                                            .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         SongEntity songEntity = songRepository.findById(songId)
-                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
+                                                .orElseThrow(() -> new SpotifyNotFoundException(new ErrorDto(ExceptionConstantsUtils.NOT_FOUND_GENERIC)));
         spotifyDeleteBadRequestSongsOrArtistEmpty(album, 2);        
         for (int i = 0; i < album.getSongs().size(); i++) {
             if (album.getSongs().get(i).getId() == songId) {

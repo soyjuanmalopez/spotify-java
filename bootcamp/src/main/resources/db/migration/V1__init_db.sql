@@ -1,5 +1,5 @@
-CREATE SCHEMA if NOT EXISTS `spotify` DEFAULT CHARACTER SET utf8;
-USE `spotify`;
+--CREATE DATABASE `spotify`;
+
 CREATE TABLE if NOT EXISTS `spotify`.`album`
 (
     `id`           INT          NOT NULL AUTO_INCREMENT,
@@ -30,21 +30,21 @@ CREATE TABLE if NOT EXISTS `spotify`.`artist`
     `description` VARCHAR(800) NULL,
     PRIMARY KEY (`id`)
 );
-CREATE TABLE if NOT EXISTS `spotify`.`genre`
+CREATE TABLE if NOT EXISTS `spotify`.`genere`
 (
     `id`   INT         NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(90) NULL,
     PRIMARY KEY (`id`)
 );
-CREATE TABLE if NOT EXISTS `spotify`.`rel_genre_songs`
+CREATE TABLE if NOT EXISTS `spotify`.`rel_genere_songs`
 (
-    `id_genre` INT NOT NULL,
+    `id_genere` INT NOT NULL,
     `id_song`  INT NOT NULL,
-    PRIMARY KEY (`id_genre`, `id_song`),
+    PRIMARY KEY (`id_genere`, `id_song`),
     INDEX `fk_rel_song_idx` (`id_song` ASC) VISIBLE,
-    CONSTRAINT `fk_rel_genre`
-        FOREIGN KEY (`id_genre`)
-            REFERENCES `spotify`.`genre` (`id`)
+    CONSTRAINT `fk_rel_genere`
+        FOREIGN KEY (`id_genere`)
+            REFERENCES `spotify`.`genere` (`id`)
             ON DELETE CASCADE
             ON UPDATE CASCADE,
     CONSTRAINT `fk_rel_song`
@@ -242,51 +242,51 @@ VALUES ('21', '9');
 INSERT INTO `spotify`.`rel_song_artist` (`id_song`, `id_artist`)
 VALUES ('22', '1');
 
-INSERT INTO `spotify`.`genre` (`name`)
+INSERT INTO `spotify`.`genere` (`name`)
 VALUES ('Hip-Hop');
 
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '1');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '2');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '3');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '4');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '5');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '6');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '7');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '8');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '9');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '10');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '11');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '12');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '13');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '14');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '15');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '16');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '17');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '18');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '19');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '20');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '21');
-INSERT INTO `spotify`.`rel_genre_songs` (`id_genre`, `id_song`)
+INSERT INTO `spotify`.`rel_genere_songs` (`id_genere`, `id_song`)
 VALUES ('1', '22');
 

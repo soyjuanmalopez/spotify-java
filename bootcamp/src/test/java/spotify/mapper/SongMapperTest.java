@@ -5,12 +5,12 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import spotify.controller.rest.model.ArtistRest;
-import spotify.controller.rest.model.GenreRest;
+import spotify.controller.rest.model.GenereRest;
 import spotify.controller.rest.model.SongRest;
 import spotify.controller.rest.model.restSongs.AlbumRestSong;
 import spotify.persistence.entity.AlbumEntity;
 import spotify.persistence.entity.ArtistEntity;
-import spotify.persistence.entity.GenreEntity;
+import spotify.persistence.entity.GenereEntity;
 import spotify.persistence.entity.SongEntity;
 
 import java.util.ArrayList;
@@ -30,12 +30,12 @@ public class SongMapperTest {
     AlbumEntity albumEntity = new AlbumEntity();
     Set<ArtistRest> artistRestSet = new HashSet<>();
     ArtistRest artistRest = new ArtistRest();
-    Set<GenreRest> genreRestSet = new HashSet<>();
-    GenreRest genreRest = new GenreRest();
+    Set<GenereRest> genereRestSet = new HashSet<>();
+    GenereRest genereRest = new GenereRest();
     List<ArtistEntity> artistEntityList = new ArrayList<>();
     ArtistEntity artistEntity = new ArtistEntity();
-    Set<GenreEntity> genreEntitySet = new HashSet<>();
-    GenreEntity genreEntity = new GenreEntity();
+    Set<GenereEntity> genereEntitySet = new HashSet<>();
+    GenereEntity genereEntity = new GenereEntity();
 
     @InjectMocks
     SongMapperImpl songMapperImpl;
@@ -47,10 +47,10 @@ public class SongMapperTest {
         artistRestSet.add(artistRest);
         artistEntityList.add(null);
         artistEntityList.add(artistEntity);
-        genreEntitySet.add(null);
-        genreEntitySet.add(genreEntity);
-        genreRestSet.add(null);
-        genreRestSet.add(genreRest);
+        genereEntitySet.add(null);
+        genereEntitySet.add(genereEntity);
+        genereRestSet.add(null);
+        genereRestSet.add(genereRest);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class SongMapperTest {
         song.setReproductions(reproductions);
         song.setDuration(duration);
         song.setAlbum(albumRest);
-        song.setGenres(genreRestSet);
+        song.setGeneres(genereRestSet);
         song.setArtists(artistRestSet);
 
         SongEntity response = songMapperImpl.mapToEntity(song);
@@ -71,7 +71,7 @@ public class SongMapperTest {
         assertThat(response.getDuration()).isEqualTo(duration);
         assertThat(response.getReproductions()).isEqualTo(reproductions);
         assertThat(response.getAlbum()).usingRecursiveComparison().isEqualTo(albumEntity);
-        assertThat(response.getGenres()).usingRecursiveComparison().isEqualTo(genreEntitySet);
+        assertThat(response.getGeneres()).usingRecursiveComparison().isEqualTo(genereEntitySet);
         assertThat(response.getArtists()).usingRecursiveComparison().isEqualTo(artistEntityList);
 
 
@@ -81,13 +81,13 @@ public class SongMapperTest {
     public void mapToEntityListSetAndAlbumNull() {
         SongRest song = new SongRest();
         song.setAlbum(null);
-        song.setGenres(null);
+        song.setGeneres(null);
         song.setArtists(null);
 
         SongEntity response = songMapperImpl.mapToEntity(song);
 
         assertThat(response.getAlbum()).isNull();
-        assertThat(response.getGenres()).isNull();
+        assertThat(response.getGeneres()).isNull();
         assertThat(response.getArtists()).isNull();
 
 
@@ -107,7 +107,7 @@ public class SongMapperTest {
         song.setReproductions(reproductions);
         song.setDuration(duration);
         song.setAlbum(albumEntity);
-        song.setGenres(genreEntitySet);
+        song.setGeneres(genereEntitySet);
         song.setArtists(artistEntityList);
 
         SongRest response = songMapperImpl.mapToRest(song);
@@ -117,7 +117,7 @@ public class SongMapperTest {
         assertThat(response.getDuration()).isEqualTo(duration);
         assertThat(response.getReproductions()).isEqualTo(reproductions);
         assertThat(response.getAlbum()).usingRecursiveComparison().isEqualTo(albumRest);
-        assertThat(response.getGenres()).usingRecursiveComparison().isEqualTo(genreRestSet);
+        assertThat(response.getGeneres()).usingRecursiveComparison().isEqualTo(genereRestSet);
         assertThat(response.getArtists()).usingRecursiveComparison().isEqualTo(artistRestSet);
     }
 
@@ -125,13 +125,13 @@ public class SongMapperTest {
     public void mapToRestSetsAndAlbumNull() {
         SongEntity song = new SongEntity();
         song.setAlbum(null);
-        song.setGenres(null);
+        song.setGeneres(null);
         song.setArtists(null);
 
         SongRest response = songMapperImpl.mapToRest(song);
 
         assertThat(response.getAlbum()).isNull();
-        assertThat(response.getGenres()).isNull();
+        assertThat(response.getGeneres()).isNull();
         assertThat(response.getArtists()).isNull();
 
     }

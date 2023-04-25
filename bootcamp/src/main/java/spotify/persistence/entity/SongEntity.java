@@ -54,7 +54,7 @@ public class SongEntity implements Serializable {
 
     @Fetch(value = FetchMode.SUBSELECT)
     @ManyToMany(mappedBy = "songs")
-    private Set<GenreEntity> genres;
+    private Set<GenereEntity> generes;
 
 }
 

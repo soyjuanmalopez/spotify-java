@@ -7,13 +7,13 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "genre")
+@Table(name = "genere")
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class GenreEntity implements Serializable {
+public class GenereEntity implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -25,8 +25,8 @@ public class GenreEntity implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "rel_genre_songs",
-            joinColumns = {@JoinColumn(name = "id_genre")},
+            name = "rel_genere_songs",
+            joinColumns = {@JoinColumn(name = "id_genere")},
             inverseJoinColumns = {@JoinColumn(name = "id_song")}
     )
     private Set<SongEntity> songs;

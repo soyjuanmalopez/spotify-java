@@ -5,15 +5,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import spotify.controller.rest.model.GenreRest;
-import spotify.persistence.entity.GenreEntity;
+import spotify.controller.rest.model.GenereRest;
+import spotify.persistence.entity.GenereEntity;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class GenreMapperImplTest {
+public class GenereMapperImplTest {
 
     @InjectMocks
-    GenreMapperImpl genreMapperImpl;
+    GenereMapperImpl genereMapperImpl;
 
     Long id = 1L;
     String name = "Test name";
@@ -26,11 +26,11 @@ public class GenreMapperImplTest {
     @Test
     public void mapToRest() {
 
-        GenreEntity genre = new GenreEntity();
-        genre.setId(id);
-        genre.setName(name);
+        GenereEntity genere = new GenereEntity();
+        genere.setId(id);
+        genere.setName(name);
 
-        GenreRest response = genreMapperImpl.mapToRest(genre);
+        GenereRest response = genereMapperImpl.mapToRest(genere);
 
         assertThat(response.getId()).isEqualTo(id);
         assertThat(response.getName()).isEqualTo(name);
@@ -38,18 +38,18 @@ public class GenreMapperImplTest {
 
     @Test
     public void mapToRestNull() {
-        GenreRest response = genreMapperImpl.mapToRest(null);
+        GenereRest response = genereMapperImpl.mapToRest(null);
         assertThat(response).isNull();
     }
 
     @Test
     public void mapToEntity() {
 
-        GenreRest genre = new GenreRest();
-        genre.setId(id);
-        genre.setName(name);
+        GenereRest genere = new GenereRest();
+        genere.setId(id);
+        genere.setName(name);
 
-        GenreEntity response = genreMapperImpl.mapToEntity(genre);
+        GenereEntity response = genereMapperImpl.mapToEntity(genere);
 
         assertThat(response.getId()).isEqualTo(id);
         assertThat(response.getName()).isEqualTo(name);
@@ -57,7 +57,7 @@ public class GenreMapperImplTest {
 
     @Test
     public void mapToEntityNull() {
-        GenreEntity response = genreMapperImpl.mapToEntity((GenreRest) null);
+        GenereEntity response = genereMapperImpl.mapToEntity((GenereRest) null);
         assertThat(response).isNull();
     }
 

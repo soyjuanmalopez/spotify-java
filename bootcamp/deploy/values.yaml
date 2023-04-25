@@ -18,14 +18,14 @@ deployment:
   livenessProbe:
     initialDelaySeconds: 25
     port: 8080
-    path: spotify/client-api/v1/actuator
+    path: spotify/v1/actuator
     failureThreshold: 1
     periodSeconds: 10
 
   readinessProbe:
     initialDelaySeconds: 25
     port: 8080
-    path: spotify/client-api/v1/actuator
+    path: spotify/v1/actuator
     failureThreshold: 1
     periodSeconds: 10
 
