@@ -60,8 +60,8 @@ jobs:
         context: .
         push: true
         tags: |
-          ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}:${{ steps.meta.outputs.tags }}
-          ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}:latest      
+          ${{ secrets.DOCKER_REPO }}:${{ steps.meta.outputs.tags }}
+          ${{ secrets.DOCKER_REPO }}:latest      
  
   publish-job:
       runs-on: ubuntu-latest
