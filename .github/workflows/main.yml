@@ -44,4 +44,4 @@ jobs:
         context: .
         push: true
         tags: |
-          juanmlopez/springboot:${{ steps.meta.outputs.tags }}      
+          ${{ steps.meta.outputs.tags }}      
