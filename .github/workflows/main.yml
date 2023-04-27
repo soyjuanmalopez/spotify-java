@@ -8,6 +8,8 @@ on:
     branches: [ main ]
 
 jobs:
+
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -17,6 +19,8 @@ jobs:
       uses: docker/metadata-action@v4
       with:
         # list of Docker images to use as base name for tags
+        images: |
+          juanmlopez/springboot
         # generate Docker tags based on the following events/attributes
         tags: |
           type=semver,pattern={{version}}
@@ -41,4 +45,4 @@ jobs:
         push: true
         tags: |
           juanmlopez/springboot:${{ steps.meta.outputs.tags }}
-          juanmlopez/springboot:latest
+          juanmlopez/springboot:latest      
