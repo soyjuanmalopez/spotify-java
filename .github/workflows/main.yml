@@ -42,7 +42,7 @@ jobs:
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
           type=semver,pattern={{major}}
-          type=sha
+        #  type=sha
     - name: Set up JDK
       uses: actions/setup-java@v1
       with:
